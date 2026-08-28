@@ -1,0 +1,37 @@
+from __future__ import annotations
+
+from contextlib import asynccontextmanager
+
+from cuesheet.api.config import TestPostgresConfig
+from cuesheet.api.infrastructure.database.postgresql.client import Postgres, db_client
+from cuesheet.api.infrastructure.database.common.session import transactional_session
+
+
+# #
+# production & develop
+
+@asynccontextmanager
+async def postgresql_transactional_session():
+    async with transactional_session(db_client.SessionLocal) as session:
+        yield session
+
+
+async def transactional_session_helper():
+    async with postgresql_transactional_session() as session:
+        yield session
+
+
+# #
+# test
+
+@asynccontextmanager
+async def transactional_test_session_helper():
+    Postgres._tables_created = False
+    test_client = Postgres(TestPostgresConfig().async_database_url())
+    await test_client.create_tables_once_in_process()
+    try:
+        async with transactional_session(test_client.SessionLocal) as session:
+            yield session
+    finally:
+        await test_client.delete_tables()
+        await test_client.close()

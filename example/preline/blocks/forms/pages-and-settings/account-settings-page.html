@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+</head>
+<body><!-- Card Section -->
+  <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto"><!-- Card -->
+    <div class="bg-layer rounded-xl shadow-xs p-4 sm:p-7">
+      <div class="mb-8">
+        <h2 class="text-xl font-bold text-foreground">
+          Profile
+        </h2>
+        <p class="text-sm text-muted-foreground-2">
+          Manage your name, password and account settings.
+        </p>
+      </div>
+
+      <form>
+        <!-- Grid -->
+        <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+          <div class="sm:col-span-3">
+            <label class="inline-block text-sm text-foreground mt-2.5">
+              Profile photo
+            </label>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <div class="flex items-center gap-5">
+              <img class="inline-block size-16 rounded-full ring-2 ring-layer" src="https://preline.co/assets/img/160x160/img1.jpg" alt="Avatar">
+              <div class="flex gap-x-2">
+                <div>
+                  <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" x2="12" y1="3" y2="15" />
+                    </svg>
+                    Upload photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <label for="af-account-full-name" class="inline-block text-sm text-foreground mt-2.5">
+              Full name
+            </label>
+            <div class="hs-tooltip [--placement:auto] inline-block">
+              <svg class="hs-tooltip-toggle ms-1 inline-block size-3 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+              </svg>
+              <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible w-40 text-center z-10 py-1 px-2 bg-tooltip border border-tooltip-line text-xs font-medium text-tooltip-foreground rounded-md shadow-2xs" role="tooltip">
+                Displayed on public forums, such as Preline
+              </span>
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <div class="sm:flex">
+              <input id="af-account-full-name" type="text" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="Maria">
+              <input type="text" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="Boone">
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <label for="af-account-email" class="inline-block text-sm text-foreground mt-2.5">
+              Email
+            </label>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <input id="af-account-email" type="email" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line shadow-2xs sm:text-sm rounded-lg text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="maria@site.com">
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <label for="af-account-password" class="inline-block text-sm text-foreground mt-2.5">
+              Password
+            </label>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <div class="space-y-2">
+              <input id="af-account-password" type="text" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line shadow-2xs sm:text-sm rounded-lg text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="Enter current password">
+              <input type="text" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line shadow-2xs sm:text-sm rounded-lg text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="Enter new password">
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <div class="inline-block">
+              <label for="af-account-phone" class="inline-block text-sm text-foreground mt-2.5">
+                Phone
+              </label>
+              <span class="text-sm text-muted-foreground">
+                (Optional)
+              </span>
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <div class="sm:flex">
+              <input id="af-account-phone" type="text" class="py-1.5 sm:py-2 px-3 block w-full bg-layer border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="+x(xxx)xxx-xx-xx">
+              <select class="py-1.5 sm:py-2 px-3 pe-9 block w-full sm:w-auto bg-layer border-layer-line text-layer-foreground shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+                <option selected>Mobile</option>
+                <option>Home</option>
+                <option>Work</option>
+                <option>Fax</option>
+              </select>
+            </div>
+
+            <p class="mt-3">
+              <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 12h8" />
+                  <path d="M12 8v8" />
+                </svg>
+                Add phone
+              </a>
+            </p>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <label for="af-account-gender-checkbox" class="inline-block text-sm text-foreground mt-2.5">
+              Gender
+            </label>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <div class="sm:flex">
+              <label for="af-account-gender-checkbox" class="flex items-center py-2 px-3 w-full bg-layer border border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-full shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="af-account-gender-checkbox" checked>
+                <span class="ms-3 sm:text-sm text-muted-foreground-1">Male</span>
+              </label>
+
+              <label for="af-account-gender-checkbox-female" class="flex items-center py-2 px-3 w-full bg-layer border border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-full shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="af-account-gender-checkbox-female">
+                <span class="ms-3 sm:text-sm text-muted-foreground-1">Female</span>
+              </label>
+
+              <label for="af-account-gender-checkbox-other" class="flex items-center py-2 px-3 w-full bg-layer border border-layer-line text-foreground placeholder:text-muted-foreground-1 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-full shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="af-account-gender-checkbox-other">
+                <span class="ms-3 sm:text-sm text-muted-foreground-1">Other</span>
+              </label>
+            </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-3">
+            <label for="af-account-bio" class="inline-block text-sm text-foreground mt-2.5">
+              BIO
+            </label>
+          </div>
+          <!-- End Col -->
+
+          <div class="sm:col-span-9">
+            <textarea id="af-account-bio" class="py-1.5 sm:py-2 px-3 block block w-full bg-layer border-layer-line shadow-2xs sm:text-sm rounded-lg text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" rows="6" placeholder="Type your message..."></textarea>
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Grid -->
+
+        <div class="mt-5 flex justify-end gap-x-2">
+          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+            Cancel
+          </button>
+          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- End Card -->
+  </div>
+  <!-- End Card Section -->
+  <script src="../../../assets/preline.js"></script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>

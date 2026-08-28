@@ -1,0 +1,7 @@
+.e-swatch {
+  display: block;
+  inline-size: var(--size-swatch);
+  block-size: var(--size-swatch);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-field);
+}

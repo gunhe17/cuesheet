@@ -1,0 +1,92 @@
+/* 테마는 이 파일 하나에서 갈린다. 컴포넌트는 어느 테마인지 모른다.
+   기본은 시스템 설정, data-theme 가 있으면 그것이 이긴다 */
+
+:root {
+  color-scheme: light dark;
+
+  --surface: var(--x-slate-50);
+  --surface-raised: var(--x-white);
+  --field: var(--x-white);
+  --line: var(--x-slate-200);
+  --layer: var(--x-slate-100);
+  --layer-hover: var(--x-slate-200);
+  --text: var(--x-slate-900);
+  --text-muted: var(--x-slate-600);
+  --text-dim: var(--x-slate-500);
+  --accent: var(--x-blue-700);
+  --accent-hover: var(--x-blue-800);
+  --accent-ink: var(--x-white);
+  --warn: var(--x-amber-600);
+  --danger: var(--x-red-600);
+  --mine: var(--x-blue-700);
+  --mine-soft: var(--x-blue-100);
+  --other: var(--x-slate-300);
+
+  --focus: var(--x-blue-700);
+  --focus-halo: color-mix(in oklch, var(--x-blue-700) 22%, transparent);
+  --shadow-card: var(--x-shadow-card);
+  --shadow-raised: var(--x-shadow-raised);
+  --thumb: oklch(20.8% 0.042 265.755 / 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --surface: var(--x-slate-950);
+    --surface-raised: var(--x-slate-900);
+    --field: var(--x-slate-900);
+    --line: var(--x-slate-800);
+    --layer: var(--x-slate-800);
+    --layer-hover: var(--x-slate-700);
+    --text: var(--x-slate-100);
+    --text-muted: var(--x-slate-400);
+    --text-dim: var(--x-slate-400);
+    --accent: var(--x-blue-500);
+    --accent-hover: var(--x-blue-400);
+    --accent-ink: var(--x-slate-950);
+    --warn: var(--x-amber-400);
+    --danger: var(--x-red-400);
+    --mine: var(--x-blue-500);
+    --mine-soft: var(--x-blue-950);
+    --other: var(--x-slate-700);
+
+    --focus: var(--x-blue-500);
+    --focus-halo: color-mix(in oklch, var(--x-blue-500) 26%, transparent);
+    --shadow-card: var(--x-shadow-dark);
+    --shadow-raised: var(--x-shadow-dark);
+    --thumb: oklch(100% 0 0 / 0.30);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --surface: var(--x-slate-950);
+  --surface-raised: var(--x-slate-900);
+  --field: var(--x-slate-900);
+  --line: var(--x-slate-800);
+  --layer: var(--x-slate-800);
+  --layer-hover: var(--x-slate-700);
+  --text: var(--x-slate-100);
+  --text-muted: var(--x-slate-400);
+  --text-dim: var(--x-slate-400);
+  --accent: var(--x-blue-500);
+  --accent-hover: var(--x-blue-400);
+  --accent-ink: var(--x-slate-950);
+  --warn: var(--x-amber-400);
+  --danger: var(--x-red-400);
+  --mine: var(--x-blue-500);
+  --mine-soft: var(--x-blue-950);
+  --other: var(--x-slate-700);
+
+  --focus: var(--x-blue-500);
+  --focus-halo: color-mix(in oklch, var(--x-blue-500) 26%, transparent);
+  --shadow-card: var(--x-shadow-dark);
+  --shadow-raised: var(--x-shadow-dark);
+  --thumb: oklch(100% 0 0 / 0.30);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}

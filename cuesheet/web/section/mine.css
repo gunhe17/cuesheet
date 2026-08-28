@@ -1,0 +1,4 @@
+.s-mine {
+  display: grid;
+  gap: var(--gap-tight);
+}

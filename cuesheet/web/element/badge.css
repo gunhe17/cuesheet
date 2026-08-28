@@ -1,0 +1,16 @@
+.e-badge {
+  justify-self: start;
+  padding: var(--pad-badge);
+  border: none;
+  border-radius: var(--radius-badge);
+  background: var(--layer);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.e-badge[data-state="running"] { color: var(--accent); }
+.e-badge[data-state="ended"] { color: var(--text-dim); }
+.e-badge[data-state="warn"] { color: var(--warn); }
+.e-badge[hidden] { display: none; }

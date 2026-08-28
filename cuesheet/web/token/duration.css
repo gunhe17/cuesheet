@@ -1,0 +1,4 @@
+:root {
+  --dur-fade: var(--x-dur-1);
+  --dur-settle: var(--x-dur-2);
+}

@@ -1,0 +1,7 @@
+.s-foot {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--gap);
+  padding-block-start: var(--gap);
+}

@@ -1,0 +1,12 @@
+.b-cue {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--gap-tight);
+  padding: var(--pad-row);
+  background: var(--surface-raised);
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-raised);
+}
+.b-cue > [data-length] { color: var(--text-dim); }

@@ -1,0 +1,7 @@
+.e-notice {
+  font-size: var(--type-caption-size);
+  letter-spacing: var(--type-caption-track);
+  line-height: var(--type-caption-leading);
+  color: var(--danger);
+}
+.e-notice[hidden] { display: none; }

@@ -1,0 +1,4 @@
+.s-actions-inline {
+  display: flex;
+  gap: var(--gap-tight);
+}

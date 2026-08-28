@@ -1,0 +1,11 @@
+.s-brand {
+  display: grid;
+  gap: var(--gap-tight);
+}
+.s-brand p {
+  margin: 0;
+  font-size: var(--type-callout-size);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-track);
+  color: var(--text-muted);
+}

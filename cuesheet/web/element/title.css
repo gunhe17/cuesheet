@@ -1,0 +1,7 @@
+.e-title {
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-track);
+  line-height: var(--type-title-leading);
+  color: var(--text);
+}

@@ -1,0 +1,7 @@
+.e-heading {
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-track);
+  line-height: var(--type-heading-leading);
+  color: var(--text);
+}

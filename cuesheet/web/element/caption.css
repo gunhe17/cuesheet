@@ -1,0 +1,6 @@
+.e-caption {
+  font-size: var(--type-caption-size);
+  letter-spacing: var(--type-caption-track);
+  line-height: var(--type-caption-leading);
+  color: var(--text-dim);
+}

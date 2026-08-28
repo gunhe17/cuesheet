@@ -1,0 +1,7 @@
+.e-time {
+  font-family: var(--font-mono);
+  font-size: var(--type-time-size);
+  letter-spacing: var(--type-time-track);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}

@@ -1,0 +1,20 @@
+.s-group {
+  display: grid;
+  gap: var(--gap);
+  padding: var(--pad-card);
+  background: var(--surface-raised);
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.s-group > header {
+  display: grid;
+  gap: var(--gap-tight);
+}
+.s-group > ul {
+  display: grid;
+  gap: var(--gap-tight);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

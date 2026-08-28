@@ -1,0 +1,5 @@
+.b-demo {
+  display: grid;
+  gap: var(--gap-hair);
+  justify-items: start;
+}

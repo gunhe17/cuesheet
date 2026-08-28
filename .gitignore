@@ -1,0 +1,14 @@
+# secrets — 예시 파일만 남긴다
+.env/*
+!.env/*.example
+.docker/.env
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# os
+.DS_Store

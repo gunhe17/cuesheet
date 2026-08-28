@@ -1,0 +1,65 @@
+/* 층 순서. 아래 층은 위 층을 못 이긴다 */
+@layer x, token, element, block, section, view;
+
+/* 컴포넌트 파일은 자기 층을 모른다 — 층은 여기서 정한다 */
+
+/* x */
+@import "x/reset.css"        layer(x);
+@import "x/palette.css"      layer(x);
+@import "x/type.css"         layer(x);
+@import "x/space.css"        layer(x);
+@import "x/radius.css"       layer(x);
+@import "x/shadow.css"       layer(x);
+@import "x/cue-palette.css"  layer(x);
+@import "x/duration.css"     layer(x);
+
+/* token */
+@import "token/color.css"    layer(token);
+@import "token/type.css"     layer(token);
+@import "token/space.css"    layer(token);
+@import "token/radius.css"   layer(token);
+@import "token/duration.css" layer(token);
+@import "token/cue.css"      layer(token);
+
+/* element */
+@import "element/title.css"        layer(element);
+@import "element/label.css"        layer(element);
+@import "element/input.css"        layer(element);
+@import "element/action.css"       layer(element);
+@import "element/action-ghost.css" layer(element);
+@import "element/notice.css"       layer(element);
+@import "element/time.css"         layer(element);
+@import "element/count.css"        layer(element);
+@import "element/tick.css"         layer(element);
+@import "element/thumb.css"        layer(element);
+@import "element/heading.css"      layer(element);
+@import "element/caption.css"      layer(element);
+@import "element/badge.css"        layer(element);
+@import "element/entry.css"        layer(element);
+
+/* block */
+@import "block/field.css"    layer(block);
+@import "block/cuesheet.css" layer(block);
+@import "block/cue.css"      layer(block);
+@import "block/axis-cue.css" layer(block);
+
+/* section */
+@import "section/app.css"     layer(section);
+@import "section/brand.css"   layer(section);
+@import "section/form.css"    layer(section);
+@import "section/actions.css" layer(section);
+@import "section/actions-inline.css" layer(section);
+@import "section/list.css"    layer(section);
+@import "section/bar.css"     layer(section);
+@import "section/hero.css"    layer(section);
+@import "section/now.css"     layer(section);
+@import "section/manager.css" layer(section);
+@import "section/mine.css"    layer(section);
+@import "section/foot.css"    layer(section);
+@import "section/axis.css"    layer(section);
+@import "section/rail.css"    layer(section);
+
+/* view */
+@import "view/auth.css"      layer(view);
+@import "view/run.css"       layer(view);
+@import "view/timeline.css"  layer(view);

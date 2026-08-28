@@ -1,0 +1,16 @@
+.v-catalog {
+  display: grid;
+  gap: var(--gap-section);
+  max-width: var(--size-content);
+  margin-inline: auto;
+  padding: var(--pad-view);
+}
+.v-catalog-demo {
+  display: grid;
+  gap: var(--gap-section);
+  justify-items: start;
+}
+.v-catalog-demo > .s-form,
+.v-catalog-demo > .s-actions,
+.v-catalog-demo > .s-list,
+.v-catalog-demo > .b-field { justify-self: stretch; }

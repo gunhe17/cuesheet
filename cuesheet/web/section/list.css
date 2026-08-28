@@ -1,0 +1,9 @@
+.s-list {
+  display: grid;
+  gap: var(--gap-tight);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.s-list > li { display: grid; }
+.s-list:empty { display: none; }

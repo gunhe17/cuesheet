@@ -1,0 +1,18 @@
+/* 카탈로그 전용. 운영 화면(app.css)에는 넣지 않는다 */
+@layer x, token, element, block, section, view;
+
+@import "/app.css";
+
+/* element */
+@import "/element/code.css"    layer(element);
+@import "/element/swatch.css"  layer(element);
+
+/* block */
+@import "/block/spec.css"      layer(block);
+@import "/block/demo.css"      layer(block);
+
+/* section */
+@import "/section/group.css"   layer(section);
+
+/* view */
+@import "/view/catalog.css"    layer(view);

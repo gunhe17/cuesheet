@@ -1,0 +1,33 @@
+/* Apple Dynamic Type 스케일 (pt = px). SF 가 없으면 시스템 폰트로 떨어진다 */
+:root {
+  --x-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+                 system-ui, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+  --x-font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+
+  --x-text-caption2: 11px;
+  --x-text-caption1: 12px;
+  --x-text-footnote: 13px;
+  --x-text-subhead: 15px;
+  --x-text-callout: 16px;
+  --x-text-body: 17px;
+  --x-text-title3: 20px;
+  --x-text-title2: 22px;
+  --x-text-title1: 28px;
+  --x-text-large: 34px;
+  --x-text-display: 44px;
+
+  --x-weight-regular: 400;
+  --x-weight-medium: 500;
+  --x-weight-semibold: 600;
+
+  /* 큰 글자일수록 좁게 — Apple 의 트래킹 곡선 */
+  --x-track-display: -0.03em;
+  --x-track-title: -0.022em;
+  --x-track-body: -0.016em;
+  --x-track-caption: 0;
+
+  --x-leading-display: 1.07;
+  --x-leading-title: 1.2;
+  --x-leading-body: 1.47;
+  --x-leading-caption: 1.38;
+}

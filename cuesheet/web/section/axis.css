@@ -1,0 +1,43 @@
+.s-axis {
+  position: relative;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding-inline-end: var(--pad-rail);
+}
+.s-axis::-webkit-scrollbar { width: 0; height: 0; }
+
+.s-axis > .track {
+  position: relative;
+  margin-inline-start: var(--size-gutter);
+}
+.s-axis .line {
+  position: absolute;
+  inset-inline-start: calc(var(--size-gutter) * -1);
+  inset-inline-end: 0;
+  border-top: 1px solid var(--line);
+  opacity: 0.6;
+}
+.s-axis .now {
+  position: absolute;
+  inset-inline-start: calc(var(--size-gutter) * -1);
+  inset-inline-end: 0;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+.s-axis .now > i {
+  flex: 1;
+  border-top: 2px dashed var(--danger);
+}
+.s-axis .now > b {
+  order: -1;
+  padding: var(--pad-badge);
+  border-radius: var(--radius-badge);
+  background: var(--danger);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

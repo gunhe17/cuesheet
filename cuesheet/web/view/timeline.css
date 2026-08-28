@@ -1,0 +1,17 @@
+/* 숨은 형제가 있어도 흔들리지 않게 — 행 번호가 아니라 flex 로 늘린다 */
+.v-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: var(--pad-view);
+  height: 100dvh;
+}
+.v-timeline[hidden] { display: none; }
+.v-timeline > .stage {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+.v-timeline > .stage > .s-axis { height: 100%; }

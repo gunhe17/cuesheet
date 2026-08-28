@@ -1,0 +1,7 @@
+:root {
+  --radius-field: var(--x-radius-2);
+  --radius-action: var(--x-radius-pill);
+  --radius-card: var(--x-radius-3);
+  --radius-badge: var(--x-radius-pill);
+  --radius-block: var(--x-radius-1);
+}

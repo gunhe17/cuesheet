@@ -1,0 +1,543 @@
+<title>큐시트 모바일 표현 방식</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
+
+<style>
+:root{
+  --paper:#f3f5f3; --card:#fbfcfb; --ink:#11161a; --ink-2:#404a4e; --ink-3:#6d787c;
+  --rule:#d5dad6; --rule-soft:#e4e8e4;
+  --signal:#0d6a73; --signal-soft:#e2efef;
+  --cue:#a56a15; --cue-soft:#f6ecda;
+  --good:#2f7a55; --warn:#a8562a;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0e1214; --card:#161b1e; --ink:#e4e8e5; --ink-2:#a9b3b3; --ink-3:#7b8686;
+    --rule:#2a3236; --rule-soft:#212a2d;
+    --signal:#54b6bf; --signal-soft:#12292c;
+    --cue:#d6a457; --cue-soft:#2a2317;
+    --good:#5eb98a; --warn:#d9865a;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0e1214; --card:#161b1e; --ink:#e4e8e5; --ink-2:#a9b3b3; --ink-3:#7b8686;
+  --rule:#2a3236; --rule-soft:#212a2d;
+  --signal:#54b6bf; --signal-soft:#12292c;
+  --cue:#d6a457; --cue-soft:#2a2317;
+  --good:#5eb98a; --warn:#d9865a;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+a{color:var(--signal)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--cue);outline-offset:2px}
+
+.mast{padding:56px 0 28px;border-bottom:2px solid var(--ink)}
+.slug{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--signal);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.slug .dot{width:6px;height:6px;border-radius:50%;background:var(--cue)}
+h1{font-family:"Archivo",system-ui,sans-serif;font-weight:700;font-size:clamp(36px,6vw,64px);
+  line-height:1.02;letter-spacing:-.028em;margin:18px 0 0;text-wrap:balance}
+.deck{margin:16px 0 0;max-width:62ch;font-size:19px;color:var(--ink-2);font-weight:300}
+.deck b{font-weight:500;color:var(--ink)}
+
+.sec{margin-top:58px}
+.sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--rule);padding-bottom:10px;flex-wrap:wrap}
+.sec-head h2{font-family:"Archivo",sans-serif;font-size:15px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:0}
+.sec-head p{margin:0;font-size:15px;color:var(--ink-3);font-weight:300}
+
+/* --- 제약 --- */
+.cons{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.con{background:var(--card);padding:18px 18px 20px}
+.con h4{font-family:"Archivo",sans-serif;font-size:15.5px;margin:0 0 4px;font-weight:600;letter-spacing:-.01em}
+.con .n{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;color:var(--cue);
+  display:block;margin-bottom:8px}
+.con p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+/* --- 제안 --- */
+.prop{display:grid;grid-template-columns:320px 1fr;gap:40px;padding:44px 0;
+  border-bottom:1px solid var(--rule-soft);align-items:start}
+.prop:last-of-type{border-bottom:none}
+.prop.flip{grid-template-columns:1fr 320px}
+.prop.flip .txt{order:-1}
+.txt .kicker{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--cue);margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.txt .kicker b{font-size:19px;letter-spacing:-.02em;color:var(--ink-3);font-family:"Archivo",sans-serif}
+.txt h3{font-family:"Archivo",sans-serif;font-size:28px;font-weight:600;letter-spacing:-.022em;
+  margin:0 0 10px;line-height:1.12}
+.txt p{margin:0 0 14px;color:var(--ink-2);max-width:50ch}
+.txt p.lede{color:var(--ink)}
+.pc{list-style:none;padding:0;margin:0 0 14px;font-size:15px}
+.pc li{display:flex;gap:9px;padding:3px 0;color:var(--ink-2)}
+.pc li::before{font-family:"IBM Plex Mono",monospace;font-size:12px;flex:0 0 auto;padding-top:2px}
+.pc li.p::before{content:"＋";color:var(--good)}
+.pc li.m::before{content:"−";color:var(--warn)}
+.fit{padding:11px 14px;border-left:2px solid var(--cue);background:var(--cue-soft);font-size:15px;color:var(--ink)}
+.fit b{font-family:"Archivo",sans-serif;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--cue);display:block;margin-bottom:2px;font-weight:600}
+.try{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--signal);
+  margin:12px 0 0;text-transform:uppercase}
+
+/* --- 폰 --- */
+.phone{width:320px;border-radius:34px;padding:10px;background:#39403f;
+  box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 16px 36px rgba(0,0,0,.24)}
+.screen{height:566px;border-radius:25px;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--a-bg);color:var(--a-txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,sans-serif;
+  font-size:13px;line-height:1.35;position:relative;
+  --a-bg:#131719; --a-surf:#1c2225; --a-surf2:#252d31; --a-line:#2e373b;
+  --a-txt:#e9edeb; --a-dim:#8d9799; --a-dim2:#646f71;
+  --t-vcr:#d99a3f; --t-live:#e0574a; --t-stage:#3fa9b4; --t-cm:#8b7fc7; --t-cg:#5ea87a;
+}
+.screen *{box-sizing:border-box}
+.screen ul,.screen ol{list-style:none;margin:0;padding:0}
+.tc{font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+.st{display:flex;justify-content:space-between;align-items:center;padding:9px 16px 3px;
+  font-size:10.5px;font-weight:600;flex:0 0 auto;color:var(--a-txt)}
+.hd{padding:6px 16px 10px;flex:0 0 auto;border-bottom:1px solid var(--a-line)}
+.hd .row1{display:flex;align-items:center;gap:8px}
+.hd h4{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;flex:1}
+.onair{font-size:9px;font-weight:700;letter-spacing:.1em;background:var(--t-live);color:#fff;
+  border-radius:3px;padding:3px 6px}
+.hd .row2{display:flex;gap:12px;margin-top:5px;font-size:10.5px;color:var(--a-dim)}
+.hd .row2 b{color:var(--a-txt);font-weight:600}
+.over{color:var(--t-vcr)}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.scroll::-webkit-scrollbar{width:0}
+
+.chip{font-size:9px;font-weight:700;letter-spacing:.06em;border-radius:3px;padding:2px 5px;
+  color:#12181a;flex:0 0 auto}
+.c-vcr{background:var(--t-vcr)} .c-live{background:var(--t-live);color:#fff}
+.c-stage{background:var(--t-stage)} .c-cm{background:var(--t-cm);color:#fff} .c-cg{background:var(--t-cg)}
+.strip{width:3px;border-radius:2px;flex:0 0 auto;align-self:stretch}
+.s-vcr{background:var(--t-vcr)} .s-live{background:var(--t-live)}
+.s-stage{background:var(--t-stage)} .s-cm{background:var(--t-cm)} .s-cg{background:var(--t-cg)}
+
+/* A 조밀 리스트 */
+.dense li{display:flex;gap:9px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--a-line)}
+.dense li.now{background:#16292c}
+.dense .no{font-size:10px;color:var(--a-dim2);width:14px;flex:0 0 auto}
+.dense .t{font-size:11px;color:var(--a-dim);width:42px;flex:0 0 auto}
+.dense .n{flex:1;font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dense .d{font-size:11px;color:var(--a-txt);width:34px;text-align:right;flex:0 0 auto}
+.dense li.done .n,.dense li.done .t{color:var(--a-dim2)}
+.dense li.done .strip{opacity:.35}
+
+/* B Now & Next */
+.now-hero{padding:16px;background:linear-gradient(180deg,#17282b,#131719);flex:0 0 auto;
+  border-bottom:1px solid var(--a-line)}
+.now-hero .lbl{font-size:9.5px;letter-spacing:.16em;color:var(--t-stage);font-weight:700}
+.now-hero h5{margin:6px 0 0;font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.now-hero .sub{margin-top:5px;font-size:11.5px;color:var(--a-dim)}
+.big{margin-top:12px;display:flex;align-items:baseline;gap:10px}
+.big .cd{font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.big .of{font-size:11px;color:var(--a-dim)}
+.bar{height:4px;border-radius:2px;background:var(--a-surf2);margin-top:11px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--t-stage);width:38%}
+.nextup{padding:11px 16px;background:var(--a-surf);border-bottom:1px solid var(--a-line);flex:0 0 auto;
+  display:flex;gap:9px;align-items:center}
+.nextup .lbl{font-size:9.5px;letter-spacing:.14em;color:var(--a-dim2);font-weight:700;flex:0 0 auto}
+.nextup .n{flex:1;font-size:13px;font-weight:500}
+.nextup .d{font-size:11px;color:var(--a-dim)}
+.rest li{display:flex;gap:9px;align-items:center;padding:7px 16px;font-size:12px;color:var(--a-dim)}
+.rest .t{font-size:10.5px;color:var(--a-dim2);width:40px}
+.rest .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adv{position:absolute;left:16px;right:16px;bottom:16px;background:var(--t-stage);color:#0d1517;
+  border:none;border-radius:11px;padding:13px;font-size:14px;font-weight:700;font-family:inherit;
+  cursor:pointer;letter-spacing:-.01em}
+.adv:active{transform:translateY(1px)}
+
+/* C 시간 비례 타임라인 */
+.tl{padding:12px 14px 30px;position:relative}
+.tl .item{display:flex;gap:10px;margin-bottom:3px}
+.tl .t{font-size:10px;color:var(--a-dim2);width:38px;flex:0 0 auto;padding-top:2px}
+.tl .blk{flex:1;border-radius:5px;background:var(--a-surf);padding:6px 9px;display:flex;
+  flex-direction:column;justify-content:center;overflow:hidden;border-left:3px solid var(--a-line)}
+.tl .blk b{font-size:12px;font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl .blk span{font-size:10px;color:var(--a-dim)}
+.tl .b-vcr{border-left-color:var(--t-vcr)} .tl .b-live{border-left-color:var(--t-live)}
+.tl .b-stage{border-left-color:var(--t-stage)} .tl .b-cm{border-left-color:var(--t-cm)}
+.tl .b-cg{border-left-color:var(--t-cg)}
+.nowline{position:absolute;left:52px;right:14px;height:0;border-top:1.5px dashed var(--t-live);z-index:2}
+.nowline::after{content:"NOW 20:04:12";position:absolute;right:0;top:-14px;font-size:8.5px;
+  letter-spacing:.08em;color:var(--t-live);font-weight:700;font-family:"IBM Plex Mono",monospace}
+
+/* D 접히는 행 */
+.exp li{border-bottom:1px solid var(--a-line)}
+.exp summary{display:flex;gap:9px;align-items:center;padding:11px 14px;cursor:pointer;list-style:none}
+.exp summary::-webkit-details-marker{display:none}
+.exp .t{font-size:11px;color:var(--a-dim);width:42px;flex:0 0 auto}
+.exp .n{flex:1;font-size:13px}
+.exp .d{font-size:11px;color:var(--a-dim);flex:0 0 auto}
+.exp .caret{font-size:9px;color:var(--a-dim2);transition:transform .18s}
+.exp details[open] .caret{transform:rotate(90deg)}
+.exp .detail{padding:2px 14px 14px 65px;display:grid;grid-template-columns:auto 1fr;gap:5px 12px;
+  font-size:11.5px}
+.exp .detail dt{color:var(--a-dim2)}
+.exp .detail dd{margin:0;color:var(--a-txt)}
+.exp .acts{grid-column:1/-1;display:flex;gap:6px;margin-top:8px}
+.exp .acts span{font-size:11px;padding:5px 10px;border-radius:6px;background:var(--a-surf2);color:var(--a-txt)}
+
+/* E 가로 스크롤 표 */
+.tbl{flex:1;overflow:auto;overscroll-behavior:contain}
+.tbl table{border-collapse:collapse;font-size:11.5px;white-space:nowrap}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--a-line);text-align:left}
+.tbl th{font-size:9.5px;letter-spacing:.08em;color:var(--a-dim2);position:sticky;top:0;
+  background:var(--a-surf);font-weight:600}
+.tbl .frz{position:sticky;left:0;background:var(--a-bg);z-index:1;
+  box-shadow:1px 0 0 var(--a-line);font-variant-numeric:tabular-nums}
+.tbl th.frz{background:var(--a-surf);z-index:3}
+.tbl td{color:var(--a-dim)}
+.tbl td.frz,.tbl td.strong{color:var(--a-txt)}
+.hint{position:absolute;right:12px;bottom:12px;background:rgba(37,45,49,.94);color:var(--a-dim);
+  font-size:10px;padding:6px 10px;border-radius:20px;letter-spacing:.04em}
+
+/* F 코너 섹션 */
+.grp .gh{position:sticky;top:0;background:var(--a-surf);padding:7px 14px;display:flex;gap:8px;
+  align-items:center;border-bottom:1px solid var(--a-line);z-index:2}
+.grp .gh b{font-size:11px;font-weight:700;letter-spacing:.04em;flex:1}
+.grp .gh .sum{font-size:10.5px;color:var(--a-dim)}
+.grp .gi{display:flex;gap:9px;align-items:center;padding:9px 14px 9px 22px;border-bottom:1px solid var(--a-line)}
+.grp .t{font-size:11px;color:var(--a-dim);width:42px;flex:0 0 auto}
+.grp .n{flex:1;font-size:12.5px}
+.grp .d{font-size:11px;color:var(--a-dim)}
+
+/* --- verdict --- */
+.verdict{margin-top:58px;border:2px solid var(--ink);background:var(--card);padding:30px 32px}
+.verdict h2{font-family:"Archivo",sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  margin:0 0 8px;color:var(--signal)}
+.verdict > p{margin:0 0 18px;color:var(--ink-2);max-width:60ch}
+.verdict ol{margin:0;padding-left:0;list-style:none;counter-reset:v}
+.verdict li{counter-increment:v;display:grid;grid-template-columns:28px 1fr;gap:14px;
+  padding:12px 0;border-top:1px solid var(--rule-soft)}
+.verdict li:first-child{border-top:none}
+.verdict li::before{content:counter(v);font-family:"IBM Plex Mono",monospace;font-size:12px;
+  color:var(--signal);padding-top:5px}
+.verdict b{font-family:"Archivo",sans-serif;font-size:17px;letter-spacing:-.01em}
+.verdict span{display:block;color:var(--ink-2);font-size:15.5px}
+.note{margin-top:24px;font-size:13.5px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;line-height:1.7}
+
+@media (max-width:880px){
+  .prop,.prop.flip{grid-template-columns:1fr;gap:26px}
+  .prop.flip .txt{order:0}
+  .phone{margin:0 auto}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="slug"><span>Rundown</span><span class="dot"></span><span>모바일 표현 방식 6안</span><span class="dot"></span><span>2026.08.28</span></div>
+  <h1>큐시트 모바일 표현 방식</h1>
+  <p class="deck">데스크톱 큐시트는 열이 열 개 넘는 표입니다. 그걸 폰에 그대로 욱여넣으면 아무도 안 씁니다. <b>무엇을 버리고 무엇을 키울지</b>가 다른 여섯 가지 안을 실제로 만져볼 수 있게 만들었습니다. 데이터는 같은 생방송 큐시트 하나로 통일했습니다.</p>
+</header>
+
+<section class="sec">
+  <div class="sec-head"><h2>제약</h2><p>폰에서 어려워지는 이유</p></div>
+  <div class="cons">
+    <div class="con"><span class="n">01</span><h4>열이 너무 많다</h4>
+      <p>순번·시간·길이·누계·제목·타입·담당·카메라·자막·비고. 폰 너비에 셋 이상은 안 들어갑니다.</p></div>
+    <div class="con"><span class="n">02</span><h4>보는 사람이 다르다</h4>
+      <p>조연출은 전체 흐름을, FD는 지금과 다음만, MC는 자기 순서만 봅니다. 한 화면이 셋을 다 만족시킬 수 없습니다.</p></div>
+    <div class="con"><span class="n">03</span><h4>시간이 계속 밀린다</h4>
+      <p>큐 하나가 늦으면 뒤가 전부 밀립니다. 지연이 누적되는 걸 화면이 알려주지 않으면 종이와 다를 게 없습니다.</p></div>
+    <div class="con"><span class="n">04</span><h4>한 손, 어두운 곳</h4>
+      <p>부조·무대 뒤에서 한 손으로 씁니다. 터치 타깃이 크고 대비가 높아야 하고, 화면은 어두워야 합니다.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>여섯 가지 안</h2><p>폰을 눌러보세요 · 전부 동작합니다</p></div>
+
+  <!-- A -->
+  <article class="prop">
+    <div class="phone"><div class="screen">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="hd">
+        <div class="row1"><h4>뮤직 스테이지</h4><span class="onair">ON AIR</span></div>
+        <div class="row2"><span>8월 28일 목</span><span>총 <b class="tc">24:00</b></span><span class="over">＋<b class="tc">0:12</b> 지연</span></div>
+      </div>
+      <ul class="dense scroll">
+        <li class="done"><span class="strip s-vcr"></span><span class="no tc">1</span><span class="t tc">20:00:00</span><span class="n">오프닝 타이틀 VCR</span><span class="d tc">0:35</span></li>
+        <li class="done"><span class="strip s-live"></span><span class="no tc">2</span><span class="t tc">20:00:35</span><span class="n">MC 오프닝</span><span class="d tc">2:10</span></li>
+        <li class="done"><span class="strip s-cg"></span><span class="no tc">3</span><span class="t tc">20:02:45</span><span class="n">1위 후보 소개 CG</span><span class="d tc">0:50</span></li>
+        <li class="now"><span class="strip s-stage"></span><span class="no tc">4</span><span class="t tc">20:03:35</span><span class="n">무대 ① 아티스트 A</span><span class="d tc">3:20</span></li>
+        <li><span class="strip s-live"></span><span class="no tc">5</span><span class="t tc">20:06:55</span><span class="n">MC 브릿지</span><span class="d tc">1:05</span></li>
+        <li><span class="strip s-stage"></span><span class="no tc">6</span><span class="t tc">20:08:00</span><span class="n">무대 ② 아티스트 B</span><span class="d tc">3:45</span></li>
+        <li><span class="strip s-cm"></span><span class="no tc">7</span><span class="t tc">20:11:45</span><span class="n">광고</span><span class="d tc">1:30</span></li>
+        <li><span class="strip s-vcr"></span><span class="no tc">8</span><span class="t tc">20:13:15</span><span class="n">주간 차트 코너</span><span class="d tc">4:00</span></li>
+        <li><span class="strip s-stage"></span><span class="no tc">9</span><span class="t tc">20:17:15</span><span class="n">무대 ③ 아티스트 C</span><span class="d tc">3:30</span></li>
+        <li><span class="strip s-live"></span><span class="no tc">10</span><span class="t tc">20:20:45</span><span class="n">1위 발표</span><span class="d tc">2:15</span></li>
+        <li><span class="strip s-live"></span><span class="no tc">11</span><span class="t tc">20:23:00</span><span class="n">엔딩</span><span class="d tc">1:00</span></li>
+      </ul>
+    </div></div>
+    <div class="txt">
+      <p class="kicker"><b>A</b><span>Dense list</span></p>
+      <h3>조밀 리스트</h3>
+      <p class="lede">한 줄에 순번·시간·제목·길이만. 나머지는 전부 버립니다. 왼쪽 색 띠가 타입, 지나간 큐는 흐리게, 현재 큐만 배경으로 표시.</p>
+      <ul class="pc">
+        <li class="p">11개 큐가 한 화면에 다 들어옴 — 전체 흐름 파악이 제일 빠름</li>
+        <li class="p">종이 큐시트와 순서·번호가 1:1로 맞아 인수인계가 쉬움</li>
+        <li class="m">담당·카메라·비고를 보려면 결국 다른 화면으로 가야 함</li>
+        <li class="m">지연이 숫자로만 나와서, 어디서 밀렸는지는 안 보임</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>조연출·PD처럼 <b>전체를 훑어야</b> 하는 사람의 기본 화면.</div>
+    </div>
+  </article>
+
+  <!-- B -->
+  <article class="prop flip">
+    <div class="txt">
+      <p class="kicker"><b>B</b><span>Now &amp; Next</span></p>
+      <h3>지금 &amp; 다음</h3>
+      <p class="lede">화면의 절반을 <b>진행 중인 큐 하나</b>에 씁니다. 남은 시간이 크게 카운트다운되고, 바로 아래 다음 큐가 붙습니다. 나머지 목록은 참고용으로 작게.</p>
+      <ul class="pc">
+        <li class="p">힐끗 봐도 읽힘 — 무대 뒤·부조에서 가장 필요한 정보만 큼</li>
+        <li class="p">"다음 큐" 버튼 하나로 진행 → 한 손 조작에 맞음</li>
+        <li class="m">전체 흐름이 안 보여서 이 화면만으로는 못 씀</li>
+        <li class="m">진행 상태를 누군가는 눌러줘야 함 — 담당이 정해져야 성립</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>FD·무대감독처럼 <b>지금 뭘 해야 하는지</b>만 필요한 사람.</div>
+      <p class="try">↓ 카운트다운 작동 중 · 버튼을 눌러보세요</p>
+    </div>
+    <div class="phone"><div class="screen" id="nn">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="now-hero">
+        <span class="lbl">NOW · 4/11</span>
+        <h5 id="nn-title">무대 ① 아티스트 A</h5>
+        <div class="sub"><span id="nn-meta">STAGE · 카메라 4 · 자막 CG-07</span></div>
+        <div class="big"><span class="cd tc" id="nn-cd">2:03</span><span class="of tc" id="nn-of">/ 3:20</span></div>
+        <div class="bar"><i id="nn-bar"></i></div>
+      </div>
+      <div class="nextup"><span class="lbl">NEXT</span><span class="n" id="nn-next">MC 브릿지</span><span class="d tc" id="nn-nextd">1:05</span></div>
+      <ul class="rest scroll" id="nn-rest"></ul>
+      <button class="adv" id="nn-btn">다음 큐 ▸</button>
+    </div></div>
+  </article>
+
+  <!-- C -->
+  <article class="prop">
+    <div class="phone"><div class="screen">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="hd">
+        <div class="row1"><h4>시간 비례 보기</h4><span class="onair">ON AIR</span></div>
+        <div class="row2"><span>1분 = 14px</span><span>총 <b class="tc">24:00</b></span><span class="over">＋<b class="tc">0:12</b></span></div>
+      </div>
+      <div class="scroll"><div class="tl">
+        <div class="item"><span class="t tc">00:00</span><div class="blk b-vcr" style="height:12px"><b>오프닝 타이틀</b></div></div>
+        <div class="item"><span class="t tc">00:35</span><div class="blk b-live" style="height:33px"><b>MC 오프닝</b><span class="tc">2:10</span></div></div>
+        <div class="item"><span class="t tc">02:45</span><div class="blk b-cg" style="height:15px"><b>1위 후보 CG</b></div></div>
+        <div class="nowline"></div>
+        <div class="item"><span class="t tc">03:35</span><div class="blk b-stage" style="height:50px"><b>무대 ① 아티스트 A</b><span class="tc">3:20</span></div></div>
+        <div class="item"><span class="t tc">06:55</span><div class="blk b-live" style="height:18px"><b>MC 브릿지</b><span class="tc">1:05</span></div></div>
+        <div class="item"><span class="t tc">08:00</span><div class="blk b-stage" style="height:56px"><b>무대 ② 아티스트 B</b><span class="tc">3:45</span></div></div>
+        <div class="item"><span class="t tc">11:45</span><div class="blk b-cm" style="height:24px"><b>광고</b><span class="tc">1:30</span></div></div>
+        <div class="item"><span class="t tc">13:15</span><div class="blk b-vcr" style="height:60px"><b>주간 차트 코너</b><span class="tc">4:00</span></div></div>
+        <div class="item"><span class="t tc">17:15</span><div class="blk b-stage" style="height:52px"><b>무대 ③ 아티스트 C</b><span class="tc">3:30</span></div></div>
+        <div class="item"><span class="t tc">20:45</span><div class="blk b-live" style="height:34px"><b>1위 발표</b><span class="tc">2:15</span></div></div>
+        <div class="item"><span class="t tc">23:00</span><div class="blk b-live" style="height:17px"><b>엔딩</b><span class="tc">1:00</span></div></div>
+      </div></div>
+    </div></div>
+    <div class="txt">
+      <p class="kicker"><b>C</b><span>Proportional timeline</span></p>
+      <h3>시간 비례 타임라인</h3>
+      <p class="lede">블록의 <b>높이가 곧 길이</b>입니다. 4분짜리 코너는 35초 타이틀보다 여섯 배 큽니다. 점선이 현재 시각.</p>
+      <ul class="pc">
+        <li class="p">어디가 무겁고 어디가 촘촘한지 숫자 안 읽고 보임</li>
+        <li class="p">지연선이 밀리는 게 시각적으로 잡혀서 "얼마나 늦었나"가 직관적</li>
+        <li class="m">짧은 큐는 제목이 안 들어감 — 30초 이하는 글자가 잘림</li>
+        <li class="m">같은 화면에 담기는 큐 수가 A의 절반 이하</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>방송 전 <b>구성 검토</b>. 어느 코너를 줄일지 정할 때.</div>
+    </div>
+  </article>
+
+  <!-- D -->
+  <article class="prop flip">
+    <div class="txt">
+      <p class="kicker"><b>D</b><span>Expandable rows</span></p>
+      <h3>접히는 행</h3>
+      <p class="lede">평소엔 A와 같은 한 줄. 탭하면 <b>그 자리에서</b> 담당·카메라·자막·비고가 펼쳐지고 편집 버튼이 나옵니다. 화면 이동이 없습니다.</p>
+      <ul class="pc">
+        <li class="p">A의 밀도와 상세 정보를 둘 다 가짐 — 절충안 중 가장 실용적</li>
+        <li class="p">화면 전환이 없어 스크롤 위치를 잃지 않음</li>
+        <li class="p"><code>&lt;details&gt;</code> 태그로 끝. JS 없이 동작</li>
+        <li class="m">여러 개 펼치면 스크롤이 길어져 흐름 파악이 깨짐</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>큐시트를 <b>편집</b>하는 화면의 기본형. 대부분의 작업이 여기서 끝남.</div>
+      <p class="try">↓ 행을 탭해보세요</p>
+    </div>
+    <div class="phone"><div class="screen">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="hd">
+        <div class="row1"><h4>뮤직 스테이지</h4><span class="onair">ON AIR</span></div>
+        <div class="row2"><span>11개 큐</span><span>총 <b class="tc">24:00</b></span><span class="over">＋<b class="tc">0:12</b></span></div>
+      </div>
+      <ul class="exp scroll">
+        <li><details><summary><span class="strip s-vcr"></span><span class="t tc">20:00:00</span><span class="n">오프닝 타이틀 VCR</span><span class="d tc">0:35</span><span class="caret">▶</span></summary>
+          <dl class="detail"><dt>타입</dt><dd>VCR</dd><dt>소스</dt><dd>서버 A · OPEN_0828.mxf</dd><dt>담당</dt><dd>편집 이서준</dd><dt>비고</dt><dd>페이드인 15프레임</dd>
+          <div class="acts"><span>편집</span><span>복제</span><span>위로</span></div></dl></details></li>
+        <li><details open><summary><span class="strip s-stage"></span><span class="t tc">20:03:35</span><span class="n">무대 ① 아티스트 A</span><span class="d tc">3:20</span><span class="caret">▶</span></summary>
+          <dl class="detail"><dt>타입</dt><dd>STAGE · 생방송</dd><dt>카메라</dt><dd>4번 지미집 · 6번 크레인</dd><dt>자막</dt><dd>CG-07 아티스트명 / 곡명</dd><dt>담당</dt><dd>FD 최유진</dd><dt>비고</dt><dd>인트로 8초 후 카메라 전환</dd>
+          <div class="acts"><span>편집</span><span>복제</span><span>위로</span></div></dl></details></li>
+        <li><details><summary><span class="strip s-live"></span><span class="t tc">20:06:55</span><span class="n">MC 브릿지</span><span class="d tc">1:05</span><span class="caret">▶</span></summary>
+          <dl class="detail"><dt>타입</dt><dd>LIVE</dd><dt>출연</dt><dd>MC 김하늘 · 박도윤</dd><dt>비고</dt><dd>다음 무대 소개 멘트</dd>
+          <div class="acts"><span>편집</span><span>복제</span><span>위로</span></div></dl></details></li>
+        <li><details><summary><span class="strip s-cm"></span><span class="t tc">20:11:45</span><span class="n">광고</span><span class="d tc">1:30</span><span class="caret">▶</span></summary>
+          <dl class="detail"><dt>타입</dt><dd>CM</dd><dt>비고</dt><dd>편성 고정 · 수정 불가</dd>
+          <div class="acts"><span>편집</span><span>복제</span><span>위로</span></div></dl></details></li>
+        <li><details><summary><span class="strip s-vcr"></span><span class="t tc">20:13:15</span><span class="n">주간 차트 코너</span><span class="d tc">4:00</span><span class="caret">▶</span></summary>
+          <dl class="detail"><dt>타입</dt><dd>VCR + LIVE</dd><dt>담당</dt><dd>작가 한지우</dd>
+          <div class="acts"><span>편집</span><span>복제</span><span>위로</span></div></dl></details></li>
+      </ul>
+    </div></div>
+  </article>
+
+  <!-- E -->
+  <article class="prop">
+    <div class="phone"><div class="screen">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="hd">
+        <div class="row1"><h4>표 그대로 보기</h4></div>
+        <div class="row2"><span>시간 열 고정</span><span>10개 열</span></div>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th class="frz">시간</th><th>제목</th><th>길이</th><th>타입</th><th>담당</th><th>카메라</th><th>자막</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td class="frz">20:00:00</td><td class="strong">오프닝 타이틀 VCR</td><td class="tc">0:35</td><td>VCR</td><td>이서준</td><td>—</td><td>—</td><td>페이드인 15f</td></tr>
+            <tr><td class="frz">20:00:35</td><td class="strong">MC 오프닝</td><td class="tc">2:10</td><td>LIVE</td><td>최유진</td><td>1, 2</td><td>CG-01</td><td>스탠딩</td></tr>
+            <tr><td class="frz">20:02:45</td><td class="strong">1위 후보 소개 CG</td><td class="tc">0:50</td><td>CG</td><td>박시우</td><td>—</td><td>CG-04</td><td>—</td></tr>
+            <tr><td class="frz">20:03:35</td><td class="strong">무대 ① 아티스트 A</td><td class="tc">3:20</td><td>STAGE</td><td>최유진</td><td>4, 6</td><td>CG-07</td><td>인트로 8초</td></tr>
+            <tr><td class="frz">20:06:55</td><td class="strong">MC 브릿지</td><td class="tc">1:05</td><td>LIVE</td><td>최유진</td><td>1</td><td>—</td><td>—</td></tr>
+            <tr><td class="frz">20:08:00</td><td class="strong">무대 ② 아티스트 B</td><td class="tc">3:45</td><td>STAGE</td><td>최유진</td><td>3, 5</td><td>CG-08</td><td>—</td></tr>
+            <tr><td class="frz">20:11:45</td><td class="strong">광고</td><td class="tc">1:30</td><td>CM</td><td>—</td><td>—</td><td>—</td><td>편성 고정</td></tr>
+            <tr><td class="frz">20:13:15</td><td class="strong">주간 차트 코너</td><td class="tc">4:00</td><td>VCR</td><td>한지우</td><td>2</td><td>CG-11</td><td>—</td></tr>
+            <tr><td class="frz">20:17:15</td><td class="strong">무대 ③ 아티스트 C</td><td class="tc">3:30</td><td>STAGE</td><td>최유진</td><td>4, 6</td><td>CG-09</td><td>—</td></tr>
+            <tr><td class="frz">20:20:45</td><td class="strong">1위 발표</td><td class="tc">2:15</td><td>LIVE</td><td>최유진</td><td>1, 3</td><td>CG-12</td><td>꽃가루</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hint">← 옆으로 밀어보세요</div>
+    </div></div>
+    <div class="txt">
+      <p class="kicker"><b>E</b><span>Frozen-column table</span></p>
+      <h3>가로 스크롤 표</h3>
+      <p class="lede">아무것도 버리지 않습니다. 시간 열만 왼쪽에 고정하고 <b>나머지 열은 옆으로 밀어서</b> 봅니다. 데스크톱 큐시트와 열 구성이 1:1.</p>
+      <ul class="pc">
+        <li class="p">기존 엑셀 큐시트를 쓰던 사람이 아무것도 새로 안 배워도 됨</li>
+        <li class="p">데스크톱과 같은 코드로 만들 수 있어 구현 비용이 제일 낮음</li>
+        <li class="m">한 손으로 가로 스크롤은 불편 — 생방송 중엔 못 씀</li>
+        <li class="m">글자가 작아지고 터치 타깃이 좁아짐</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>방송 <b>전후 확인용</b>. 이동 중에 전체 열을 봐야 할 때.</div>
+    </div>
+  </article>
+
+  <!-- F -->
+  <article class="prop flip">
+    <div class="txt">
+      <p class="kicker"><b>F</b><span>Grouped by segment</span></p>
+      <h3>코너별 묶기</h3>
+      <p class="lede">큐를 <b>코너 단위로 묶고</b> 코너 헤더에 누계 시간을 붙입니다. 헤더는 스크롤해도 위에 붙어 있어 지금 어느 코너인지 잃지 않습니다.</p>
+      <ul class="pc">
+        <li class="p">"오프닝이 3분 35초"처럼 사람이 실제로 말하는 단위로 시간이 보임</li>
+        <li class="p">코너를 접으면 긴 큐시트도 한 화면에 들어옴</li>
+        <li class="m">코너 구분이 없는 프로그램(뉴스 등)에는 안 맞음</li>
+        <li class="m">코너 정의를 누가 관리할지 정해야 함 — 데이터 모델이 하나 늘어남</li>
+      </ul>
+      <div class="fit"><b>이럴 때</b>코너 구성이 뚜렷한 <b>예능·음악 프로그램</b>. 편성 시간 조율에 강함.</div>
+    </div>
+    <div class="phone"><div class="screen">
+      <div class="st"><span class="tc">20:04</span><span>▪▪▪ ▮</span></div>
+      <div class="hd">
+        <div class="row1"><h4>코너별 보기</h4><span class="onair">ON AIR</span></div>
+        <div class="row2"><span>5개 코너</span><span>총 <b class="tc">24:00</b></span><span class="over">＋<b class="tc">0:12</b></span></div>
+      </div>
+      <div class="scroll grp">
+        <div class="gh"><b>오프닝</b><span class="sum tc">3:35</span></div>
+        <div class="gi"><span class="strip s-vcr"></span><span class="t tc">20:00:00</span><span class="n">오프닝 타이틀 VCR</span><span class="d tc">0:35</span></div>
+        <div class="gi"><span class="strip s-live"></span><span class="t tc">20:00:35</span><span class="n">MC 오프닝</span><span class="d tc">2:10</span></div>
+        <div class="gi"><span class="strip s-cg"></span><span class="t tc">20:02:45</span><span class="n">1위 후보 소개 CG</span><span class="d tc">0:50</span></div>
+
+        <div class="gh"><b>무대 1부</b><span class="sum tc">8:10</span></div>
+        <div class="gi"><span class="strip s-stage"></span><span class="t tc">20:03:35</span><span class="n">무대 ① 아티스트 A</span><span class="d tc">3:20</span></div>
+        <div class="gi"><span class="strip s-live"></span><span class="t tc">20:06:55</span><span class="n">MC 브릿지</span><span class="d tc">1:05</span></div>
+        <div class="gi"><span class="strip s-stage"></span><span class="t tc">20:08:00</span><span class="n">무대 ② 아티스트 B</span><span class="d tc">3:45</span></div>
+
+        <div class="gh"><b>광고</b><span class="sum tc">1:30</span></div>
+        <div class="gi"><span class="strip s-cm"></span><span class="t tc">20:11:45</span><span class="n">광고</span><span class="d tc">1:30</span></div>
+
+        <div class="gh"><b>주간 차트</b><span class="sum tc">4:00</span></div>
+        <div class="gi"><span class="strip s-vcr"></span><span class="t tc">20:13:15</span><span class="n">주간 차트 코너</span><span class="d tc">4:00</span></div>
+
+        <div class="gh"><b>피날레</b><span class="sum tc">6:45</span></div>
+        <div class="gi"><span class="strip s-stage"></span><span class="t tc">20:17:15</span><span class="n">무대 ③ 아티스트 C</span><span class="d tc">3:30</span></div>
+        <div class="gi"><span class="strip s-live"></span><span class="t tc">20:20:45</span><span class="n">1위 발표</span><span class="d tc">2:15</span></div>
+        <div class="gi"><span class="strip s-live"></span><span class="t tc">20:23:00</span><span class="n">엔딩</span><span class="d tc">1:00</span></div>
+      </div>
+    </div></div>
+  </article>
+</section>
+
+<div class="verdict">
+  <h2>제안</h2>
+  <p>여섯 개 중 하나를 고르는 문제가 아닙니다. <b>제약 02</b>가 말하듯 보는 사람이 다르므로, 화면 하나에 모드를 두는 게 맞습니다.</p>
+  <ol>
+    <li><span><b>기본은 D — 접히는 행</b><span>A의 밀도를 그대로 가지면서 상세까지 덮습니다. <code>&lt;details&gt;</code>만으로 되니 구현도 제일 쌉니다. 여기서 시작하면 A를 따로 만들 필요가 없습니다.</span></span></li>
+    <li><span><b>라이브 모드로 B를 토글</b><span>방송이 시작되면 상단에 "라이브" 스위치. 같은 데이터, 다른 밀도. FD·무대감독은 이 상태로 고정해두고 씁니다.</span></span></li>
+    <li><span><b>C와 F는 방송 전용</b><span>구성 검토(C)와 편성 조율(F)은 생방송 중에 안 봅니다. 나중에 붙여도 되는 뷰라 1차 범위에서 빼도 됩니다.</span></span></li>
+    <li><span><b>E는 만들지 말 것</b><span>가로 스크롤 표는 폰에서 아무도 안 씁니다. 그 요구는 태블릿·데스크톱 화면으로 넘기는 게 맞습니다.</span></span></li>
+  </ol>
+  <p class="note">먼저 정해야 하는 것 → 큐 하나에 들어갈 필드, 진행 상태를 누가 눌러 넘기는지, 코너 개념을 쓸지.<br>세 개만 정하면 D를 바로 만들 수 있습니다.</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var cues=[
+    {n:"오프닝 타이틀 VCR",m:"VCR · 서버 A",s:35},
+    {n:"MC 오프닝",m:"LIVE · MC 김하늘, 박도윤",s:130},
+    {n:"1위 후보 소개 CG",m:"CG · CG-04",s:50},
+    {n:"무대 ① 아티스트 A",m:"STAGE · 카메라 4 · 자막 CG-07",s:200},
+    {n:"MC 브릿지",m:"LIVE · 카메라 1",s:65},
+    {n:"무대 ② 아티스트 B",m:"STAGE · 카메라 3, 5",s:225},
+    {n:"광고",m:"CM · 편성 고정",s:90},
+    {n:"주간 차트 코너",m:"VCR + LIVE · 작가 한지우",s:240},
+    {n:"무대 ③ 아티스트 C",m:"STAGE · 카메라 4, 6",s:210},
+    {n:"1위 발표",m:"LIVE · 카메라 1, 3",s:135},
+    {n:"엔딩",m:"LIVE",s:60}
+  ];
+  var i=3, left=123, timer=null;
+  var el=function(id){return document.getElementById(id)};
+  function mmss(s){s=Math.max(0,s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+  function draw(){
+    var c=cues[i], nx=cues[i+1];
+    el("nn-title").textContent=c.n;
+    el("nn-meta").textContent=c.m;
+    el("nn-cd").textContent=mmss(left);
+    el("nn-of").textContent="/ "+mmss(c.s);
+    el("nn-bar").style.width=Math.min(100,(1-left/c.s)*100)+"%";
+    el("nn-cd").style.color = left<=10 ? "var(--t-live)" : "";
+    el("nn-next").textContent = nx ? nx.n : "종료";
+    el("nn-nextd").textContent = nx ? mmss(nx.s) : "—";
+    el("nn").querySelector(".lbl").textContent="NOW · "+(i+1)+"/"+cues.length;
+    var html="";
+    for(var k=i+2;k<cues.length;k++){
+      html+='<li><span class="t tc">'+(k+1)+'</span><span class="n">'+cues[k].n+
+            '</span><span class="tc">'+mmss(cues[k].s)+'</span></li>';
+    }
+    el("nn-rest").innerHTML=html||'<li><span class="n">마지막 큐입니다</span></li>';
+  }
+  function advance(){ i=(i+1)%cues.length; left=cues[i].s; draw(); }
+  el("nn-btn").addEventListener("click",advance);
+  draw();
+  timer=setInterval(function(){ left--; if(left<0) advance(); else draw(); },1000);
+})();
+</script>

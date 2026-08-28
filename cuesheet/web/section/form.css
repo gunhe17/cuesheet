@@ -1,0 +1,4 @@
+.s-form {
+  display: grid;
+  gap: var(--gap-loose);
+}

@@ -1,0 +1,20 @@
+/* 8pt 그리드 + 4pt 세분 */
+:root {
+  --x-space-1: 4px;
+  --x-space-2: 8px;
+  --x-space-3: 12px;
+  --x-space-4: 16px;
+  --x-space-5: 20px;
+  --x-space-6: 24px;
+  --x-space-7: 32px;
+  --x-space-8: 40px;
+  --x-space-9: 48px;
+  --x-space-10: 64px;
+
+  /* 최소 탭 타깃 44×44 */
+  --x-size-tap: 44px;
+  --x-size-rail: 10px;
+  --x-size-rail-hit: 20px;
+  --x-size-gutter: 52px;
+  --x-size-content: 692px;
+}

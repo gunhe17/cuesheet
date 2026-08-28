@@ -1,0 +1,8 @@
+.e-thumb {
+  position: absolute;
+  inset-inline: 0;
+  border-radius: var(--radius-field);
+  background: var(--thumb);
+  pointer-events: none;
+  transition: background var(--dur-fade);
+}

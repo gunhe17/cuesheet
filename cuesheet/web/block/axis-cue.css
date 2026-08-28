@@ -1,0 +1,48 @@
+.b-axis-cue {
+  position: absolute;
+  inset-inline: 0;
+  overflow: hidden;
+  padding: var(--gap-hair) var(--gap-tight);
+  border-start-end-radius: var(--radius-block);
+  border-end-end-radius: var(--radius-block);
+  background: var(--hue);
+  color: var(--cue-ink);
+  display: grid;
+  align-content: center;
+}
+.b-axis-cue[data-color="slate"]  { --hue: var(--cue-slate); }
+.b-axis-cue[data-color="blue"]   { --hue: var(--cue-blue); }
+.b-axis-cue[data-color="teal"]   { --hue: var(--cue-teal); }
+.b-axis-cue[data-color="amber"]  { --hue: var(--cue-amber); }
+.b-axis-cue[data-color="rose"]   { --hue: var(--cue-rose); }
+.b-axis-cue[data-color="violet"] { --hue: var(--cue-violet); }
+
+/* 담당이 아니면 가라앉는다 — 색은 종류, 진하기는 담당 여부.
+   opacity 로 흐리면 글자까지 같이 사라진다. 배경만 표면색에 섞되,
+   oklch 로 섞으면 색상환을 돌아 amber 가 보라로 간다 — oklab(직교) 으로 섞는다 */
+.b-axis-cue[data-mine="false"] {
+  background: color-mix(in oklab, var(--hue) 28%, var(--surface));
+  color: var(--text);
+}
+.b-axis-cue[data-state="current"] { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+/* 최소 높이 때문에 늘어난 블록 — 비율이 깨졌음을 숨기지 않는다 */
+.b-axis-cue[data-stretched="true"] > span::after {
+  content: " ≈";
+  opacity: 0.9;
+}
+
+.b-axis-cue > b {
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.b-axis-cue > span {
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}

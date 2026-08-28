@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+</head>
+<body>
+  <div id="cookies-simple-with-dismiss-button" class="fixed bottom-0 inset-s-1/2 transform -translate-x-1/2 z-60 sm:max-w-4xl w-full mx-auto p-6">
+    <!-- Card -->
+    <div class="p-4 bg-layer border border-layer-line rounded-xl shadow-2xs">
+      <div class="flex justify-between items-center gap-x-5 sm:gap-x-10">
+        <div class="grow">
+          <h2 class="text-sm text-muted-foreground-2">
+            By continuing to use this site you consent to the use of cookies in accordance with our <a class="inline-flex items-center gap-x-1.5 text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Cookies Policy.</a>
+          </h2>
+        </div>
+        <button type="button" class="p-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden focus:bg-surface-focus disabled:opacity-50 disabled:pointer-events-none" data-hs-remove-element="#cookies-simple-with-dismiss-button">
+          <span class="sr-only">Dismiss</span>
+          <svg class="shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>
+
+  <script src="../../../assets/preline.js"></script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hs-overlay').forEach((el) => HSOverlay.open(el));
+    });
+  });
+</script>

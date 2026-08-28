@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+</head>
+<body class="flex h-full items-center py-16 w-full max-w-md mx-auto p-6">
+  <div class="text-center">
+    <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-modal-recover-account" data-hs-overlay="#hs-modal-recover-account">
+      Open modal
+    </button>
+  </div>
+
+  <div id="hs-modal-recover-account" class="hs-overlay hidden size-full fixed top-0 inset-s-0 z-80 overflow-x-hidden overflow-y-auto" role="dialog" tabindex="-1" aria-labelledby="hs-modal-signin-label">
+    <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
+      <div class="relative w-full max-h-full flex flex-col bg-overlay border border-overlay-line rounded-xl pointer-events-auto shadow-xl">
+        <!-- Sign In -->
+        <div class="p-4 sm:p-7">
+          <div class="text-center">
+            <h3 id="hs-modal-signin-label" class="block text-2xl font-bold text-foreground">Forgot password?</h3>
+            <p class="mt-2 text-sm text-muted-foreground-2">
+              Remember your password?
+              <a class="text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                Sign in here
+              </a>
+            </p>
+          </div>
+
+          <!-- Form -->
+          <form>
+            <div class="grid gap-y-4">
+              <!-- Form Group -->
+              <div>
+                <label for="email" class="block text-sm mb-2 text-foreground">Email address</label>
+                <div class="relative">
+                  <input type="email" id="email" name="email" class="py-2.5 sm:py-3 px-4 block w-full bg-layer border-layer-line rounded-lg sm:text-sm text-foreground placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error">
+                  <div class="hidden absolute inset-y-0 inset-e-0 pointer-events-none pe-3">
+                    <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    </svg>
+                  </div>
+                </div>
+                <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we can get back to you</p>
+              </div>
+              <!-- End Form Group -->
+
+              <!-- Checkbox -->
+              <div class="flex items-center">
+                <div class="flex">
+                  <input id="checkbox" name="checkbox" type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none">
+                </div>
+                <div class="ms-3">
+                  <label for="checkbox" class="text-sm text-foreground">
+                    Remember me
+                  </label>
+                </div>
+              </div>
+              <!-- End Checkbox -->
+
+              <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none">Reset password</button>
+            </div>
+          </form>
+          <!-- End Form -->
+        </div>
+        <!-- End Sign In -->
+
+      </div>
+    </div>
+  </div>
+  <script src="../../../assets/preline.js"></script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hs-overlay').forEach((el) => HSOverlay.open(el));
+    });
+  });
+</script>

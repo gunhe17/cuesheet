@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+</head>
+<body>
+  <div class="fixed bottom-0 z-60 inset-x-0">
+    <!-- Card -->
+    <div class="p-4 bg-layer border border-layer-line shadow-2xs">
+      <div class="max-w-sm w-full mx-auto">
+        <h2 class="font-semibold text-foreground">
+          Cookie Settings
+        </h2>
+        <p class="mt-2 text-sm text-muted-foreground-2">
+          We use cookies to improve your experience and for marketing. Visit our <a class="inline-flex items-center gap-x-1.5 text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">Cookies Policy</a> to learn more.
+        </p>
+
+        <div class="mt-5 inline-flex gap-x-2">
+          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+            Agree
+          </button>
+          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus disabled:opacity-50 disabled:pointer-events-none">
+            Reject
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>
+
+  <script src="../../../assets/preline.js"></script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hs-overlay').forEach((el) => HSOverlay.open(el));
+    });
+  });
+</script>

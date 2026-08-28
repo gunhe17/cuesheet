@@ -1,0 +1,11 @@
+.v-run {
+  display: grid;
+  align-content: start;
+  gap: var(--gap);
+  max-width: 30rem;
+  margin-inline: auto;
+  padding: var(--pad-view);
+  min-height: 100dvh;
+}
+.v-run[hidden] { display: none; }
+.v-run > .s-foot { margin-block-start: auto; }

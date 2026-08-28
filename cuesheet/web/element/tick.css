@@ -1,0 +1,9 @@
+.e-tick {
+  position: absolute;
+  inset-inline-start: calc(var(--size-gutter) * -1);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+  transform: translateY(-50%);
+}

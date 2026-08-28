@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>큐시트 디자인 시스템</title>
+<link rel="stylesheet" href="/catalog/catalog.css">
+</head>
+<body class="s-app">
+
+<main class="v-catalog">
+
+  <header class="s-brand">
+    <h1 class="e-title">디자인 시스템</h1>
+    <p class="e-caption">
+      아래 목록은 손으로 적은 것이 아니라 실제 스타일시트에서 읽어온 것입니다.
+      토큰을 추가하면 여기 자동으로 나타나고, 데모가 없는 컴포넌트는 맨 아래에 경고로 뜹니다.
+    </p>
+    <p id="coverage" class="e-caption"></p>
+    <div class="s-actions">
+      <button class="e-action-ghost" type="button" id="theme">테마 — <span id="theme-label">시스템</span></button>
+    </div>
+  </header>
+
+  <!-- ============ x ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">x — 원시 토큰 (<span id="count-x">0</span>)</h2>
+      <p class="e-caption">값 그 자체. 컴포넌트가 직접 참조하지 않습니다.</p>
+    </header>
+    <ul id="token-x"></ul>
+  </section>
+
+  <!-- ============ token ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">token — 시맨틱 토큰 (<span id="count-semantic">0</span>)</h2>
+      <p class="e-caption">역할 이름. 컴포넌트는 이 층만 봅니다. 오른쪽이 원시 토큰으로의 매핑입니다.</p>
+    </header>
+    <ul id="token-semantic"></ul>
+  </section>
+
+  <!-- ============ element ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">element</h2>
+      <p class="e-caption">단일 요소. 바깥 여백과 위치를 선언하지 않습니다.</p>
+    </header>
+
+    <div class="v-catalog-demo">
+      <div class="b-demo">
+        <p class="e-code">.e-title</p>
+        <p class="e-title" data-demo="e-title">큐시트</p>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-heading</p>
+        <p class="e-heading" data-demo="e-heading">진행 중인 큐</p>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-label</p>
+        <span class="e-label" data-demo="e-label">아이디</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-caption</p>
+        <p class="e-caption" data-demo="e-caption">행사 순서를 함께 봅니다</p>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-code</p>
+        <span class="e-code" data-demo="e-code">--surface</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-swatch</p>
+        <span class="e-swatch" data-demo="e-swatch" style="background: var(--accent); max-width: 4rem"></span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-input — 기본 / 오류</p>
+        <input class="e-input" data-demo="e-input" value="choi" aria-label="예시 입력">
+        <input class="e-input" value="choi" aria-invalid="true" aria-label="오류 예시 입력">
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-action — 기본 / 비활성</p>
+        <button class="e-action" type="button" data-demo="e-action">로그인</button>
+        <button class="e-action" type="button" disabled>로그인</button>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-action-ghost</p>
+        <button class="e-action-ghost" type="button" data-demo="e-action-ghost">가입</button>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-badge — 기본 / running / ended</p>
+        <span class="e-badge" data-demo="e-badge">대기</span>
+        <span class="e-badge" data-state="running">진행 중</span>
+        <span class="e-badge" data-state="ended">종료</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-entry — 눌러서 여는 카드</p>
+        <button class="e-entry" type="button" data-demo="e-entry">뮤직 스테이지</button>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.e-time — mono + tabular. 세로로 자릿수가 맞는다</p>
+        <p class="e-time" data-demo="e-time">20:03:35</p>
+        <p class="e-time">20:11:45</p>
+        <p class="e-time">09:00:00</p>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.e-count — 카운트다운. 초과하면 danger 로</p>
+        <p class="e-count" data-demo="e-count">1:03</p>
+        <p class="e-count" data-over="true">-0:21</p>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.e-tick / .e-thumb — 축 눈금과 레일 손잡이. 둘 다 절대 위치라 담는 쪽이 필요하다</p>
+        <span class="e-caption" data-demo="e-tick">눈금 라벨 — s-axis 안에서만 보입니다</span>
+        <span class="e-caption" data-demo="e-thumb">레일 손잡이 — s-rail 안에서만 보입니다</span>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.e-notice</p>
+        <p class="e-notice" data-demo="e-notice">PIN이 올바르지 않습니다</p>
+      </div></div>
+  </section>
+
+  <!-- ============ block ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">block</h2>
+      <p class="e-caption">요소 몇 개 + 배치. 바깥 여백을 선언하지 않습니다.</p>
+    </header>
+
+    <div class="v-catalog-demo">
+      <div class="b-demo">
+        <p class="e-code">.b-field — e-label + e-input</p>
+        <div class="b-field" data-demo="b-field">
+          <label class="e-label" for="demo-field">아이디</label>
+          <input class="e-input" id="demo-field" value="choi">
+        </div>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.b-cuesheet — e-heading + e-badge + e-caption</p>
+        <span class="b-cuesheet" data-demo="b-cuesheet">
+          <span class="e-heading">뮤직 스테이지</span>
+          <span class="e-badge" data-state="running">진행 중</span>
+          <span class="e-caption">8월 28일 목 20:00 · 11개 큐</span>
+        </span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.b-demo — 라벨과 대상을 붙인다. 이 카탈로그의 각 항목이 그것입니다</p>
+        <span class="e-caption" data-demo="b-demo">라벨 4px 아래에 대상, 항목 사이는 40px</span>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.b-cue — 시각 + 제목 + 길이. 시각이 세로로 맞는다</p>
+        <ol class="s-list">
+          <li class="b-cue" data-demo="b-cue">
+            <span class="e-time">오후 08:03</span><span>무대 ① 아티스트 A</span><span class="e-time">3:20</span>
+          </li>
+          <li class="b-cue">
+            <span class="e-time">오후 08:07</span><span>MC 브릿지</span><span class="e-time">1:05</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.b-axis-cue — 축 위의 블록. 높이가 곧 소요시간</p>
+        <div style="position: relative; height: 160px; width: 100%">
+          <div class="b-axis-cue" data-demo="b-axis-cue" data-color="blue" data-mine="true" data-state="current"
+               style="top: 0; height: 92px"><b>무대 ① 아티스트 A</b><span>3:20</span></div>
+          <div class="b-axis-cue" data-color="rose" data-mine="false" data-state="ahead"
+               style="top: 93px; height: 30px"><b>MC 브릿지</b><span>1:05</span></div>
+          <div class="b-axis-cue" data-color="violet" data-mine="true" data-state="done"
+               style="top: 124px; height: 36px"><b>광고</b><span>1:30</span></div>
+        </div>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.b-spec — e-swatch + e-code + e-code</p>
+        <ul>
+          <li class="b-spec" data-demo="b-spec">
+            <span class="e-swatch" style="background: var(--accent)"></span>
+            <span class="e-code">--accent</span>
+            <span class="e-code">var(--x-blue-600)</span>
+          </li>
+        </ul>
+      </div></div>
+  </section>
+
+  <!-- ============ section ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">section</h2>
+      <p class="e-caption">화면의 한 구역.</p>
+    </header>
+
+    <div class="v-catalog-demo">
+      <div class="b-demo">
+        <p class="e-code">.s-brand</p>
+        <header class="s-brand" data-demo="s-brand">
+          <h3 class="e-title">큐시트</h3>
+          <p>행사 순서를 함께 봅니다</p>
+        </header>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.s-form — b-field 여럿</p>
+        <div class="s-form" data-demo="s-form">
+          <div class="b-field">
+            <label class="e-label" for="demo-form-id">아이디</label>
+            <input class="e-input" id="demo-form-id">
+          </div>
+          <div class="b-field">
+            <label class="e-label" for="demo-form-pin">PIN 4자리</label>
+            <input class="e-input" id="demo-form-pin" type="password" value="1234">
+          </div>
+        </div>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.s-list — e-entry 안에 b-cuesheet</p>
+        <ol class="s-list" data-demo="s-list">
+          <li>
+            <button class="e-entry" type="button">
+              <span class="b-cuesheet">
+                <span class="e-heading">뮤직 스테이지</span>
+                <span class="e-badge" data-state="running">진행 중</span>
+                <span class="e-caption">8월 28일 목 20:00 · 11개 큐</span>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button class="e-entry" type="button">
+              <span class="b-cuesheet">
+                <span class="e-heading">개국 30주년 특집</span>
+                <span class="e-badge">대기</span>
+                <span class="e-caption">9월 2일 화 19:30 · 24개 큐</span>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button class="e-entry" type="button">
+              <span class="b-cuesheet">
+                <span class="e-heading">주간 차트쇼</span>
+                <span class="e-badge" data-state="ended">종료</span>
+                <span class="e-caption">8월 21일 목 20:00 · 9개 큐</span>
+              </span>
+            </button>
+          </li>
+        </ol>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.s-actions</p>
+        <div class="s-actions" data-demo="s-actions">
+          <button class="e-action" type="button">로그인</button>
+          <button class="e-action-ghost" type="button">가입</button>
+        </div>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.s-bar — 제목 + 상태</p>
+        <header class="s-bar" data-demo="s-bar">
+          <span class="e-heading">뮤직 스테이지</span>
+          <span class="e-badge" data-state="running">진행중</span>
+        </header>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-hero — 내 다음 큐</p>
+        <section class="s-hero" data-demo="s-hero">
+          <p class="e-label">내 다음 큐</p>
+          <p class="e-count">1:03</p>
+          <p class="e-heading">MC 오프닝</p>
+          <p class="e-caption">카메라 1번 스탠바이 · 스탠딩</p>
+        </section>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-now — 진행 중</p>
+        <section class="s-now" data-demo="s-now">
+          <p class="e-label">진행 중</p>
+          <p>MC 오프닝</p>
+          <span class="e-badge" data-state="ended">＋0:12 지연</span>
+        </section>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-manager — 진행 조작</p>
+        <section class="s-manager" data-demo="s-manager">
+          <button class="e-action" type="button">다음 순서</button>
+          <button class="e-action-ghost" type="button">되돌리기</button>
+        </section>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-mine — 내 남은 큐</p>
+        <section class="s-mine" data-demo="s-mine">
+          <p class="e-label">내 남은 큐</p>
+          <ol class="s-list">
+            <li class="b-cue"><span class="e-time">오후 08:03</span><span>무대 ①</span><span class="e-time">3:20</span></li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-foot — 연결 상태 + 닫기</p>
+        <footer class="s-foot" data-demo="s-foot">
+          <span class="e-badge" data-state="running">연결됨</span>
+          <button class="e-action-ghost" type="button">닫기</button>
+        </footer>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-axis + .s-rail — 눈금 축과 미니맵 스크롤바</p>
+        <div style="position: relative; height: 220px; width: 100%">
+          <div class="s-axis" data-demo="s-axis" style="height: 100%">
+            <div class="track" style="height: 420px">
+              <span class="e-tick" style="top: 0">13:48</span>
+              <i class="line" style="top: 0"></i>
+              <span class="e-tick" style="top: 92px">13:50</span>
+              <i class="line" style="top: 92px"></i>
+              <span class="e-tick" style="top: 184px">13:52</span>
+              <i class="line" style="top: 184px"></i>
+              <div class="b-axis-cue" data-color="blue" data-mine="true" style="top: 0; height: 90px"><b>무대 ①</b><span>3:20</span></div>
+              <div class="b-axis-cue" data-color="amber" data-mine="false" style="top: 91px; height: 130px"><b>주간 차트 코너</b><span>4:00</span></div>
+              <div class="b-axis-cue" data-color="teal" data-mine="true" style="top: 222px; height: 100px"><b>무대 ②</b><span>3:45</span></div>
+              <div class="now" style="top: 150px"><b>13:51</b><i></i></div>
+            </div>
+          </div>
+          <div class="s-rail live" data-demo="s-rail">
+            <div class="track">
+              <i class="seg" data-color="blue" style="flex: 200 0 0"></i>
+              <i class="seg" data-color="amber" style="flex: 240 0 0"></i>
+              <i class="seg" data-color="teal" style="flex: 225 0 0"></i>
+            </div>
+            <div class="e-thumb" style="top: 40px; height: 90px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-actions-inline — 가로로 붙는 버튼들</p>
+        <span class="s-actions-inline" data-demo="s-actions-inline">
+          <button class="e-action-ghost" type="button">전체 큐시트</button>
+          <button class="e-action-ghost" type="button">닫기</button>
+        </span>
+      </div>
+
+      <div class="b-demo">
+        <p class="e-code">.s-group — 이 카탈로그의 각 카드가 그것입니다</p>
+        <span class="e-caption" data-demo="s-group">위 카드들</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.s-app — 이 페이지의 배경·기본 타이포</p>
+        <span class="e-caption" data-demo="s-app">body 에 적용됨</span>
+      </div></div>
+  </section>
+
+  <!-- ============ view ============ -->
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">view</h2>
+      <p class="e-caption">배치만. 색·폰트·곡률·그림자를 선언하지 않습니다.</p>
+    </header>
+
+    <div class="v-catalog-demo">
+      <div class="b-demo">
+        <p class="e-code">.v-auth — s-brand + s-form + s-actions</p>
+        <span class="e-caption" data-demo="v-auth">
+          <a href="/">홈 화면에서 보기</a> — login · register · pick 셋이 공유합니다
+        </span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.v-timeline</p>
+        <span class="e-caption" data-demo="v-timeline">
+          s-bar + s-axis + s-rail. <a href="/">큐시트를 열고 “전체 큐시트”</a>
+        </span>
+
+        <p class="e-code">.v-catalog</p>
+        <span class="e-caption" data-demo="v-catalog">이 페이지의 배치</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.v-catalog-demo</p>
+        <span class="e-caption" data-demo="v-catalog-demo">각 카드 안의 데모 나열</span>
+      </div>
+      <div class="b-demo">
+        <p class="e-code">.v-run</p>
+        <span class="e-caption" data-demo="v-run">
+          s-bar + s-hero + s-now + s-manager + s-mine + s-foot. <a href="/">홈에서 큐시트를 열면 보입니다</a>
+        </span>
+      </div></div>
+  </section>
+
+</main>
+
+<script type="module" src="/catalog/catalog.js"></script>
+</body>
+</html>

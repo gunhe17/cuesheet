@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>큐시트</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+<main id="app" class="s-app">
+
+  <!-- login -->
+  <section id="view-login" class="v-auth" aria-labelledby="login-title">
+    <header class="s-brand">
+      <h1 id="login-title" class="e-title">큐시트</h1>
+      <p>행사 순서를 함께 봅니다</p>
+    </header>
+
+    <form id="form-login" class="s-form" novalidate>
+      <div class="b-field">
+        <label class="e-label" for="login-login-id">아이디</label>
+        <input class="e-input" id="login-login-id" name="login_id"
+               autocomplete="username" autocapitalize="off" autocorrect="off" required>
+      </div>
+
+      <div class="b-field">
+        <label class="e-label" for="login-pin">PIN 4자리</label>
+        <input class="e-input" id="login-pin" name="pin" type="password"
+               inputmode="numeric" pattern="[0-9]{4}" maxlength="4"
+               autocomplete="current-password" required>
+      </div>
+
+      <p id="login-notice" class="e-notice" role="alert" hidden></p>
+
+      <div class="s-actions">
+        <button class="e-action" type="submit">로그인</button>
+        <button class="e-action-ghost" type="button" data-goto="register">가입</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- register -->
+  <section id="view-register" class="v-auth" aria-labelledby="register-title" hidden>
+    <header class="s-brand">
+      <h1 id="register-title" class="e-title">가입</h1>
+      <p>아이디와 PIN 4자리로 시작합니다</p>
+    </header>
+
+    <form id="form-register" class="s-form" novalidate>
+      <div class="b-field">
+        <label class="e-label" for="register-login-id">아이디</label>
+        <input class="e-input" id="register-login-id" name="login_id"
+               autocomplete="username" autocapitalize="off" autocorrect="off" required>
+      </div>
+
+      <div class="b-field">
+        <label class="e-label" for="register-name">이름</label>
+        <input class="e-input" id="register-name" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="b-field">
+        <label class="e-label" for="register-pin">PIN 4자리</label>
+        <input class="e-input" id="register-pin" name="pin" type="password"
+               inputmode="numeric" pattern="[0-9]{4}" maxlength="4"
+               autocomplete="new-password" required>
+      </div>
+
+      <p id="register-notice" class="e-notice" role="alert" hidden></p>
+
+      <div class="s-actions">
+        <button class="e-action" type="submit">가입하고 로그인</button>
+        <button class="e-action-ghost" type="button" data-goto="login">돌아가기</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- pick -->
+  <section id="view-pick" class="v-auth" aria-labelledby="pick-title" hidden>
+    <header class="s-brand">
+      <h1 id="pick-title" class="e-title">큐시트 열기</h1>
+      <p id="pick-greeting"></p>
+    </header>
+
+    <ol id="pick-list" class="s-list"></ol>
+
+    <p id="pick-empty" class="e-caption" hidden>참여 중인 큐시트가 없습니다. 초대 링크로 합류하세요.</p>
+    <p id="pick-notice" class="e-notice" role="alert" hidden></p>
+
+    <div class="s-actions">
+      <button class="e-action-ghost" type="button" data-logout>로그아웃</button>
+    </div>
+  </section>
+
+  <!-- cuesheet -->
+  <section id="view-cuesheet" class="v-timeline" aria-labelledby="timeline-title" hidden>
+    <header class="s-bar">
+      <h1 id="timeline-title" class="e-heading"></h1>
+      <span class="s-actions-inline">
+        <span id="run-state" class="e-badge"></span>
+        <span id="now-delay" class="e-badge" data-state="warn" hidden></span>
+      </span>
+    </header>
+
+    <p id="timeline-folded" class="e-caption" hidden></p>
+
+    <div class="stage">
+      <div class="s-axis" id="timeline-axis">
+        <div class="track" id="timeline-track"></div>
+      </div>
+
+      <div class="s-rail" id="rail">
+        <div class="track" id="rail-track"></div>
+        <div class="e-thumb" id="rail-thumb"></div>
+        <div class="hit" id="rail-hit"></div>
+      </div>
+    </div>
+
+    <section id="manager" class="s-manager" hidden>
+      <button class="e-action" id="btn-start" type="button" hidden>시작</button>
+      <button class="e-action" id="btn-advance" type="button" hidden>다음 순서</button>
+      <button class="e-action-ghost" id="btn-rewind" type="button" hidden>되돌리기</button>
+    </section>
+
+    <footer class="s-foot">
+      <span id="conn" class="e-badge" data-state="running">연결됨</span>
+      <button class="e-action-ghost" id="btn-timeline-close" type="button">닫기</button>
+    </footer>
+  </section>
+
+</main>
+
+<template id="tpl-cuesheet">
+  <li>
+    <button class="e-entry" type="button">
+      <span class="b-cuesheet">
+        <span class="e-heading" data-title></span>
+        <span class="e-badge" data-state></span>
+        <span class="e-caption" data-when></span>
+      </span>
+    </button>
+  </li>
+</template>
+
+
+<template id="tpl-axis-cue">
+  <div class="b-axis-cue"><b></b><span></span></div>
+</template>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.e-action-ghost {
+  min-height: var(--size-tap);
+  padding: var(--pad-action);
+  background: var(--layer);
+  color: var(--accent);
+  border: none;
+  border-radius: var(--radius-action);
+  font-size: var(--type-action-size);
+  letter-spacing: var(--type-body-track);
+  line-height: var(--type-caption-leading);
+  cursor: pointer;
+  transition: background var(--dur-fade), transform var(--dur-fade);
+}
+.e-action-ghost:hover { background: var(--layer-hover); }
+.e-action-ghost:active { transform: scale(0.98); }
+.e-action-ghost:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }

@@ -1,0 +1,31 @@
+:root {
+  --cue-slate: var(--x-slate-400);
+  --cue-blue: var(--x-blue-600);
+  --cue-teal: var(--x-teal-600);
+  --cue-amber: var(--x-amber-600);
+  --cue-rose: var(--x-rose-600);
+  --cue-violet: var(--x-violet-600);
+  --cue-ink: var(--x-white);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cue-slate: var(--x-slate-600);
+    --cue-blue: var(--x-blue-500);
+    --cue-teal: var(--x-teal-400);
+    --cue-amber: var(--x-amber-400);
+    --cue-rose: var(--x-rose-400);
+    --cue-violet: var(--x-violet-400);
+    --cue-ink: var(--x-slate-950);
+  }
+}
+
+:root[data-theme="dark"] {
+  --cue-slate: var(--x-slate-600);
+  --cue-blue: var(--x-blue-500);
+  --cue-teal: var(--x-teal-400);
+  --cue-amber: var(--x-amber-400);
+  --cue-rose: var(--x-rose-400);
+  --cue-violet: var(--x-violet-400);
+  --cue-ink: var(--x-slate-950);
+}

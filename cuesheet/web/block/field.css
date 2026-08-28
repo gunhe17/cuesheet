@@ -1,0 +1,4 @@
+.b-field {
+  display: grid;
+  gap: var(--gap-tight);
+}

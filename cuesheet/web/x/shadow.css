@@ -1,0 +1,6 @@
+/* 테두리가 아니라 아주 넓고 옅은 그림자로 띄운다 */
+:root {
+  --x-shadow-card: 0 4px 14px oklch(0% 0 0 / 0.08);
+  --x-shadow-raised: 0 2px 6px oklch(0% 0 0 / 0.06);
+  --x-shadow-dark: 0 4px 14px oklch(0% 0 0 / 0.5);
+}

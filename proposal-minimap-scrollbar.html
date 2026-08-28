@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>미니맵 스크롤바 확정안</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="example/preline/assets/main.min.css">
+<style>
+  .t-vcr{--c:#d99a3f} .t-live{--c:#e0574a} .t-stage{--c:#3fa9b4} .t-cm{--c:#8b7fc7} .t-cg{--c:#5ea87a}
+  .fill{background:var(--c)}
+  .phone{width:300px;border-radius:32px;padding:9px;background:#39403f;
+         box-shadow:0 1px 0 rgb(255 255 255/.16) inset, 0 14px 32px rgb(0 0 0/.28)}
+  .screen{height:540px;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+  /* 타임라인 영역: 부모가 flex여야 pane 높이가 제약돼 스크롤이 생긴다 */
+  .tlwrap{flex:1 1 0;min-height:0;position:relative;overflow:hidden;display:flex}
+  .pane{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+  .pane::-webkit-scrollbar{width:0;height:0}
+  .axis{position:absolute;inset-block:0;border-inline-start:1px solid var(--color-line-3)}
+  .gl{position:absolute;inset-inline-end:0;border-top:1px solid var(--color-line-3);opacity:.4}
+  .mono{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  /* 우측 레일 = 스크롤바 겸 미니맵. 폭은 고정.
+     평소: 타입 색 위에 반투명 필터 / 조작 중: 필터가 벗겨져 원색 */
+  .rail{position:absolute;inset-block:0;inset-inline-end:0;touch-action:none;cursor:grab;
+        display:flex;flex-direction:column;align-items:stretch;width:var(--w)}
+  .rail:active{cursor:grabbing}
+  .seg{width:100%;background:var(--c);opacity:.4;transition:opacity .2s ease}
+  .rail.live .seg{opacity:1}
+  .thumb{position:absolute;inset-inline:0;border-radius:6px;pointer-events:none;
+         background:rgb(255 255 255/.30);transition:background .2s ease}
+  .rail.live .thumb{background:rgb(255 255 255/.40)}
+  /* 조작 중에만 나타나는 눈금 */
+  .ticks{position:absolute;inset-block:0;inset-inline-end:calc(var(--w) + 4px);
+         opacity:0;transition:opacity .18s ease;pointer-events:none}
+  .rail.live ~ .ticks{opacity:1}
+
+  /* main.min.css에 없는 유틸리티 보충 */
+  .text-\[8px\]{font-size:8px;line-height:1.2}
+  .text-\[9px\]{font-size:9px;line-height:1.25}
+  .text-\[10px\]{font-size:10px;line-height:1.3}
+  .text-\[11px\]{font-size:11px;line-height:1.35}
+  .mt-0\.5{margin-top:2px} .mt-1\.5{margin-top:6px} .gap-1\.5{gap:6px}
+  .py-2\.5{padding-top:10px;padding-bottom:10px} .px-1\.5{padding-left:6px;padding-right:6px}
+  .w-2\.5{width:10px} .h-2\.5{height:10px}
+  .text-black\/85{color:rgb(0 0 0/.85)} .text-black\/60{color:rgb(0 0 0/.6)}
+  @media (min-width:768px){ .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (min-width:1024px){ .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))} }
+</style>
+</head>
+<body class="bg-background text-foreground antialiased">
+
+<div class="max-w-6xl mx-auto px-6 py-10">
+
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <span class="text-xs uppercase tracking-wider text-primary font-semibold">확정안 · minimap as scrollbar</span>
+      <h1 class="text-3xl font-bold text-foreground mt-2">미니맵 스크롤바</h1>
+      <p class="text-sm text-muted-foreground-1 mt-2 max-w-2xl">
+        눈금 축 타임라인 오른쪽 끝에 <b class="text-foreground">10px 레일</b>. 트랙이 곧 프로그램 전체 구성이고,
+        thumb이 지금 보고 있는 구간입니다. 미니맵을 스크롤바 자리로 밀어 넣어, 축이 둘이어도 폭을 나눠 쓰지 않습니다.
+      </p>
+      <p class="text-sm text-muted-foreground-1 mt-2 max-w-2xl">
+        타입 색은 항상 있되 평소엔 반투명 필터로 가라앉아 있고, 스크롤·드래그 중에만 필터가 벗겨집니다.
+        <b class="text-foreground">폭은 변하지 않습니다.</b> 스크롤하거나 레일을 끌어보세요.
+      </p>
+    </div>
+    <button type="button" id="theme"
+      class="shrink-0 text-sm px-3 py-2 rounded-lg bg-layer border border-layer-line text-foreground">
+      라이트 / 다크
+    </button>
+  </div>
+
+  <div class="mt-4 p-3 rounded-lg bg-layer border border-layer-line text-xs text-muted-foreground-1">
+    본 축 1분 = 46px (24분 = 1104px) · 레일은 24분 전체를 화면 높이에 압축 · 현재 20:04:12
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 items-start">
+
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card" data-tl data-rail-w="10"></div></div>
+      </div>
+    </div>
+
+    <div class="bg-card border border-card-line rounded-xl p-6">
+      <span class="text-xs uppercase tracking-wider text-primary font-semibold">확정 규격</span>
+      <dl class="mt-4 text-sm">
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">레일 폭</dt><dd class="text-foreground mono">10px 고정</dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">터치 영역</dt><dd class="text-foreground mono">20px<span class="text-muted-foreground-1"> · 시각 폭과 무관</span></dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">세그먼트</dt><dd class="text-foreground">타입 색 · 사이 1px 간격</dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">평소</dt><dd class="text-foreground mono">opacity 0.4</dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">조작 중</dt><dd class="text-foreground mono">opacity 1.0<span class="text-muted-foreground-1"> · 전환 0.2s</span></dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">복귀 지연</dt><dd class="text-foreground mono">0.9s</dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">thumb</dt><dd class="text-foreground">테두리 없음 · 흰색 30% → 40% · 최소 높이 24px</dd></div>
+        <div class="flex gap-4 py-2 border-b border-card-divider"><dt class="w-28 shrink-0 text-muted-foreground-2">현재 시각</dt><dd class="text-foreground">레일 아님 — 본 축 좌측 배지 + 가로 점선</dd></div>
+        <div class="flex gap-4 py-2"><dt class="w-28 shrink-0 text-muted-foreground-2">본 축 배율</dt><dd class="text-foreground mono">1분 = 46px</dd></div>
+      </dl>
+      <p class="text-xs text-muted-foreground-2 mt-4 leading-relaxed">
+        폭 확대는 넣지 않습니다 — 레일이 움직이면 본문 오른쪽을 가리고 시선을 뺏습니다.
+        필터가 벗겨지는 것만으로 상태 변화는 충분히 전달됩니다.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 상호작용 규칙 -->
+  <div class="mt-8 bg-card border border-card-line rounded-xl p-6">
+    <span class="text-xs uppercase tracking-wider text-primary font-semibold">규칙</span>
+    <h2 class="text-xl font-semibold text-foreground mt-2">스크롤바처럼 보이면 스크롤바처럼 동작해야 합니다</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+      <div class="p-4 rounded-lg bg-layer border border-layer-line">
+        <div class="text-sm font-semibold text-foreground">지켜야 할 것</div>
+        <ul class="text-sm text-muted-foreground-1 mt-2 space-y-1">
+          <li>· 레일을 끌면 그 구간으로 이동 — thumb 밖을 눌러도 점프</li>
+          <li>· 본 축을 스크롤하면 thumb이 즉시 따라옴</li>
+          <li>· 터치 영역은 시각적 폭보다 넓게 (최소 20px)</li>
+          <li>· thumb 높이 = 보이는 구간 비율. 최소 24px 보장</li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-lg bg-layer border border-layer-line">
+        <div class="text-sm font-semibold text-foreground">더한 것</div>
+        <ul class="text-sm text-muted-foreground-1 mt-2 space-y-1">
+          <li>· 레일은 <b class="text-foreground">지금 보고 있는 구간</b>만 표현. 테두리 없이 밝기 차이로</li>
+          <li>· 현재 시각은 레일이 아니라 <b class="text-foreground">본 축 좌측</b>에 — 가로선과 함께</li>
+          <li>· 색은 항상. 조작 중에만 <b class="text-foreground">반투명 필터가 벗겨져</b> 원색이 됨 (40% → 100%)</li>
+          <li>· <b class="text-foreground">폭은 절대 변하지 않음</b> — 레일이 움직이면 본문을 가리고 시선을 뺏음</li>
+          <li>· 색 전환 0.2초, 복귀 지연 0.9초 — 스크롤이 끊길 때마다 깜빡이지 않게</li>
+          <li>· 네이티브 스크롤바는 숨김 (<code>scrollbar-width:none</code>) — 둘이 겹치면 안 됨</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 남은 결정 -->
+  <div class="mt-6 bg-card border border-card-line rounded-xl p-6">
+    <span class="text-xs uppercase tracking-wider text-primary font-semibold">남은 결정</span>
+    <ol class="mt-4 space-y-3">
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">1</span>
+        <span><b class="text-foreground">레일 탭 = 구간 점프인가, 큐 선택인가</b><span class="block text-sm text-muted-foreground-1">지금은 스크롤바 관습대로 점프입니다. 큐 선택이 더 자주 필요한 동작이라면 바꿔야 합니다.</span></span></li>
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">2</span>
+        <span><b class="text-foreground">눈금 옵션을 켤 것인가</b><span class="block text-sm text-muted-foreground-1">조작 중에만 5분 눈금을 레일 옆에 띄우는 옵션. 평소엔 축이 하나뿐이라 부작용은 없지만, 10px 옆에 눈금을 붙이면 그만큼 본문을 더 내줘야 합니다. 90분급 프로그램을 다루게 되면 그때 켜세요.</span></span></li>
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">3</span>
+        <span><b class="text-foreground">긴 프로그램의 배율</b><span class="block text-sm text-muted-foreground-1">본 축은 1분 = 46px 고정입니다. 레일은 프로그램 길이에 맞춰 자동 압축되므로 90분이어도 성립하지만, 그때는 세그먼트가 너무 얇아집니다.</span></span></li>
+    </ol>
+    <p class="text-xs text-muted-foreground-2 mt-6 leading-relaxed">
+      구현은 <b class="text-foreground">시각 → px 변환 함수 하나</b>와 스크롤 동기화가 전부입니다.
+      본 축과 레일이 같은 함수를 공유합니다.
+    </p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // 큐시트 원본 — 시작 오프셋(초), 길이(초), 타입
+  var CUES=[
+    {t:"오프닝 타이틀 VCR", d:35,  k:"vcr",   sub:"서버 A · OPEN_0828"},
+    {t:"MC 오프닝",         d:130, k:"live",  sub:"MC 김하늘 · 박도윤"},
+    {t:"1위 후보 소개 CG",  d:50,  k:"cg",    sub:"CG-04"},
+    {t:"무대 ① 아티스트 A", d:200, k:"stage", sub:"카메라 4, 6 · 자막 CG-07"},
+    {t:"MC 브릿지",         d:65,  k:"live",  sub:"카메라 1"},
+    {t:"무대 ② 아티스트 B", d:225, k:"stage", sub:"카메라 3, 5"},
+    {t:"광고",              d:90,  k:"cm",    sub:"편성 고정"},
+    {t:"주간 차트 코너",    d:240, k:"vcr",   sub:"작가 한지우"},
+    {t:"무대 ③ 아티스트 C", d:210, k:"stage", sub:"카메라 4, 6"},
+    {t:"1위 발표",          d:135, k:"live",  sub:"카메라 1, 3"},
+    {t:"엔딩",              d:60,  k:"live",  sub:""}
+  ];
+  var TOTAL=CUES.reduce(function(a,c){return a+c.d},0);   // 1440초
+  var PXS=46/60;                                          // 1분 = 46px
+  var NOW=252;                                            // 20:04:12
+  var DARK={vcr:1,stage:1,cg:1};                          // 밝은 배경 → 검은 글자
+
+  function clock(sec){
+    var h=20, m=Math.floor(sec/60), s=sec%60;
+    return h+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  }
+  function mmss(sec){ return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0") }
+
+  function build(root){
+    var railW=+root.dataset.railW;      // 레일 폭 (고정)
+    var ticks=root.dataset.ticks;
+    var pad=railW+8;                    // 본문 오른쪽 여백 = 레일 자리
+    root.style.setProperty('--w', railW+'px');
+
+    var head=
+      '<div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">'+
+        '<div class="flex items-center gap-2">'+
+          '<h3 class="text-base font-semibold text-foreground flex-1">뮤직 스테이지</h3>'+
+          '<span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>'+
+        '</div>'+
+        '<div class="flex gap-3 mt-1 text-[10px] text-muted-foreground-2">'+
+          '<span>1분 = 46px</span><span>총 <b class="text-foreground mono">24:00</b></span>'+
+          '<span class="text-amber-500">＋<b class="mono">0:12</b></span>'+
+        '</div>'+
+      '</div>';
+
+    // 본 축 (확대 구간)
+    var body='', off=0;
+    for(var i=0;i<CUES.length;i++){
+      var c=CUES[i], top=off*PXS, h=c.d*PXS, dark=DARK[c.k];
+      var tone=dark?"text-black/85":"text-white", tone2=dark?"text-black/60":"text-white/70";
+      body+=
+        '<div class="absolute end-0 t-'+c.k+'" style="inset-inline-start:44px;top:'+top.toFixed(1)+'px;height:'+(h-2).toFixed(1)+'px">'+
+          '<div class="h-full rounded-e fill flex flex-col justify-center px-2 overflow-hidden">'+
+            '<b class="text-[11px] font-semibold '+tone+' truncate">'+c.t+'</b>'+
+            (h>34?'<span class="text-[9px] '+tone2+' mono mt-0.5 truncate">'+mmss(c.d)+(c.sub?' · '+c.sub:'')+'</span>':'')+
+          '</div>'+
+        '</div>';
+      off+=c.d;
+    }
+    // 눈금 + 그리드
+    var axis='';
+    for(var m=0;m<=Math.floor(TOTAL/60);m+=2){
+      var y=m*60*PXS;
+      axis+='<span class="absolute text-[9px] text-muted-foreground-2 mono" style="top:'+(y-5).toFixed(1)+'px;inset-inline-start:0">'+clock(m*60).slice(3)+'</span>';
+      axis+='<div class="gl" style="inset-inline-start:40px;top:'+y.toFixed(1)+'px"></div>';
+    }
+    var nowY=NOW*PXS;
+
+    var pane=
+      '<div class="pane relative" data-pane style="padding-inline-end:'+pad+'px">'+
+        '<div class="relative" style="height:'+(TOTAL*PXS+16).toFixed(1)+'px;margin:8px 0 0 12px">'+
+          axis+
+          '<div class="axis" style="inset-inline-start:40px"></div>'+
+          body+
+          '<div class="absolute end-0 flex items-center" style="inset-inline-start:0;top:'+nowY.toFixed(1)+'px">'+
+            '<span class="text-[8px] font-bold px-1 py-0.5 rounded-e bg-rose-500 text-white mono shrink-0">'+clock(NOW).slice(3)+'</span>'+
+            '<div class="flex-1 border-t-2 border-dashed border-rose-500"></div>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+
+    // 레일 (미니맵 = 스크롤바)
+    var segs='';
+    for(var j=0;j<CUES.length;j++){
+      segs+='<div class="seg t-'+CUES[j].k+'" style="flex:'+CUES[j].d+' 0 0"></div>';
+    }
+    var tickMarks='';
+    if(ticks){
+      for(var t=0;t<=Math.floor(TOTAL/60);t+=5){
+        tickMarks+='<div class="absolute text-[8px] text-muted-foreground-2 mono" '+
+                   'style="inset-inline-end:0;top:calc('+(t*60/TOTAL*100)+'% - 4px)">'+t+'</div>';
+      }
+    }
+    var rail=
+      '<div class="rail" data-rail>'+
+        '<div class="absolute inset-0 rounded overflow-hidden flex flex-col" style="gap:1px">'+segs+'</div>'+
+        '<div class="thumb" data-thumb></div>'+
+      '</div>'+
+      (ticks?'<div class="ticks" data-ticks>'+tickMarks+'</div>':'')+
+      // 터치 확장 영역 (시각적 폭과 무관하게 항상 20px 이상)
+      '<div class="absolute inset-y-0" data-hit style="inset-inline-end:0;width:'+Math.max(20,railW+10)+'px;touch-action:none"></div>';
+
+    root.innerHTML=head+'<div class="tlwrap">'+pane+rail+'</div>';
+    wire(root);
+  }
+
+  function wire(root){
+    var pane=root.querySelector('[data-pane]');
+    var rail=root.querySelector('[data-rail]');
+    var thumb=root.querySelector('[data-thumb]');
+    var hit=root.querySelector('[data-hit]');
+    var hideT=null;
+
+    function sync(){
+      var vh=pane.clientHeight, ch=pane.scrollHeight, rh=rail.clientHeight;
+      if(!ch||!rh) return;
+      var th=Math.max(24, rh*(vh/ch));
+      var range=ch-vh;
+      var p=range>0 ? pane.scrollTop/range : 0;
+      thumb.style.height=th+'px';
+      thumb.style.top=((rh-th)*p)+'px';
+    }
+    function scrollTo(clientY){
+      var r=rail.getBoundingClientRect(), rh=rail.clientHeight;
+      var th=thumb.offsetHeight;
+      var p=(clientY-r.top-th/2)/Math.max(1,rh-th);
+      p=Math.min(1,Math.max(0,p));
+      pane.scrollTop=p*(pane.scrollHeight-pane.clientHeight);
+    }
+    // 조작 중에만 레일이 넓어지고 색의 반투명 필터가 벗겨짐. 멈추면 되돌아감
+    function flash(){
+      rail.classList.add('live');
+      clearTimeout(hideT);
+      hideT=setTimeout(function(){ rail.classList.remove('live'); sync() },900);
+    }
+
+    pane.addEventListener('scroll',function(){ sync(); flash() },{passive:true});
+
+    var dragging=false;
+    hit.addEventListener('pointerdown',function(e){
+      dragging=true; hit.setPointerCapture(e.pointerId); scrollTo(e.clientY); flash(); e.preventDefault();
+    });
+    hit.addEventListener('pointermove',function(e){ if(dragging){ scrollTo(e.clientY); flash() } });
+    hit.addEventListener('pointerup',function(){ dragging=false });
+    hit.addEventListener('pointercancel',function(){ dragging=false });
+
+    // 현재 큐가 보이도록 초기 위치
+    requestAnimationFrame(function(){
+      sync();
+      pane.scrollTop=Math.max(0, NOW*PXS-90);
+      sync();
+    });
+  }
+
+  document.querySelectorAll('[data-tl]').forEach(build);
+
+  document.getElementById('theme').addEventListener('click',function(){
+    document.documentElement.classList.toggle('dark');
+  });
+})();
+</script>
+</body>
+</html>

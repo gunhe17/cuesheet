@@ -1,0 +1,40 @@
+.s-rail {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: var(--size-rail);
+  touch-action: none;
+  cursor: grab;
+}
+.s-rail:active { cursor: grabbing; }
+
+.s-rail > .track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-radius: var(--radius-field);
+  overflow: hidden;
+}
+.s-rail .seg {
+  width: 100%;
+  background: var(--hue);
+  opacity: 0.4;
+  transition: opacity var(--dur-settle);
+}
+.s-rail .seg[data-color="slate"]  { --hue: var(--cue-slate); }
+.s-rail .seg[data-color="blue"]   { --hue: var(--cue-blue); }
+.s-rail .seg[data-color="teal"]   { --hue: var(--cue-teal); }
+.s-rail .seg[data-color="amber"]  { --hue: var(--cue-amber); }
+.s-rail .seg[data-color="rose"]   { --hue: var(--cue-rose); }
+.s-rail .seg[data-color="violet"] { --hue: var(--cue-violet); }
+.s-rail.live .seg { opacity: 1; }
+
+/* 시각 폭과 무관하게 엄지가 잡을 수 있는 넓이 */
+.s-rail > .hit {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: var(--size-rail-hit);
+}

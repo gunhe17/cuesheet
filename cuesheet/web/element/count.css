@@ -1,0 +1,10 @@
+.e-count {
+  font-family: var(--font-mono);
+  font-size: var(--type-count-size);
+  font-weight: var(--type-count-weight);
+  letter-spacing: var(--type-count-track);
+  line-height: var(--type-title-leading);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.e-count[data-over="true"] { color: var(--danger); }

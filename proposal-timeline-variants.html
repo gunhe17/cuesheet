@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>시간 비례 큐시트 · 6안</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="example/preline/assets/main.min.css">
+<style>
+  /* 비율과 타입 색만 여기서 — 나머지는 전부 Preline 클래스 */
+  .t-vcr{--c:#d99a3f} .t-live{--c:#e0574a} .t-stage{--c:#3fa9b4} .t-cm{--c:#8b7fc7} .t-cg{--c:#5ea87a}
+  .fill{background:var(--c)} .edge{border-inline-start-color:var(--c)} .ink{color:var(--c)}
+  .soft{background:color-mix(in srgb, var(--c) 16%, transparent)}
+  .phone{width:300px;border-radius:32px;padding:9px;background:#39403f;
+         box-shadow:0 1px 0 rgb(255 255 255/.16) inset, 0 14px 32px rgb(0 0 0/.28)}
+  .screen{height:540px;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+  .noscroll::-webkit-scrollbar{width:0}
+  .mono{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  /* main.min.css는 컴파일된 빌드라 아래 유틸리티가 빠져 있음 — 보충 */
+  .text-\[9px\]{font-size:9px;line-height:1.25}
+  .text-\[10px\]{font-size:10px;line-height:1.3}
+  .text-\[11px\]{font-size:11px;line-height:1.35}
+  .bg-teal-500\/60{background-color:color-mix(in srgb,var(--color-teal-500) 60%,transparent)}
+  .bg-teal-500\/10{background-color:color-mix(in srgb,var(--color-teal-500) 10%,transparent)}
+  .opacity-45{opacity:.45}
+  .pt-0\.5{padding-top:2px} .mb-0\.5{margin-bottom:2px}
+  .py-2\.5{padding-top:10px;padding-bottom:10px}
+  .px-1\.5{padding-left:6px;padding-right:6px}
+  .w-2\.5{width:10px} .h-2\.5{height:10px}
+  @media (min-width:768px){ .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  @media (min-width:1024px){ .lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))} }
+</style>
+</head>
+<body class="bg-background text-foreground antialiased">
+
+<div class="max-w-6xl mx-auto px-6 py-10">
+
+  <!-- 헤더 -->
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <span class="text-xs uppercase tracking-wider text-primary font-semibold">Timeline variants</span>
+      <h1 class="text-3xl font-bold text-foreground mt-2">시간 비례 큐시트 · 6안</h1>
+      <p class="text-sm text-muted-foreground-1 mt-2 max-w-2xl">
+        C안(시간 비례 타임라인)만 파고들었습니다. 여섯 개 모두 <b class="text-foreground">블록 크기 = 실제 길이</b>라는
+        같은 원칙을 쓰지만, 그 원칙이 깨지는 지점을 각각 다르게 해결합니다.
+        데이터는 같은 생방송 큐시트(11큐 · 24분).
+      </p>
+    </div>
+    <button type="button" id="theme"
+      class="shrink-0 text-sm px-3 py-2 rounded-lg bg-layer border border-layer-line text-foreground">
+      라이트 / 다크
+    </button>
+  </div>
+
+  <div class="mt-4 p-3 rounded-lg bg-layer border border-layer-line text-xs text-muted-foreground-1">
+    스타일: <code class="text-foreground">example/preline/assets/main.min.css</code> ·
+    Preline 시맨틱 클래스(<code>bg-card</code>, <code>text-muted-foreground-1</code>, <code>border-card-line</code>) 사용.
+    인라인 style은 데이터에서 나오는 값(높이 비율, 타입 색)에만 썼습니다.
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+
+    <!-- ===== T1 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T1</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">비례 블록</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">가장 단순한 형태. 1분 = 20px, 블록 높이가 곧 길이.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">뮤직 스테이지</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>
+            </div>
+            <div class="flex gap-3 mt-1 text-[10px] text-muted-foreground-2">
+              <span>1분 = 20px</span><span>총 <b class="text-foreground mono">24:00</b></span>
+              <span class="text-amber-500">＋<b class="mono">0:12</b></span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto noscroll px-3 py-3">
+            <div class="flex gap-2 mb-0.5 t-vcr"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">00:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 overflow-hidden flex items-center" style="height:12px"><b class="text-[10px] font-medium text-foreground truncate">오프닝 타이틀</b></div></div>
+            <div class="flex gap-2 mb-0.5 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">00:35</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:43px"><b class="text-xs font-medium text-foreground block truncate">MC 오프닝</b><span class="text-[10px] text-muted-foreground-1 mono">2:10</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-cg"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">02:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 overflow-hidden flex items-center" style="height:17px"><b class="text-[10px] font-medium text-foreground truncate">1위 후보 CG</b></div></div>
+            <div class="flex gap-2 mb-0.5 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">03:35</span>
+              <div class="flex-1 rounded soft border-s-2 edge px-2 py-1 overflow-hidden" style="height:67px"><b class="text-xs font-medium text-foreground block truncate">무대 ① 아티스트 A</b><span class="text-[10px] text-muted-foreground-1 mono">3:20</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">06:55</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:22px"><b class="text-[10px] font-medium text-foreground block truncate">MC 브릿지</b></div></div>
+            <div class="flex gap-2 mb-0.5 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">08:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:75px"><b class="text-xs font-medium text-foreground block truncate">무대 ② 아티스트 B</b><span class="text-[10px] text-muted-foreground-1 mono">3:45</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-cm"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">11:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:30px"><b class="text-[10px] font-medium text-foreground block truncate">광고</b><span class="text-[10px] text-muted-foreground-1 mono">1:30</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-vcr"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">13:15</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:80px"><b class="text-xs font-medium text-foreground block truncate">주간 차트 코너</b><span class="text-[10px] text-muted-foreground-1 mono">4:00</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">17:15</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:70px"><b class="text-xs font-medium text-foreground block truncate">무대 ③ 아티스트 C</b><span class="text-[10px] text-muted-foreground-1 mono">3:30</span></div></div>
+            <div class="flex gap-2 mb-0.5 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">20:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 overflow-hidden" style="height:45px"><b class="text-xs font-medium text-foreground block truncate">1위 발표</b><span class="text-[10px] text-muted-foreground-1 mono">2:15</span></div></div>
+            <div class="flex gap-2 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono">23:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 overflow-hidden flex items-center" style="height:20px"><b class="text-[10px] font-medium text-foreground truncate">엔딩</b></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 구현이 제일 쉬움 — 높이 하나만 계산</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 35초 큐는 12px, 제목이 안 들어감</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 블록 사이 여백 때문에 비율이 미세하게 틀어짐</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== T2 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T2</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">눈금 축</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">왼쪽에 진짜 시간 눈금. 블록은 축에 절대 위치로 붙어 여백이 없습니다.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">시간 축 보기</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>
+            </div>
+            <div class="flex gap-3 mt-1 text-[10px] text-muted-foreground-2">
+              <span>24분 전체가 한 화면</span><span class="text-amber-500">＋<b class="mono">0:12</b></span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-hidden px-3 py-3">
+            <div class="relative h-full">
+              <!-- 눈금 -->
+              <div class="absolute inset-y-0 start-0 w-8 text-[9px] text-muted-foreground-2 mono">
+                <span class="absolute" style="top:-4px">0분</span>
+                <span class="absolute" style="top:96px">5</span>
+                <span class="absolute" style="top:196px">10</span>
+                <span class="absolute" style="top:296px">15</span>
+                <span class="absolute" style="top:396px">20</span>
+              </div>
+              <div class="absolute inset-y-0 border-s border-line-3" style="inset-inline-start:32px"></div>
+              <div class="absolute border-t border-line-3 opacity-50" style="inset-inline-start:32px;inset-inline-end:0;top:100px"></div>
+              <div class="absolute border-t border-line-3 opacity-50" style="inset-inline-start:32px;inset-inline-end:0;top:200px"></div>
+              <div class="absolute border-t border-line-3 opacity-50" style="inset-inline-start:32px;inset-inline-end:0;top:300px"></div>
+              <div class="absolute border-t border-line-3 opacity-50" style="inset-inline-start:32px;inset-inline-end:0;top:400px"></div>
+
+              <!-- 블록 -->
+              <div class="absolute end-0 t-vcr"   style="inset-inline-start:38px;top:0px;height:11px"><div class="h-full rounded-e fill flex items-center px-1.5"><b class="text-[9px] font-semibold text-black/80 truncate">오프닝 타이틀</b></div></div>
+              <div class="absolute end-0 t-live"  style="inset-inline-start:38px;top:12px;height:42px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-white truncate">MC 오프닝</b><span class="text-[9px] text-white/70 mono">2:10</span></div></div>
+              <div class="absolute end-0 t-cg"    style="inset-inline-start:38px;top:55px;height:16px"><div class="h-full rounded-e fill flex items-center px-1.5"><b class="text-[9px] font-semibold text-black/80 truncate">1위 후보 CG</b></div></div>
+              <div class="absolute end-0 t-stage" style="inset-inline-start:38px;top:72px;height:66px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-black/80 truncate">무대 ① 아티스트 A</b><span class="text-[9px] text-black/60 mono">3:20</span></div></div>
+              <div class="absolute end-0 t-live"  style="inset-inline-start:38px;top:139px;height:21px"><div class="h-full rounded-e fill flex items-center px-2"><b class="text-[10px] font-semibold text-white truncate">MC 브릿지</b></div></div>
+              <div class="absolute end-0 t-stage" style="inset-inline-start:38px;top:161px;height:74px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-black/80 truncate">무대 ② 아티스트 B</b><span class="text-[9px] text-black/60 mono">3:45</span></div></div>
+              <div class="absolute end-0 t-cm"    style="inset-inline-start:38px;top:236px;height:29px"><div class="h-full rounded-e fill flex items-center px-2"><b class="text-[10px] font-semibold text-white truncate">광고 1:30</b></div></div>
+              <div class="absolute end-0 t-vcr"   style="inset-inline-start:38px;top:266px;height:79px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-black/80 truncate">주간 차트 코너</b><span class="text-[9px] text-black/60 mono">4:00</span></div></div>
+              <div class="absolute end-0 t-stage" style="inset-inline-start:38px;top:346px;height:69px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-black/80 truncate">무대 ③ 아티스트 C</b><span class="text-[9px] text-black/60 mono">3:30</span></div></div>
+              <div class="absolute end-0 t-live"  style="inset-inline-start:38px;top:416px;height:44px"><div class="h-full rounded-e fill flex flex-col justify-center px-2"><b class="text-[11px] font-semibold text-white truncate">1위 발표</b><span class="text-[9px] text-white/70 mono">2:15</span></div></div>
+              <div class="absolute end-0 t-live"  style="inset-inline-start:38px;top:461px;height:19px"><div class="h-full rounded-e fill flex items-center px-2"><b class="text-[10px] font-semibold text-white truncate">엔딩</b></div></div>
+
+              <!-- 현재 시각 -->
+              <div class="absolute end-0 flex items-center" style="inset-inline-start:0;top:84px">
+                <div class="flex-1 border-t-2 border-dashed border-rose-500"></div>
+                <span class="text-[8px] font-bold tracking-wider px-1 py-0.5 rounded-s bg-rose-500 text-white mono">04:12</span>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 스크롤 없이 24분 전체가 한 화면에 — 흐름 파악 최고</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 눈금 대비 현재선 위치로 지연이 즉시 읽힘</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 60분 프로그램이면 다시 스크롤 — 축 배율 조절이 필요</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== T3 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T3</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">압축 비례</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">짧은 큐에 최소 높이를 보장하고, 비율을 깬 블록에 <b class="text-foreground">≈</b> 표시.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">압축 비례 보기</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>
+            </div>
+            <div class="flex gap-3 mt-1 text-[10px] text-muted-foreground-2">
+              <span>최소 높이 26px</span><span><b class="text-amber-500">≈</b> = 비율 깨짐</span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto noscroll px-3 py-3">
+            <div class="flex gap-2 mb-1 t-vcr"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">00:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 flex items-center gap-1.5" style="height:26px">
+                <b class="text-[11px] font-medium text-foreground truncate flex-1">오프닝 타이틀 VCR</b>
+                <span class="text-[10px] text-muted-foreground-1 mono">0:35</span><span class="text-amber-500 text-xs">≈</span></div></div>
+            <div class="flex gap-2 mb-1 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">00:35</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:43px"><b class="text-xs font-medium text-foreground truncate">MC 오프닝</b><span class="text-[10px] text-muted-foreground-1 mono">2:10</span></div></div>
+            <div class="flex gap-2 mb-1 t-cg"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">02:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 flex items-center gap-1.5" style="height:26px">
+                <b class="text-[11px] font-medium text-foreground truncate flex-1">1위 후보 소개 CG</b>
+                <span class="text-[10px] text-muted-foreground-1 mono">0:50</span><span class="text-amber-500 text-xs">≈</span></div></div>
+            <div class="flex gap-2 mb-1 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">03:35</span>
+              <div class="flex-1 rounded soft border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:67px"><b class="text-xs font-medium text-foreground truncate">무대 ① 아티스트 A</b><span class="text-[10px] text-muted-foreground-1 mono">3:20 · 카메라 4, 6</span></div></div>
+            <div class="flex gap-2 mb-1 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">06:55</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 flex items-center gap-1.5" style="height:26px">
+                <b class="text-[11px] font-medium text-foreground truncate flex-1">MC 브릿지</b>
+                <span class="text-[10px] text-muted-foreground-1 mono">1:05</span><span class="text-amber-500 text-xs">≈</span></div></div>
+            <div class="flex gap-2 mb-1 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">08:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:75px"><b class="text-xs font-medium text-foreground truncate">무대 ② 아티스트 B</b><span class="text-[10px] text-muted-foreground-1 mono">3:45</span></div></div>
+            <div class="flex gap-2 mb-1 t-cm"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">11:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:30px"><b class="text-[11px] font-medium text-foreground truncate">광고 <span class="text-muted-foreground-1 mono">1:30</span></b></div></div>
+            <div class="flex gap-2 mb-1 t-vcr"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">13:15</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:80px"><b class="text-xs font-medium text-foreground truncate">주간 차트 코너</b><span class="text-[10px] text-muted-foreground-1 mono">4:00 · 작가 한지우</span></div></div>
+            <div class="flex gap-2 mb-1 t-stage"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">17:15</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:70px"><b class="text-xs font-medium text-foreground truncate">무대 ③ 아티스트 C</b><span class="text-[10px] text-muted-foreground-1 mono">3:30</span></div></div>
+            <div class="flex gap-2 mb-1 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">20:45</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 py-1 flex flex-col justify-center" style="height:45px"><b class="text-xs font-medium text-foreground truncate">1위 발표</b><span class="text-[10px] text-muted-foreground-1 mono">2:15</span></div></div>
+            <div class="flex gap-2 t-live"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-1">23:00</span>
+              <div class="flex-1 rounded bg-layer border-s-2 edge px-2 flex items-center gap-1.5" style="height:26px">
+                <b class="text-[11px] font-medium text-foreground truncate flex-1">엔딩</b>
+                <span class="text-[10px] text-muted-foreground-1 mono">1:00</span><span class="text-amber-500 text-xs">≈</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> T1의 유일한 치명적 결함(짧은 큐 못 읽음)을 해결</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 비율을 속이지 않고 <b class="text-foreground">≈</b>로 정직하게 표시</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 짧은 큐가 많으면 ≈ 투성이가 되어 비례의 의미가 옅어짐</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== T4 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T4</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">단일 누적 바</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">프로그램 전체를 막대 하나로. 왼쪽은 비율, 오른쪽은 읽을 수 있는 목록.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">전체 구성</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>
+            </div>
+            <div class="flex gap-3 mt-1 text-[10px] text-muted-foreground-2">
+              <span>11개 큐</span><span>총 <b class="text-foreground mono">24:00</b></span><span class="text-amber-500">＋<b class="mono">0:12</b></span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-hidden px-4 py-3 flex gap-3">
+            <!-- 막대 -->
+            <div class="w-7 shrink-0 rounded-lg overflow-hidden flex flex-col">
+              <div class="t-vcr fill" style="height:10px"></div>
+              <div class="t-live fill" style="height:38px"></div>
+              <div class="t-cg fill" style="height:15px"></div>
+              <div class="t-stage fill relative" style="height:58px">
+                <div class="absolute inset-x-0 border-t-2 border-white" style="top:11px"></div></div>
+              <div class="t-live fill" style="height:19px"></div>
+              <div class="t-stage fill" style="height:66px"></div>
+              <div class="t-cm fill" style="height:26px"></div>
+              <div class="t-vcr fill" style="height:70px"></div>
+              <div class="t-stage fill" style="height:61px"></div>
+              <div class="t-live fill" style="height:39px"></div>
+              <div class="t-live fill" style="height:18px"></div>
+            </div>
+            <!-- 목록 -->
+            <div class="flex-1 flex flex-col text-[11px] min-w-0">
+              <div class="flex items-center gap-2" style="height:10px"><span class="truncate text-muted-foreground-2 flex-1">오프닝 타이틀</span><span class="mono text-muted-foreground-2">0:35</span></div>
+              <div class="flex items-center gap-2" style="height:38px"><span class="truncate text-muted-foreground-1 flex-1">MC 오프닝</span><span class="mono text-muted-foreground-1">2:10</span></div>
+              <div class="flex items-center gap-2" style="height:15px"><span class="truncate text-muted-foreground-2 flex-1">1위 후보 CG</span><span class="mono text-muted-foreground-2">0:50</span></div>
+              <div class="flex items-center gap-2" style="height:58px"><span class="truncate text-foreground font-semibold flex-1">무대 ① 아티스트 A</span><span class="mono text-foreground">3:20</span></div>
+              <div class="flex items-center gap-2" style="height:19px"><span class="truncate text-muted-foreground-1 flex-1">MC 브릿지</span><span class="mono text-muted-foreground-1">1:05</span></div>
+              <div class="flex items-center gap-2" style="height:66px"><span class="truncate text-muted-foreground-1 flex-1">무대 ② 아티스트 B</span><span class="mono text-muted-foreground-1">3:45</span></div>
+              <div class="flex items-center gap-2" style="height:26px"><span class="truncate text-muted-foreground-1 flex-1">광고</span><span class="mono text-muted-foreground-1">1:30</span></div>
+              <div class="flex items-center gap-2" style="height:70px"><span class="truncate text-muted-foreground-1 flex-1">주간 차트 코너</span><span class="mono text-muted-foreground-1">4:00</span></div>
+              <div class="flex items-center gap-2" style="height:61px"><span class="truncate text-muted-foreground-1 flex-1">무대 ③ 아티스트 C</span><span class="mono text-muted-foreground-1">3:30</span></div>
+              <div class="flex items-center gap-2" style="height:39px"><span class="truncate text-muted-foreground-1 flex-1">1위 발표</span><span class="mono text-muted-foreground-1">2:15</span></div>
+              <div class="flex items-center gap-2" style="height:18px"><span class="truncate text-muted-foreground-1 flex-1">엔딩</span><span class="mono text-muted-foreground-1">1:00</span></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 비율은 막대가, 가독성은 목록이 — 둘 다 안 깨짐</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 타입 구성비(무대가 몇 %인지)가 한눈에</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 짧은 큐의 목록 행도 같이 눌려서 결국 글자가 겹칠 수 있음</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== T5 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T5</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">계획 vs 실제</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">두 트랙을 나란히. 어긋난 만큼이 그대로 지연입니다.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-2 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">계획 vs 실제</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-amber-500 text-black">＋0:12</span>
+            </div>
+            <div class="flex gap-4 mt-1.5 text-[10px] text-muted-foreground-2">
+              <span class="flex items-center gap-1"><i class="w-2.5 h-2.5 rounded-sm bg-layer border border-line-3 inline-block"></i>계획</span>
+              <span class="flex items-center gap-1"><i class="w-2.5 h-2.5 rounded-sm bg-teal-500 inline-block"></i>실제</span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto noscroll px-3 py-3">
+            <div class="relative">
+
+              <div class="flex gap-2 mb-1"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">00:00</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3" style="height:12px"></div>
+                  <div class="rounded bg-teal-500/60" style="height:14px"></div></div>
+                <span class="w-8 shrink-0 text-[9px] text-amber-500 mono text-end pt-0.5">+0:06</span></div>
+
+              <div class="flex gap-2 mb-1"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">00:35</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3 px-1.5 flex items-center" style="height:43px"><b class="text-[10px] text-muted-foreground-1 truncate">MC 오프닝</b></div>
+                  <div class="rounded bg-teal-500/60 px-1.5 flex items-center" style="height:45px"><b class="text-[10px] text-foreground truncate mono">2:16</b></div></div>
+                <span class="w-8 shrink-0 text-[9px] text-amber-500 mono text-end pt-0.5">+0:06</span></div>
+
+              <div class="flex gap-2 mb-1"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">02:45</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3" style="height:17px"></div>
+                  <div class="rounded bg-teal-500/60" style="height:16px"></div></div>
+                <span class="w-8 shrink-0 text-[9px] text-emerald-500 mono text-end pt-0.5">−0:02</span></div>
+
+              <div class="flex gap-2 mb-1"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">03:35</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3 px-1.5 flex items-center" style="height:67px"><b class="text-[10px] text-muted-foreground-1 truncate">무대 ①</b></div>
+                  <div class="rounded bg-teal-500 px-1.5 flex items-end pb-1" style="height:25px"><b class="text-[9px] text-black/80 mono">진행 중</b></div></div>
+                <span class="w-8 shrink-0 text-[9px] text-muted-foreground-2 mono text-end pt-0.5">—</span></div>
+
+              <div class="flex gap-2 mb-1 opacity-60"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">06:55</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3" style="height:22px"></div>
+                  <div class="rounded border border-dashed border-line-3" style="height:22px"></div></div>
+                <span class="w-8 shrink-0"></span></div>
+
+              <div class="flex gap-2 mb-1 opacity-60"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">08:00</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3 px-1.5 flex items-center" style="height:75px"><b class="text-[10px] text-muted-foreground-1 truncate">무대 ②</b></div>
+                  <div class="rounded border border-dashed border-line-3" style="height:75px"></div></div>
+                <span class="w-8 shrink-0"></span></div>
+
+              <div class="flex gap-2 mb-1 opacity-60"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">11:45</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3" style="height:30px"></div>
+                  <div class="rounded border border-dashed border-line-3" style="height:30px"></div></div>
+                <span class="w-8 shrink-0"></span></div>
+
+              <div class="flex gap-2 opacity-60"><span class="w-9 shrink-0 text-[10px] text-muted-foreground-2 mono pt-0.5">13:15</span>
+                <div class="flex-1 grid grid-cols-2 gap-1.5">
+                  <div class="rounded bg-layer border border-line-3 px-1.5 flex items-center" style="height:80px"><b class="text-[10px] text-muted-foreground-1 truncate">주간 차트</b></div>
+                  <div class="rounded border border-dashed border-line-3" style="height:80px"></div></div>
+                <span class="w-8 shrink-0"></span></div>
+
+            </div>
+          </div>
+          <div class="shrink-0 px-4 py-3 border-t border-card-divider flex items-center gap-2">
+            <span class="text-[10px] text-muted-foreground-2 flex-1">이대로 가면 종료</span>
+            <span class="text-sm font-semibold text-amber-500 mono">20:24:12</span>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 어느 큐에서 밀렸는지가 유일하게 보이는 안 — 제약 03의 정답</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 예상 종료 시각이 자동으로 나옴 (편성 시간 초과 경고)</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 열이 둘이라 폭이 절반 — 제목이 거의 안 들어감</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 실제 진행 시각을 기록하는 장치가 먼저 있어야 성립</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== T6 ===== -->
+    <div class="bg-card border border-card-line rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-card-divider">
+        <span class="text-xs uppercase tracking-wider text-primary font-semibold">T6</span>
+        <h2 class="text-xl font-semibold text-foreground mt-1">가로 스크러버</h2>
+        <p class="text-sm text-muted-foreground-1 mt-1">비례는 상단 가로 막대가 전담. 본문은 평범한 리스트로 돌려줍니다.</p>
+      </div>
+
+      <div class="p-5 flex justify-center bg-background">
+        <div class="phone"><div class="screen bg-card">
+          <div class="px-4 pt-3 pb-3 shrink-0 border-b border-card-divider">
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-semibold text-foreground flex-1">뮤직 스테이지</h3>
+              <span class="text-[9px] font-bold tracking-wider px-1.5 py-1 rounded bg-rose-500 text-white">ON AIR</span>
+            </div>
+            <!-- 스크러버 -->
+            <div class="mt-3 relative">
+              <div class="flex gap-px h-6 rounded overflow-hidden">
+                <div class="t-vcr fill" style="width:2.43%"></div>
+                <div class="t-live fill" style="width:9.03%"></div>
+                <div class="t-cg fill" style="width:3.47%"></div>
+                <div class="t-stage fill ring-2 ring-white" style="width:13.89%"></div>
+                <div class="t-live fill" style="width:4.51%"></div>
+                <div class="t-stage fill" style="width:15.63%"></div>
+                <div class="t-cm fill" style="width:6.25%"></div>
+                <div class="t-vcr fill" style="width:16.67%"></div>
+                <div class="t-stage fill" style="width:14.58%"></div>
+                <div class="t-live fill" style="width:9.38%"></div>
+                <div class="t-live fill" style="width:4.17%"></div>
+              </div>
+              <div class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:17.5%"></div>
+              <div class="flex justify-between mt-1 text-[9px] text-muted-foreground-2 mono">
+                <span>20:00</span><span class="text-rose-500 font-bold">▲ 20:04:12</span><span>20:24</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto noscroll">
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider opacity-45 t-vcr">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:00:00</span><span class="text-xs text-foreground flex-1 truncate">오프닝 타이틀 VCR</span><span class="text-[10px] text-muted-foreground-1 mono">0:35</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider opacity-45 t-live">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:00:35</span><span class="text-xs text-foreground flex-1 truncate">MC 오프닝</span><span class="text-[10px] text-muted-foreground-1 mono">2:10</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider opacity-45 t-cg">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:02:45</span><span class="text-xs text-foreground flex-1 truncate">1위 후보 소개 CG</span><span class="text-[10px] text-muted-foreground-1 mono">0:50</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-3 border-b border-card-divider bg-teal-500/10 t-stage">
+              <i class="w-1 h-8 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-1 mono w-14 shrink-0">20:03:35</span>
+              <span class="flex-1 min-w-0"><b class="text-sm text-foreground block truncate">무대 ① 아티스트 A</b><span class="text-[10px] text-muted-foreground-1">카메라 4, 6 · CG-07</span></span>
+              <span class="text-xs font-semibold text-foreground mono">2:03</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-live">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:06:55</span><span class="text-xs text-foreground flex-1 truncate">MC 브릿지</span><span class="text-[10px] text-muted-foreground-1 mono">1:05</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-stage">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:08:00</span><span class="text-xs text-foreground flex-1 truncate">무대 ② 아티스트 B</span><span class="text-[10px] text-muted-foreground-1 mono">3:45</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-cm">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:11:45</span><span class="text-xs text-foreground flex-1 truncate">광고</span><span class="text-[10px] text-muted-foreground-1 mono">1:30</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-vcr">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:13:15</span><span class="text-xs text-foreground flex-1 truncate">주간 차트 코너</span><span class="text-[10px] text-muted-foreground-1 mono">4:00</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-stage">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:17:15</span><span class="text-xs text-foreground flex-1 truncate">무대 ③ 아티스트 C</span><span class="text-[10px] text-muted-foreground-1 mono">3:30</span></div>
+            <div class="flex items-center gap-2.5 px-4 py-2.5 border-b border-card-divider t-live">
+              <i class="w-1 h-6 rounded-full fill shrink-0"></i><span class="text-[10px] text-muted-foreground-2 mono w-14 shrink-0">20:20:45</span><span class="text-xs text-foreground flex-1 truncate">1위 발표</span><span class="text-[10px] text-muted-foreground-1 mono">2:15</span></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="p-5 border-t border-card-divider">
+        <ul class="text-sm space-y-1">
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 비례의 이점은 남기고 리스트의 가독성을 전부 되찾음</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> 막대는 항상 상단 고정 — 스크롤해도 전체 위치를 잃지 않음</li>
+          <li class="text-muted-foreground-1"><span class="text-emerald-500 font-semibold">＋</span> D안(접히는 행)과 그대로 합쳐짐</li>
+          <li class="text-muted-foreground-1"><span class="text-rose-500 font-semibold">−</span> 24분을 300px에 넣으면 35초 큐는 7px — 탭이 거의 불가능</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 추천 -->
+  <div class="mt-8 bg-card border border-card-line rounded-xl p-6">
+    <span class="text-xs uppercase tracking-wider text-primary font-semibold">추천</span>
+    <p class="text-sm text-muted-foreground-1 mt-3 max-w-3xl">
+      여섯 개가 해결하려는 문제가 서로 다릅니다. 정리하면 <b class="text-foreground">비례를 어디에 둘 것인가</b>의 문제입니다.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+      <div class="p-4 rounded-lg bg-layer border border-layer-line">
+        <div class="text-sm font-semibold text-foreground">본문에 둔다</div>
+        <div class="text-xs text-muted-foreground-2 mt-1">T1 · T2 · T3</div>
+        <p class="text-sm text-muted-foreground-1 mt-2">흐름 파악은 최고, 가독성은 희생. 방송 전 검토용.</p>
+      </div>
+      <div class="p-4 rounded-lg bg-layer border border-layer-line">
+        <div class="text-sm font-semibold text-foreground">옆·위로 뺀다</div>
+        <div class="text-xs text-muted-foreground-2 mt-1">T4 · T6</div>
+        <p class="text-sm text-muted-foreground-1 mt-2">비례는 막대가, 글자는 리스트가. 둘 다 안 깨짐.</p>
+      </div>
+      <div class="p-4 rounded-lg bg-layer border border-layer-line">
+        <div class="text-sm font-semibold text-foreground">비교에 쓴다</div>
+        <div class="text-xs text-muted-foreground-2 mt-1">T5</div>
+        <p class="text-sm text-muted-foreground-1 mt-2">비례를 계획·실제 대조에 씀. 지연 추적 전용.</p>
+      </div>
+    </div>
+    <ol class="mt-6 space-y-3">
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">1</span>
+        <span><b class="text-foreground">T6를 기본으로</b><span class="block text-sm text-muted-foreground-1">앞서 제안한 D안(접히는 행) 위에 스크러버만 얹으면 됩니다. 화면 하나로 비례와 편집을 다 덮습니다.</span></span></li>
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">2</span>
+        <span><b class="text-foreground">T2를 별도 뷰로</b><span class="block text-sm text-muted-foreground-1">방송 전 구성 검토 전용. 24분이 스크롤 없이 한 화면에 들어오는 건 T2뿐입니다.</span></span></li>
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">3</span>
+        <span><b class="text-foreground">T5는 나중에</b><span class="block text-sm text-muted-foreground-1">실제 진행 시각을 기록하는 기능이 먼저입니다. 그게 없으면 만들 수 없는 화면이라 1차 범위 밖.</span></span></li>
+      <li class="flex gap-3 pt-3 border-t border-card-divider">
+        <span class="text-xs text-primary mono pt-1 shrink-0">4</span>
+        <span><b class="text-foreground">T1은 버리기</b><span class="block text-sm text-muted-foreground-1">T3가 상위 호환입니다. 최소 높이 한 줄 추가하는 비용밖에 차이가 없습니다.</span></span></li>
+    </ol>
+    <p class="text-xs text-muted-foreground-2 mt-6 leading-relaxed">
+      공통으로 정해야 할 것 → 배율(1분 = ?px)을 고정할지 프로그램 길이에 맞춰 자동 계산할지.
+      24분과 90분 프로그램이 같은 화면을 써야 한다면 자동이 맞습니다.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('theme').addEventListener('click', function(){
+    document.documentElement.classList.toggle('dark');
+  });
+</script>
+</body>
+</html>

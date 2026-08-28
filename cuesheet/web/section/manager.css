@@ -1,0 +1,4 @@
+.s-manager {
+  display: grid;
+  gap: var(--gap-tight);
+}

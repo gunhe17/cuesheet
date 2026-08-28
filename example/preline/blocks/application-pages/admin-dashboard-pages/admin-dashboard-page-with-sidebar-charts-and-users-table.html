@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+  <!-- Apexcharts -->
+  <link rel="stylesheet" href="../../../assets/apexcharts.css">
+  <style>
+    .apexcharts-tooltip.apexcharts-theme-light
+    {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .apexcharts-xaxistooltip
+    {
+      background: var(--color-primary-600) !important;
+      border-color: var(--color-primary-600) !important;
+    }
+
+    .apexcharts-xaxistooltip:after,
+    .apexcharts-xaxistooltip:before
+    {
+      border-bottom-color: var(--color-primary-600) !important;
+    }
+  </style>
+
+</head>
+<body><!-- ========== HEADER ========== -->
+  <header class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-48 w-full bg-navbar border-b border-navbar-line text-sm py-2.5 lg:ps-65">
+    <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
+      <div class="me-5 lg:me-0 lg:hidden flex items-center">
+        <!-- Logo -->
+        <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="#" aria-label="Preline">
+          <svg class="w-28 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M33.5696 30.8182V11.3182H37.4474V13.7003H37.6229C37.7952 13.3187 38.0445 12.9309 38.3707 12.5369C38.7031 12.1368 39.134 11.8045 39.6634 11.5398C40.1989 11.2689 40.8636 11.1335 41.6577 11.1335C42.6918 11.1335 43.6458 11.4044 44.5199 11.946C45.3939 12.4815 46.0926 13.291 46.6158 14.3743C47.139 15.4515 47.4006 16.8026 47.4006 18.4276C47.4006 20.0095 47.1451 21.3452 46.6342 22.4347C46.1295 23.518 45.4401 24.3397 44.5661 24.8999C43.6982 25.4538 42.7256 25.7308 41.6484 25.7308C40.8852 25.7308 40.2358 25.6046 39.7003 25.3523C39.1709 25.0999 38.737 24.7829 38.3984 24.4013C38.0599 24.0135 37.8014 23.6226 37.6229 23.2287H37.5028V30.8182H33.5696ZM37.4197 18.4091C37.4197 19.2524 37.5367 19.9879 37.7706 20.6158C38.0045 21.2436 38.343 21.733 38.7862 22.0838C39.2294 22.4285 39.768 22.6009 40.402 22.6009C41.0421 22.6009 41.5838 22.4254 42.027 22.0746C42.4702 21.7176 42.8056 21.2251 43.0334 20.5973C43.2673 19.9633 43.3842 19.2339 43.3842 18.4091C43.3842 17.5904 43.2704 16.8703 43.0426 16.2486C42.8149 15.6269 42.4794 15.1406 42.0362 14.7898C41.593 14.4389 41.0483 14.2635 40.402 14.2635C39.7618 14.2635 39.2202 14.4328 38.777 14.7713C38.34 15.1098 38.0045 15.59 37.7706 16.2116C37.5367 16.8333 37.4197 17.5658 37.4197 18.4091ZM49.2427 25.5V11.3182H53.0559V13.7926H53.2037C53.4622 12.9124 53.8961 12.2476 54.5055 11.7983C55.1149 11.3428 55.8166 11.1151 56.6106 11.1151C56.8076 11.1151 57.02 11.1274 57.2477 11.152C57.4754 11.1766 57.6755 11.2105 57.8478 11.2536V14.7436C57.6632 14.6882 57.4077 14.639 57.0815 14.5959C56.7553 14.5528 56.4567 14.5312 56.1859 14.5312C55.6073 14.5312 55.0903 14.6574 54.6348 14.9098C54.1854 15.156 53.8284 15.5007 53.5638 15.9439C53.3052 16.3871 53.176 16.898 53.176 17.4766V25.5H49.2427ZM64.9043 25.777C63.4455 25.777 62.1898 25.4815 61.1373 24.8906C60.0909 24.2936 59.2845 23.4503 58.7182 22.3608C58.1519 21.2652 57.8688 19.9695 57.8688 18.4737C57.8688 17.0149 58.1519 15.7346 58.7182 14.6328C59.2845 13.531 60.0816 12.6723 61.1096 12.0568C62.1437 11.4413 63.3563 11.1335 64.7474 11.1335C65.683 11.1335 66.5539 11.2843 67.3603 11.5859C68.1728 11.8814 68.8806 12.3277 69.4839 12.9247C70.0932 13.5218 70.5672 14.2727 70.9057 15.1776C71.2443 16.0762 71.4135 17.1288 71.4135 18.3352V19.4155H59.4384V16.978H67.7111C67.7111 16.4117 67.588 15.91 67.3418 15.473C67.0956 15.036 66.754 14.6944 66.317 14.4482C65.8861 14.1958 65.3844 14.0696 64.812 14.0696C64.2149 14.0696 63.6856 14.2081 63.2239 14.4851C62.7684 14.7559 62.4114 15.1222 62.1529 15.5838C61.8944 16.0393 61.762 16.5471 61.7559 17.1072V19.4247C61.7559 20.1264 61.8851 20.7327 62.1437 21.2436C62.4083 21.7545 62.7807 22.1484 63.2608 22.4254C63.741 22.7024 64.3103 22.8409 64.9689 22.8409C65.406 22.8409 65.8061 22.7794 66.1692 22.6562C66.5324 22.5331 66.8432 22.3485 67.1018 22.1023C67.3603 21.8561 67.5572 21.5545 67.6927 21.1974L71.3304 21.4375C71.1458 22.3116 70.7672 23.0748 70.1948 23.7273C69.6285 24.3736 68.896 24.8783 67.9974 25.2415C67.1048 25.5985 66.0738 25.777 64.9043 25.777ZM77.1335 6.59091V25.5H73.2003V6.59091H77.1335ZM79.5043 25.5V11.3182H83.4375V25.5H79.5043ZM81.4801 9.49006C80.8954 9.49006 80.3937 9.29616 79.9752 8.90838C79.5628 8.51444 79.3566 8.04356 79.3566 7.49574C79.3566 6.95407 79.5628 6.48935 79.9752 6.10156C80.3937 5.70762 80.8954 5.51065 81.4801 5.51065C82.0649 5.51065 82.5635 5.70762 82.9759 6.10156C83.3944 6.48935 83.6037 6.95407 83.6037 7.49574C83.6037 8.04356 83.3944 8.51444 82.9759 8.90838C82.5635 9.29616 82.0649 9.49006 81.4801 9.49006ZM89.7415 17.3011V25.5H85.8083V11.3182H89.5569V13.8203H89.723C90.037 12.9955 90.5632 12.343 91.3019 11.8629C92.0405 11.3767 92.9361 11.1335 93.9887 11.1335C94.9735 11.1335 95.8322 11.349 96.5647 11.7798C97.2971 12.2107 97.8665 12.8262 98.2728 13.6264C98.679 14.4205 98.8821 15.3684 98.8821 16.4702V25.5H94.9489V17.1719C94.9551 16.304 94.7335 15.6269 94.2841 15.1406C93.8348 14.6482 93.2162 14.402 92.4283 14.402C91.8989 14.402 91.4311 14.5159 91.0249 14.7436C90.6248 14.9714 90.3109 15.3037 90.0831 15.7408C89.8615 16.1716 89.7477 16.6918 89.7415 17.3011ZM107.665 25.777C106.206 25.777 104.951 25.4815 103.898 24.8906C102.852 24.2936 102.045 23.4503 101.479 22.3608C100.913 21.2652 100.63 19.9695 100.63 18.4737C100.63 17.0149 100.913 15.7346 101.479 14.6328C102.045 13.531 102.842 12.6723 103.87 12.0568C104.905 11.4413 106.117 11.1335 107.508 11.1335C108.444 11.1335 109.315 11.2843 110.121 11.5859C110.934 11.8814 111.641 12.3277 112.245 12.9247C112.854 13.5218 113.328 14.2727 113.667 15.1776C114.005 16.0762 114.174 17.1288 114.174 18.3352V19.4155H102.199V16.978H110.472C110.472 16.4117 110.349 15.91 110.103 15.473C109.856 15.036 109.515 14.6944 109.078 14.4482C108.647 14.1958 108.145 14.0696 107.573 14.0696C106.976 14.0696 106.446 14.2081 105.985 14.4851C105.529 14.7559 105.172 15.1222 104.914 15.5838C104.655 16.0393 104.523 16.5471 104.517 17.1072V19.4247C104.517 20.1264 104.646 20.7327 104.905 21.2436C105.169 21.7545 105.542 22.1484 106.022 22.4254C106.502 22.7024 107.071 22.8409 107.73 22.8409C108.167 22.8409 108.567 22.7794 108.93 22.6562C109.293 22.5331 109.604 22.3485 109.863 22.1023C110.121 21.8561 110.318 21.5545 110.454 21.1974L114.091 21.4375C113.907 22.3116 113.528 23.0748 112.956 23.7273C112.389 24.3736 111.657 24.8783 110.758 25.2415C109.866 25.5985 108.835 25.777 107.665 25.777Z" class="fill-primary" fill="currentColor" />
+            <path d="M1 29.5V16.5C1 9.87258 6.37258 4.5 13 4.5C19.6274 4.5 25 9.87258 25 16.5C25 23.1274 19.6274 28.5 13 28.5H12" class="stroke-primary" stroke="currentColor" stroke-width="2" />
+            <path d="M5 29.5V16.66C5 12.1534 8.58172 8.5 13 8.5C17.4183 8.5 21 12.1534 21 16.66C21 21.1666 17.4183 24.82 13 24.82H12" class="stroke-primary" stroke="currentColor" stroke-width="2" />
+            <circle cx="13" cy="16.5214" r="5" class="fill-primary" fill="currentColor" />
+          </svg>
+        </a>
+        <!-- End Logo -->
+      </div>
+
+      <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+
+        <div class="hidden md:block">
+          <!-- Search Input -->
+          <div class="relative">
+            <div class="absolute inset-y-0 inset-s-0 flex items-center pointer-events-none z-20 ps-3.5">
+              <svg class="shrink-0 size-4 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </div>
+            <input type="text" class="py-2 ps-10 pe-16 block w-full bg-layer border-layer-line rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:border-primary-focus focus:ring-primary-focus disabled:opacity-50 disabled:pointer-events-none" placeholder="Search">
+            <div class="hidden absolute inset-y-0 inset-e-0 flex items-center z-20 pe-1">
+              <button type="button" class="inline-flex shrink-0 justify-center items-center size-6 rounded-full text-muted-foreground-1 hover:text-primary-hover focus:outline-hidden focus:text-primary-focus" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m15 9-6 6" />
+                  <path d="m9 9 6 6" />
+                </svg>
+              </button>
+            </div>
+            <div class="absolute inset-y-0 inset-e-0 flex items-center pointer-events-none z-20 pe-3 text-muted-foreground">
+              <svg class="shrink-0 size-3 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+              </svg>
+              <span class="mx-1">
+                <svg class="shrink-0 size-3 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </span>
+              <span class="text-xs">/</span>
+            </div>
+          </div>
+          <!-- End Search Input -->
+        </div>
+
+        <div class="flex flex-row items-center justify-end gap-1">
+          <button type="button" class="md:hidden size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus disabled:opacity-50 disabled:pointer-events-none">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <span class="sr-only">Search</span>
+          </button>
+
+          <button type="button" class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus disabled:opacity-50 disabled:pointer-events-none">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+            </svg>
+            <span class="sr-only">Notifications</span>
+          </button>
+
+          <button type="button" class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus disabled:opacity-50 disabled:pointer-events-none">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+            <span class="sr-only">Activity</span>
+          </button>
+
+          <!-- Dropdown -->
+          <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
+            <button id="hs-dropdown-account" type="button" class="size-9.5 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-foreground focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+              <img class="shrink-0 size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+            </button>
+
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-dropdown border border-dropdown-line shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:inset-s-0 after:w-full before:h-4 before:absolute before:-top-4 before:inset-s-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
+              <div class="py-3 px-5 bg-surface rounded-t-lg">
+                <p class="text-sm text-muted-foreground-1">Signed in as</p>
+                <p class="text-sm font-medium text-foreground">james@site.com</p>
+              </div>
+              <div class="p-1.5 space-y-0.5">
+                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                  </svg>
+                  Newsletter
+                </a>
+                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                  Purchases
+                </a>
+                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                    <path d="M12 12v9" />
+                    <path d="m8 17 4 4 4-4" />
+                  </svg>
+                  Downloads
+                </a>
+                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Team Account
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- End Dropdown -->
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <!-- Breadcrumb -->
+  <div class="sticky top-0 inset-x-0 z-20 bg-navbar border-y border-navbar-line px-4 sm:px-6 lg:px-8 lg:hidden">
+    <div class="flex items-center py-2">
+      <!-- Navigation Toggle -->
+      <button type="button" class="size-8 flex justify-center items-center gap-x-2 bg-layer border border-layer-line text-layer-foreground hover:text-layer-foreground-hover rounded-lg focus:outline-hidden focus:text-layer-foreground-focus disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
+        <span class="sr-only">Toggle Navigation</span>
+        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M15 3v18" />
+          <path d="m8 9 3 3-3 3" />
+        </svg>
+      </button>
+      <!-- End Navigation Toggle -->
+
+      <!-- Breadcrumb -->
+      <ol class="ms-3 flex items-center whitespace-nowrap">
+        <li class="flex items-center text-sm text-foreground">
+          Application Layout
+          <svg class="shrink-0 mx-3 overflow-visible size-2.5 text-muted-foreground" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </li>
+        <li class="text-sm font-semibold text-foreground truncate" aria-current="page">
+          Dashboard
+        </li>
+      </ol>
+      <!-- End Breadcrumb -->
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!-- Sidebar -->
+  <div id="hs-application-sidebar" class="hs-overlay  [--auto-close:lg]
+  hs-overlay-open:translate-x-0
+  -translate-x-full transition-all duration-300 transform
+  w-65 h-full
+  hidden
+  fixed inset-y-0 inset-s-0 z-60
+  bg-sidebar border-e border-sidebar-line
+  lg:block lg:translate-x-0 lg:inset-e-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
+    <div class="relative flex flex-col h-full max-h-full">
+      <div class="px-6 pt-4 flex items-center">
+        <!-- Logo -->
+        <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="#" aria-label="Preline">
+          <svg class="w-28 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M33.5696 30.8182V11.3182H37.4474V13.7003H37.6229C37.7952 13.3187 38.0445 12.9309 38.3707 12.5369C38.7031 12.1368 39.134 11.8045 39.6634 11.5398C40.1989 11.2689 40.8636 11.1335 41.6577 11.1335C42.6918 11.1335 43.6458 11.4044 44.5199 11.946C45.3939 12.4815 46.0926 13.291 46.6158 14.3743C47.139 15.4515 47.4006 16.8026 47.4006 18.4276C47.4006 20.0095 47.1451 21.3452 46.6342 22.4347C46.1295 23.518 45.4401 24.3397 44.5661 24.8999C43.6982 25.4538 42.7256 25.7308 41.6484 25.7308C40.8852 25.7308 40.2358 25.6046 39.7003 25.3523C39.1709 25.0999 38.737 24.7829 38.3984 24.4013C38.0599 24.0135 37.8014 23.6226 37.6229 23.2287H37.5028V30.8182H33.5696ZM37.4197 18.4091C37.4197 19.2524 37.5367 19.9879 37.7706 20.6158C38.0045 21.2436 38.343 21.733 38.7862 22.0838C39.2294 22.4285 39.768 22.6009 40.402 22.6009C41.0421 22.6009 41.5838 22.4254 42.027 22.0746C42.4702 21.7176 42.8056 21.2251 43.0334 20.5973C43.2673 19.9633 43.3842 19.2339 43.3842 18.4091C43.3842 17.5904 43.2704 16.8703 43.0426 16.2486C42.8149 15.6269 42.4794 15.1406 42.0362 14.7898C41.593 14.4389 41.0483 14.2635 40.402 14.2635C39.7618 14.2635 39.2202 14.4328 38.777 14.7713C38.34 15.1098 38.0045 15.59 37.7706 16.2116C37.5367 16.8333 37.4197 17.5658 37.4197 18.4091ZM49.2427 25.5V11.3182H53.0559V13.7926H53.2037C53.4622 12.9124 53.8961 12.2476 54.5055 11.7983C55.1149 11.3428 55.8166 11.1151 56.6106 11.1151C56.8076 11.1151 57.02 11.1274 57.2477 11.152C57.4754 11.1766 57.6755 11.2105 57.8478 11.2536V14.7436C57.6632 14.6882 57.4077 14.639 57.0815 14.5959C56.7553 14.5528 56.4567 14.5312 56.1859 14.5312C55.6073 14.5312 55.0903 14.6574 54.6348 14.9098C54.1854 15.156 53.8284 15.5007 53.5638 15.9439C53.3052 16.3871 53.176 16.898 53.176 17.4766V25.5H49.2427ZM64.9043 25.777C63.4455 25.777 62.1898 25.4815 61.1373 24.8906C60.0909 24.2936 59.2845 23.4503 58.7182 22.3608C58.1519 21.2652 57.8688 19.9695 57.8688 18.4737C57.8688 17.0149 58.1519 15.7346 58.7182 14.6328C59.2845 13.531 60.0816 12.6723 61.1096 12.0568C62.1437 11.4413 63.3563 11.1335 64.7474 11.1335C65.683 11.1335 66.5539 11.2843 67.3603 11.5859C68.1728 11.8814 68.8806 12.3277 69.4839 12.9247C70.0932 13.5218 70.5672 14.2727 70.9057 15.1776C71.2443 16.0762 71.4135 17.1288 71.4135 18.3352V19.4155H59.4384V16.978H67.7111C67.7111 16.4117 67.588 15.91 67.3418 15.473C67.0956 15.036 66.754 14.6944 66.317 14.4482C65.8861 14.1958 65.3844 14.0696 64.812 14.0696C64.2149 14.0696 63.6856 14.2081 63.2239 14.4851C62.7684 14.7559 62.4114 15.1222 62.1529 15.5838C61.8944 16.0393 61.762 16.5471 61.7559 17.1072V19.4247C61.7559 20.1264 61.8851 20.7327 62.1437 21.2436C62.4083 21.7545 62.7807 22.1484 63.2608 22.4254C63.741 22.7024 64.3103 22.8409 64.9689 22.8409C65.406 22.8409 65.8061 22.7794 66.1692 22.6562C66.5324 22.5331 66.8432 22.3485 67.1018 22.1023C67.3603 21.8561 67.5572 21.5545 67.6927 21.1974L71.3304 21.4375C71.1458 22.3116 70.7672 23.0748 70.1948 23.7273C69.6285 24.3736 68.896 24.8783 67.9974 25.2415C67.1048 25.5985 66.0738 25.777 64.9043 25.777ZM77.1335 6.59091V25.5H73.2003V6.59091H77.1335ZM79.5043 25.5V11.3182H83.4375V25.5H79.5043ZM81.4801 9.49006C80.8954 9.49006 80.3937 9.29616 79.9752 8.90838C79.5628 8.51444 79.3566 8.04356 79.3566 7.49574C79.3566 6.95407 79.5628 6.48935 79.9752 6.10156C80.3937 5.70762 80.8954 5.51065 81.4801 5.51065C82.0649 5.51065 82.5635 5.70762 82.9759 6.10156C83.3944 6.48935 83.6037 6.95407 83.6037 7.49574C83.6037 8.04356 83.3944 8.51444 82.9759 8.90838C82.5635 9.29616 82.0649 9.49006 81.4801 9.49006ZM89.7415 17.3011V25.5H85.8083V11.3182H89.5569V13.8203H89.723C90.037 12.9955 90.5632 12.343 91.3019 11.8629C92.0405 11.3767 92.9361 11.1335 93.9887 11.1335C94.9735 11.1335 95.8322 11.349 96.5647 11.7798C97.2971 12.2107 97.8665 12.8262 98.2728 13.6264C98.679 14.4205 98.8821 15.3684 98.8821 16.4702V25.5H94.9489V17.1719C94.9551 16.304 94.7335 15.6269 94.2841 15.1406C93.8348 14.6482 93.2162 14.402 92.4283 14.402C91.8989 14.402 91.4311 14.5159 91.0249 14.7436C90.6248 14.9714 90.3109 15.3037 90.0831 15.7408C89.8615 16.1716 89.7477 16.6918 89.7415 17.3011ZM107.665 25.777C106.206 25.777 104.951 25.4815 103.898 24.8906C102.852 24.2936 102.045 23.4503 101.479 22.3608C100.913 21.2652 100.63 19.9695 100.63 18.4737C100.63 17.0149 100.913 15.7346 101.479 14.6328C102.045 13.531 102.842 12.6723 103.87 12.0568C104.905 11.4413 106.117 11.1335 107.508 11.1335C108.444 11.1335 109.315 11.2843 110.121 11.5859C110.934 11.8814 111.641 12.3277 112.245 12.9247C112.854 13.5218 113.328 14.2727 113.667 15.1776C114.005 16.0762 114.174 17.1288 114.174 18.3352V19.4155H102.199V16.978H110.472C110.472 16.4117 110.349 15.91 110.103 15.473C109.856 15.036 109.515 14.6944 109.078 14.4482C108.647 14.1958 108.145 14.0696 107.573 14.0696C106.976 14.0696 106.446 14.2081 105.985 14.4851C105.529 14.7559 105.172 15.1222 104.914 15.5838C104.655 16.0393 104.523 16.5471 104.517 17.1072V19.4247C104.517 20.1264 104.646 20.7327 104.905 21.2436C105.169 21.7545 105.542 22.1484 106.022 22.4254C106.502 22.7024 107.071 22.8409 107.73 22.8409C108.167 22.8409 108.567 22.7794 108.93 22.6562C109.293 22.5331 109.604 22.3485 109.863 22.1023C110.121 21.8561 110.318 21.5545 110.454 21.1974L114.091 21.4375C113.907 22.3116 113.528 23.0748 112.956 23.7273C112.389 24.3736 111.657 24.8783 110.758 25.2415C109.866 25.5985 108.835 25.777 107.665 25.777Z" class="fill-primary" fill="currentColor" />
+            <path d="M1 29.5V16.5C1 9.87258 6.37258 4.5 13 4.5C19.6274 4.5 25 9.87258 25 16.5C25 23.1274 19.6274 28.5 13 28.5H12" class="stroke-primary" stroke="currentColor" stroke-width="2" />
+            <path d="M5 29.5V16.66C5 12.1534 8.58172 8.5 13 8.5C17.4183 8.5 21 12.1534 21 16.66C21 21.1666 17.4183 24.82 13 24.82H12" class="stroke-primary" stroke="currentColor" stroke-width="2" />
+            <circle cx="13" cy="16.5214" r="5" class="fill-primary" fill="currentColor" />
+          </svg>
+        </a>
+        <!-- End Logo -->
+      </div>
+
+      <!-- Content -->
+      <div class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
+        <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+          <ul class="flex flex-col space-y-1">
+            <li>
+              <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-sidebar-nav-active text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Dashboard
+              </a>
+            </li>
+
+            <li class="hs-accordion" id="users-accordion">
+              <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-expanded="true" aria-controls="users-accordion-child">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                Users
+
+                <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              <div id="users-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion">
+                <ul class="hs-accordion-group ps-8 pt-1 space-y-1" data-hs-accordion-always-open>
+                  <li class="hs-accordion" id="users-accordion-sub-1">
+                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-expanded="true" aria-controls="users-accordion-sub-1-child">
+                      Sub Menu 1
+
+                      <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m18 15-6-6-6 6" />
+                      </svg>
+
+                      <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
+
+                    <div id="users-accordion-sub-1-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion-sub-1">
+                      <ul class="pt-1 space-y-1">
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 1
+                          </a>
+                        </li>
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 2
+                          </a>
+                        </li>
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 3
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="hs-accordion" id="users-accordion-sub-2">
+                    <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-expanded="true" aria-controls="users-accordion-sub-2-child">
+                      Sub Menu 2
+
+                      <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m18 15-6-6-6 6" />
+                      </svg>
+
+                      <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
+
+                    <div id="users-accordion-sub-2-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="users-accordion-sub-2">
+                      <ul class="pt-1 space-y-1">
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 1
+                          </a>
+                        </li>
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 2
+                          </a>
+                        </li>
+                        <li>
+                          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                            Link 3
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="hs-accordion" id="account-accordion">
+              <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-expanded="true" aria-controls="account-accordion-child">
+                <svg class="shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="15" r="3" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M10 15H6a4 4 0 0 0-4 4v2" />
+                  <path d="m21.7 16.4-.9-.3" />
+                  <path d="m15.2 13.9-.9-.3" />
+                  <path d="m16.6 18.7.3-.9" />
+                  <path d="m19.1 12.2.3-.9" />
+                  <path d="m19.6 18.7-.4-1" />
+                  <path d="m16.8 12.3-.4-1" />
+                  <path d="m14.3 16.6 1-.4" />
+                  <path d="m20.7 13.8 1-.4" />
+                </svg>
+                Account
+
+                <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              <div id="account-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="account-accordion">
+                <ul class="ps-8 pt-1 space-y-1">
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 1
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 2
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 3
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="hs-accordion" id="projects-accordion">
+              <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-expanded="true" aria-controls="projects-accordion-child">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+                Projects
+
+                <svg class="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg class="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              <div id="projects-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="projects-accordion">
+                <ul class="ps-8 pt-1 space-y-1">
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 1
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 2
+                    </a>
+                  </li>
+                  <li>
+                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                      Link 3
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li><a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                  <path d="M8 14h.01" />
+                  <path d="M12 14h.01" />
+                  <path d="M16 14h.01" />
+                  <path d="M8 18h.01" />
+                  <path d="M12 18h.01" />
+                  <path d="M16 18h.01" />
+                </svg>
+                Calendar
+              </a></li>
+            <li><a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="#">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+                Documentation
+              </a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- End Content -->
+    </div>
+  </div>
+  <!-- End Sidebar -->
+
+  <!-- Content -->
+  <div class="w-full lg:ps-64">
+    <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <!-- Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Card -->
+        <div class="flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase text-muted-foreground-1">
+                Total users
+              </p>
+              <div class="hs-tooltip">
+                <div class="hs-tooltip-toggle">
+                  <svg class="shrink-0 size-4 text-muted-foreground-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <path d="M12 17h.01" />
+                  </svg>
+                  <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-tooltip border border-tooltip-line text-xs font-medium text-tooltip-foreground rounded-md shadow-2xs" role="tooltip">
+                    The number of daily users
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-1 flex items-center gap-x-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-foreground">
+                72,540
+              </h3>
+              <span class="flex items-center gap-x-1 text-green-600">
+                <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                  <polyline points="16 7 22 7 22 13" />
+                </svg>
+                <span class="inline-block text-sm">
+                  1.7%
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <div class="flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase text-muted-foreground-1">
+                Sessions
+              </p>
+            </div>
+
+            <div class="mt-1 flex items-center gap-x-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-foreground">
+                29.4%
+              </h3>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <div class="flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase text-muted-foreground-1">
+                Avg. Click Rate
+              </p>
+            </div>
+
+            <div class="mt-1 flex items-center gap-x-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-foreground">
+                56.8%
+              </h3>
+              <span class="flex items-center gap-x-1 text-red-600">
+                <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
+                  <polyline points="16 17 22 17 22 11" />
+                </svg>
+                <span class="inline-block text-sm">
+                  1.7%
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <div class="flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase text-muted-foreground-1">
+                Pageviews
+              </p>
+            </div>
+
+            <div class="mt-1 flex items-center gap-x-2">
+              <h3 class="text-xl sm:text-2xl font-medium text-foreground">
+                92,913
+              </h3>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+      <!-- End Grid -->
+
+      <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
+        <!-- Card -->
+        <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <!-- Header -->
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <div>
+              <h2 class="text-sm text-muted-foreground-1">
+                Income
+              </h2>
+              <p class="text-xl sm:text-2xl font-medium text-foreground">
+                $126,238.49
+              </p>
+            </div>
+
+            <div>
+              <span class="py-2 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">
+                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5v14" />
+                  <path d="m19 12-7 7-7-7" />
+                </svg>
+                25%
+              </span>
+            </div>
+          </div>
+          <!-- End Header -->
+
+          <div id="hs-multiple-bar-charts"></div>
+        </div>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-card border border-card-line shadow-2xs rounded-xl">
+          <!-- Header -->
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <div>
+              <h2 class="text-sm text-muted-foreground-1">
+                Visitors
+              </h2>
+              <p class="text-xl sm:text-2xl font-medium text-foreground">
+                80.3k
+              </p>
+            </div>
+
+            <div>
+              <span class="py-2 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-red-100 text-red-800 dark:bg-red-500/10 dark:text-red-500">
+                <svg class="inline-block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5v14" />
+                  <path d="m19 12-7 7-7-7" />
+                </svg>
+                2%
+              </span>
+            </div>
+          </div>
+          <!-- End Header -->
+
+          <div id="hs-single-area-chart"></div>
+        </div>
+        <!-- End Card -->
+
+      </div>
+
+      <!-- Card -->
+      <div class="flex flex-col">
+        <div class="overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
+          <div class="min-w-full inline-block align-middle">
+            <div class="bg-layer border border-layer-line rounded-xl shadow-2xs overflow-hidden">
+              <!-- Header -->
+              <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-table-line">
+                <div>
+                  <h2 class="text-xl font-semibold text-foreground">
+                    Users
+                  </h2>
+                  <p class="text-sm text-muted-foreground-2">
+                    Add users, edit and more.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="inline-flex gap-x-2">
+                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus" href="#">
+                      View all
+                    </a>
+
+                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none" href="#">
+                      <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M12 5v14" />
+                      </svg>
+                      Add user
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- End Header -->
+
+              <!-- Table -->
+              <table class="min-w-full divide-y divide-table-line">
+                <thead class="bg-muted">
+                  <tr>
+                    <th scope="col" class="ps-6 pe-3 py-3 text-start">
+                      <label for="hs-at-with-checkboxes-main" class="flex">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-main">
+                        <span class="sr-only">Checkbox</span>
+                      </label>
+                    </th>
+
+                    <th scope="col" class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
+                      <div class="flex items-center gap-x-2">
+                        <span class="text-xs font-semibold uppercase text-foreground">
+                          Name
+                        </span>
+                      </div>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-start">
+                      <div class="flex items-center gap-x-2">
+                        <span class="text-xs font-semibold uppercase text-foreground">
+                          Position
+                        </span>
+                      </div>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-start">
+                      <div class="flex items-center gap-x-2">
+                        <span class="text-xs font-semibold uppercase text-foreground">
+                          Status
+                        </span>
+                      </div>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-start">
+                      <div class="flex items-center gap-x-2">
+                        <span class="text-xs font-semibold uppercase text-foreground">
+                          Portfolio
+                        </span>
+                      </div>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-start">
+                      <div class="flex items-center gap-x-2">
+                        <span class="text-xs font-semibold uppercase text-foreground">
+                          Created
+                        </span>
+                      </div>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-end"></th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-table-line">
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-1" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-1">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Christina Bersh</span>
+                            <span class="block text-sm text-muted-foreground-1">christina@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Director</span>
+                        <span class="block text-sm text-muted-foreground-1">Human resources</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">1/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">28 Dec, 12:12</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-2" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-2">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">David Harrison</span>
+                            <span class="block text-sm text-muted-foreground-1">david@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Seller</span>
+                        <span class="block text-sm text-muted-foreground-1">Branding products</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                          </svg>
+                          Warning
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">3/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">20 Dec, 09:27</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-3" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-3">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="inline-flex items-center justify-center size-9.5 rounded-full bg-layer border border-layer-line">
+                            <span class="font-medium text-sm text-foreground">A</span>
+                          </span>
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Anne Richard</span>
+                            <span class="block text-sm text-muted-foreground-1">anne@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Designer</span>
+                        <span class="block text-sm text-muted-foreground-1">IT department</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">5/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">18 Dec, 15:20</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-4" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-4">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Samia Kartoon</span>
+                            <span class="block text-sm text-muted-foreground-1">samia@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Executive director</span>
+                        <span class="block text-sm text-muted-foreground-1">Marketing</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">0/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">18 Dec, 15:20</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-5" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-5">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="inline-flex items-center justify-center size-9.5 rounded-full bg-layer border border-layer-line">
+                            <span class="font-medium text-sm text-foreground">D</span>
+                          </span>
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">David Harrison</span>
+                            <span class="block text-sm text-muted-foreground-1">david@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Developer</span>
+                        <span class="block text-sm text-muted-foreground-1">Mobile app</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                          </svg>
+                          Danger
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">3/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">15 Dec, 14:41</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-6" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-6">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Brian Halligan</span>
+                            <span class="block text-sm text-muted-foreground-1">brian@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Accountant</span>
+                        <span class="block text-sm text-muted-foreground-1">Finance</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">2/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">11 Dec, 18:51</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-7" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-7">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Andy Clerk</span>
+                            <span class="block text-sm text-muted-foreground-1">andy@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Director</span>
+                        <span class="block text-sm text-muted-foreground-1">Human resources</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">1/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">28 Dec, 12:12</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-8" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-8">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Bart Simpson</span>
+                            <span class="block text-sm text-muted-foreground-1">Bart@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Seller</span>
+                        <span class="block text-sm text-muted-foreground-1">Branding products</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                          </svg>
+                          Warning
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">3/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">20 Dec, 09:27</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-9" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-9">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="inline-flex items-center justify-center size-9.5 rounded-full bg-layer border border-layer-line">
+                            <span class="font-medium text-sm text-foreground">C</span>
+                          </span>
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Camila Welters</span>
+                            <span class="block text-sm text-muted-foreground-1">cwelt@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Designer</span>
+                        <span class="block text-sm text-muted-foreground-1">IT department</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">5/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">18 Dec, 15:20</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-10" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-10">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Oliver Schevich</span>
+                            <span class="block text-sm text-muted-foreground-1">oliver@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Seller</span>
+                        <span class="block text-sm text-muted-foreground-1">Branding products</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                          </svg>
+                          Warning
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">3/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">20 Dec, 09:27</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-11" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-11">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="inline-flex items-center justify-center size-9.5 rounded-full bg-layer border border-layer-line">
+                            <span class="font-medium text-sm text-foreground">I</span>
+                          </span>
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Inna Ivy</span>
+                            <span class="block text-sm text-muted-foreground-1">invy@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Designer</span>
+                        <span class="block text-sm text-muted-foreground-1">IT department</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">5/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">18 Dec, 15:20</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 pe-3 py-3">
+                        <label for="hs-at-with-checkboxes-12" class="flex">
+                          <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-at-with-checkboxes-12">
+                          <span class="sr-only">Checkbox</span>
+                        </label>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
+                          <div class="grow">
+                            <span class="block text-sm font-semibold text-foreground">Jessica Williams</span>
+                            <span class="block text-sm text-muted-foreground-1">myhairisred@site.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="h-px w-72 whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="block text-sm font-semibold text-foreground">Executive director</span>
+                        <span class="block text-sm text-muted-foreground-1">Marketing</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                          </svg>
+                          Active
+                        </span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <div class="flex items-center gap-x-3">
+                          <span class="text-xs text-muted-foreground-1">0/5</span>
+                          <div class="flex w-full h-1.5 bg-surface-1 rounded-full overflow-hidden">
+                            <div class="flex flex-col justify-center overflow-hidden bg-secondary" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3">
+                        <span class="text-sm text-muted-foreground-1">18 Dec, 15:20</span>
+                      </div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-1.5">
+                        <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table -->
+
+              <!-- Footer -->
+              <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-layer-line">
+                <div>
+                  <p class="text-sm text-muted-foreground-2">
+                    <span class="font-semibold text-foreground">12</span> results
+                  </p>
+                </div>
+
+                <div>
+                  <div class="inline-flex gap-x-2">
+                    <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+                      <svg class="shrink-0 size-4 -ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6" />
+                      </svg>
+                      Prev
+                    </button>
+
+                    <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+                      Next
+                      <svg class="shrink-0 size-4 -me-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- End Footer -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+  </div>
+  <!-- End Content -->
+
+  <!-- JS Implementing Plugins -->
+
+  <script src="../../../assets/preline.js"></script>
+  <script>
+      (function () {
+        const html = document.documentElement;
+        const appearance = localStorage.getItem("hs_theme") || "default";
+        const resolvedAppearance = appearance === "auto"
+          ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default")
+          : appearance;
+        const colorTheme = localStorage.getItem("hs-clipboard-theme") || "default";
+        const brand = localStorage.getItem("hs-clipboard-brand");
+        const font = localStorage.getItem("hs-clipboard-font");
+
+        html.classList.toggle("dark", resolvedAppearance === "dark");
+        html.setAttribute("data-theme", `theme-${colorTheme}`);
+        if (brand) html.setAttribute("data-brand", brand);
+        if (font) html.setAttribute("data-font", font);
+      })();
+    </script>
+
+  <script src="../../../assets/lodash.min.js"></script>
+  <script src="../../../assets/apexcharts.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/culori@4.0.2/bundled/culori.umd.min.js"></script>
+
+  <script>
+      !function(e,a){if("object"==typeof exports&&"object"==typeof module)module.exports=a();else if("function"==typeof define&&define.amd)define([],a);else{var t=a();for(var r in t)("object"==typeof exports?exports:e)[r]=t[r]}}(self,()=>(()=>{var e={8710(e){var a,t=Object.defineProperty,r=Object.getOwnPropertyDescriptor,o=Object.getOwnPropertyNames,l=Object.prototype.hasOwnProperty,n={};((e,a)=>{for(var r in a)t(e,r,{get:a[r],enumerable:!0})})(n,{a98:()=>dl,average:()=>We,averageAngle:()=>Je,averageNumber:()=>Ge,blend:()=>Yr,blerp:()=>ae,clampChroma:()=>Co,clampGamut:()=>Xo,clampRgb:()=>Oo,colorsNamed:()=>h,convertA98ToXyz65:()=>he,convertCubehelixToRgb:()=>Le,convertDlchToLab65:()=>va,convertHsiToRgb:()=>ya,convertHslToRgb:()=>wa,convertHsvToRgb:()=>Ra,convertHwbToRgb:()=>Ha,convertItpToXyz65:()=>Fa,convertJabToJch:()=>lt,convertJabToRgb:()=>rt,convertJabToXyz65:()=>at,convertJchToJab:()=>nt,convertLab65ToDlch:()=>ca,convertLab65ToRgb:()=>na,convertLab65ToXyz65:()=>la,convertLabToLch:()=>Ye,convertLabToRgb:()=>bt,convertLabToXyz50:()=>st,convertLchToLab:()=>Ke,convertLchuvToLuv:()=>Tt,convertLrgbToOklab:()=>Et,convertLrgbToRgb:()=>ce,convertLuvToLchuv:()=>$t,convertLuvToXyz50:()=>Ot,convertOkhslToOklab:()=>Yt,convertOkhsvToOklab:()=>Zt,convertOklabToLrgb:()=>Nt,convertOklabToOkhsl:()=>Bt,convertOklabToOkhsv:()=>Vt,convertOklabToRgb:()=>_t,convertP3ToXyz65:()=>rr,convertProphotoToXyz50:()=>dr,convertRec2020ToXyz65:()=>gr,convertRgbToCubehelix:()=>Re,convertRgbToHsi:()=>xa,convertRgbToHsl:()=>ka,convertRgbToHsv:()=>La,convertRgbToHwb:()=>Oa,convertRgbToJab:()=>tt,convertRgbToLab:()=>Mt,convertRgbToLab65:()=>da,convertRgbToLrgb:()=>ue,convertRgbToOklab:()=>At,convertRgbToXyb:()=>xr,convertRgbToXyz50:()=>vt,convertRgbToXyz65:()=>be,convertRgbToYiq:()=>qr,convertXybToRgb:()=>wr,convertXyz50ToLab:()=>gt,convertXyz50ToLuv:()=>Lt,convertXyz50ToProphoto:()=>ir,convertXyz50ToRgb:()=>ut,convertXyz50ToXyz65:()=>Pr,convertXyz65ToA98:()=>pe,convertXyz65ToItp:()=>Ba,convertXyz65ToJab:()=>Za,convertXyz65ToLab65:()=>ha,convertXyz65ToP3:()=>or,convertXyz65ToRec2020:()=>br,convertXyz65ToRgb:()=>ge,convertXyz65ToXyz50:()=>Tr,convertYiqToRgb:()=>Rr,converter:()=>x,cubehelix:()=>pl,differenceCie76:()=>Ce,differenceCie94:()=>Se,differenceCiede2000:()=>Ee,differenceCmc:()=>Ae,differenceEuclidean:()=>Xe,differenceHueChroma:()=>Oe,differenceHueNaive:()=>He,differenceHueSaturation:()=>je,differenceHyab:()=>Ne,differenceItp:()=>De,differenceKotsarenkoRamos:()=>_e,displayable:()=>jo,dlab:()=>sl,dlch:()=>ul,easingGamma:()=>To,easingInOutSine:()=>nl,easingMidpoint:()=>to,easingSmootherstep:()=>ll,easingSmoothstep:()=>rl,easingSmoothstepInverse:()=>ol,filterBrightness:()=>Do,filterContrast:()=>Jo,filterDeficiencyDeuter:()=>al,filterDeficiencyProt:()=>el,filterDeficiencyTrit:()=>tl,filterGrayscale:()=>Wo,filterHueRotate:()=>Yo,filterInvert:()=>Bo,filterSaturate:()=>Fo,filterSepia:()=>Go,fixupAlpha:()=>le,fixupHueDecreasing:()=>we,fixupHueIncreasing:()=>ze,fixupHueLonger:()=>xe,fixupHueShorter:()=>ye,formatCss:()=>Dr,formatHex:()=>Jr,formatHex8:()=>Gr,formatHsl:()=>Wr,formatRgb:()=>Fr,getMode:()=>I,hsi:()=>bl,hsl:()=>vl,hsv:()=>cl,hwb:()=>gl,inGamut:()=>Ho,interpolate:()=>io,interpolateWith:()=>ho,interpolateWithPremultipliedAlpha:()=>po,interpolatorLinear:()=>oe,interpolatorPiecewise:()=>re,interpolatorSplineBasis:()=>bo,interpolatorSplineBasisClosed:()=>vo,interpolatorSplineMonotone:()=>wo,interpolatorSplineMonotone2:()=>ko,interpolatorSplineMonotoneClosed:()=>$o,interpolatorSplineNatural:()=>go,interpolatorSplineNaturalClosed:()=>Mo,itp:()=>Ml,jab:()=>fl,jch:()=>ml,lab:()=>yl,lab65:()=>xl,lch:()=>zl,lch65:()=>wl,lchuv:()=>kl,lerp:()=>U,lrgb:()=>$l,luv:()=>Tl,mapAlphaDivide:()=>Qr,mapAlphaMultiply:()=>Zr,mapTransferGamma:()=>eo,mapTransferLinear:()=>Ur,mapper:()=>Vr,modeA98:()=>Me,modeCubehelix:()=>Be,modeDlab:()=>fa,modeDlch:()=>ma,modeHsi:()=>za,modeHsl:()=>qa,modeHsv:()=>ja,modeHwb:()=>Ca,modeItp:()=>Ya,modeJab:()=>ot,modeJch:()=>it,modeLab:()=>mt,modeLab65:()=>yt,modeLch:()=>wt,modeLch65:()=>kt,modeLchuv:()=>Xt,modeLrgb:()=>Ct,modeLuv:()=>St,modeOkhsl:()=>Kt,modeOkhsv:()=>Qt,modeOklab:()=>er,modeOklch:()=>tr,modeP3:()=>lr,modeProphoto:()=>pr,modeRec2020:()=>Mr,modeRgb:()=>ne,modeXyb:()=>kr,modeXyz50:()=>$r,modeXyz65:()=>Ir,modeYiq:()=>Lr,nearest:()=>Eo,okhsl:()=>Pl,okhsv:()=>Il,oklab:()=>ql,oklch:()=>Rl,p3:()=>Ll,parse:()=>V,parseHex:()=>s,parseHsl:()=>Ia,parseHslLegacy:()=>Pa,parseHwb:()=>Xa,parseLab:()=>ft,parseLch:()=>zt,parseNamed:()=>d,parseOklab:()=>Ut,parseOklch:()=>ar,parseRgb:()=>Z,parseRgbLegacy:()=>m,parseTransparent:()=>Q,prophoto:()=>jl,random:()=>Kr,rec2020:()=>Hl,removeParser:()=>R,rgb:()=>Ol,round:()=>jr,samples:()=>Po,serializeHex:()=>Er,serializeHex8:()=>Ar,serializeHsl:()=>_r,serializeRgb:()=>Nr,toGamut:()=>So,trilerp:()=>te,unlerp:()=>ee,useMode:()=>P,useParser:()=>q,wcagContrast:()=>hl,wcagLuminance:()=>il,xyb:()=>Xl,xyz50:()=>Cl,xyz65:()=>Sl,yiq:()=>El}),e.exports=(a=n,((e,a,n,i)=>{if(a&&"object"==typeof a||"function"==typeof a)for(let h of o(a))l.call(e,h)||h===n||t(e,h,{get:()=>a[h],enumerable:!(i=r(a,h))||i.enumerable});return e})(t({},"__esModule",{value:!0}),a));var i=(e,a)=>{if("number"==typeof e)return 3===a?{mode:"rgb",r:(e>>8&15|e>>4&240)/255,g:(e>>4&15|240&e)/255,b:(15&e|e<<4&240)/255}:4===a?{mode:"rgb",r:(e>>12&15|e>>8&240)/255,g:(e>>8&15|e>>4&240)/255,b:(e>>4&15|240&e)/255,alpha:(15&e|e<<4&240)/255}:6===a?{mode:"rgb",r:(e>>16&255)/255,g:(e>>8&255)/255,b:(255&e)/255}:8===a?{mode:"rgb",r:(e>>24&255)/255,g:(e>>16&255)/255,b:(e>>8&255)/255,alpha:(255&e)/255}:void 0},h={aliceblue:15792383,antiquewhite:16444375,aqua:65535,aquamarine:8388564,azure:15794175,beige:16119260,bisque:16770244,black:0,blanchedalmond:16772045,blue:255,blueviolet:9055202,brown:10824234,burlywood:14596231,cadetblue:6266528,chartreuse:8388352,chocolate:13789470,coral:16744272,cornflowerblue:6591981,cornsilk:16775388,crimson:14423100,cyan:65535,darkblue:139,darkcyan:35723,darkgoldenrod:12092939,darkgray:11119017,darkgreen:25600,darkgrey:11119017,darkkhaki:12433259,darkmagenta:9109643,darkolivegreen:5597999,darkorange:16747520,darkorchid:10040012,darkred:9109504,darksalmon:15308410,darkseagreen:9419919,darkslateblue:4734347,darkslategray:3100495,darkslategrey:3100495,darkturquoise:52945,darkviolet:9699539,deeppink:16716947,deepskyblue:49151,dimgray:6908265,dimgrey:6908265,dodgerblue:2003199,firebrick:11674146,floralwhite:16775920,forestgreen:2263842,fuchsia:16711935,gainsboro:14474460,ghostwhite:16316671,gold:16766720,goldenrod:14329120,gray:8421504,green:32768,greenyellow:11403055,grey:8421504,honeydew:15794160,hotpink:16738740,indianred:13458524,indigo:4915330,ivory:16777200,khaki:15787660,lavender:15132410,lavenderblush:16773365,lawngreen:8190976,lemonchiffon:16775885,lightblue:11393254,lightcoral:15761536,lightcyan:14745599,lightgoldenrodyellow:16448210,lightgray:13882323,lightgreen:9498256,lightgrey:13882323,lightpink:16758465,lightsalmon:16752762,lightseagreen:2142890,lightskyblue:8900346,lightslategray:7833753,lightslategrey:7833753,lightsteelblue:11584734,lightyellow:16777184,lime:65280,limegreen:3329330,linen:16445670,magenta:16711935,maroon:8388608,mediumaquamarine:6737322,mediumblue:205,mediumorchid:12211667,mediumpurple:9662683,mediumseagreen:3978097,mediumslateblue:8087790,mediumspringgreen:64154,mediumturquoise:4772300,mediumvioletred:13047173,midnightblue:1644912,mintcream:16121850,mistyrose:16770273,moccasin:16770229,navajowhite:16768685,navy:128,oldlace:16643558,olive:8421376,olivedrab:7048739,orange:16753920,orangered:16729344,orchid:14315734,palegoldenrod:15657130,palegreen:10025880,paleturquoise:11529966,palevioletred:14381203,papayawhip:16773077,peachpuff:16767673,peru:13468991,pink:16761035,plum:14524637,powderblue:11591910,purple:8388736,rebeccapurple:6697881,red:16711680,rosybrown:12357519,royalblue:4286945,saddlebrown:9127187,salmon:16416882,sandybrown:16032864,seagreen:3050327,seashell:16774638,sienna:10506797,silver:12632256,skyblue:8900331,slateblue:6970061,slategray:7372944,slategrey:7372944,snow:16775930,springgreen:65407,steelblue:4620980,tan:13808780,teal:32896,thistle:14204888,tomato:16737095,turquoise:4251856,violet:15631086,wheat:16113331,white:16777215,whitesmoke:16119285,yellow:16776960,yellowgreen:10145074},d=e=>i(h[e.toLowerCase()],6),p=/^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i,s=e=>{let a;return(a=e.match(p))?i(parseInt(a[1],16),a[1].length):void 0},u="([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)",b=`${u}%`,v=`(?:${u}%|${u})`,c=`(?:${u}(deg|grad|rad|turn)|${u})`,g="\\s*,\\s*",M=(new RegExp("^"+`(?:${u}%|${u}|none)`+"$"),new RegExp(`^rgba?\\(\\s*${u}${g}${u}${g}${u}\\s*(?:,\\s*${v}\\s*)?\\)$`)),f=new RegExp(`^rgba?\\(\\s*${b}${g}${b}${g}${b}\\s*(?:,\\s*${v}\\s*)?\\)$`),m=e=>{let a,t={mode:"rgb"};if(a=e.match(M))void 0!==a[1]&&(t.r=a[1]/255),void 0!==a[2]&&(t.g=a[2]/255),void 0!==a[3]&&(t.b=a[3]/255);else{if(!(a=e.match(f)))return;void 0!==a[1]&&(t.r=a[1]/100),void 0!==a[2]&&(t.g=a[2]/100),void 0!==a[3]&&(t.b=a[3]/100)}return void 0!==a[4]?t.alpha=Math.max(0,Math.min(1,a[4]/100)):void 0!==a[5]&&(t.alpha=Math.max(0,Math.min(1,+a[5]))),t},y=(e,a)=>void 0===e?void 0:"object"!=typeof e?V(e):void 0!==e.mode?e:a?{...e,mode:a}:void 0,x=(e="rgb")=>a=>void 0!==(a=y(a,e))?a.mode===e?a:z[a.mode][e]?z[a.mode][e](a):"rgb"===e?z[a.mode].rgb(a):z.rgb[e](z[a.mode].rgb(a)):void 0,z={},w={},k=[],$={},T=e=>e,P=e=>(z[e.mode]={...z[e.mode],...e.toMode},Object.keys(e.fromMode||{}).forEach(a=>{z[a]||(z[a]={}),z[a][e.mode]=e.fromMode[a]}),e.ranges||(e.ranges={}),e.difference||(e.difference={}),e.channels.forEach(a=>{if(void 0===e.ranges[a]&&(e.ranges[a]=[0,1]),!e.interpolate[a])throw new Error(`Missing interpolator for: ${a}`);"function"==typeof e.interpolate[a]&&(e.interpolate[a]={use:e.interpolate[a]}),e.interpolate[a].fixup||(e.interpolate[a].fixup=T)}),w[e.mode]=e,(e.parse||[]).forEach(a=>{q(a,e.mode)}),x(e.mode)),I=e=>w[e],q=(e,a)=>{if("string"==typeof e){if(!a)throw new Error("'mode' required when 'parser' is a string");$[e]=a}else"function"==typeof e&&k.indexOf(e)<0&&k.push(e)},R=e=>{if("string"==typeof e)delete $[e];else if("function"==typeof e){const a=k.indexOf(e);a>0&&k.splice(a,1)}},L=/[^\x00-\x7F]|[a-zA-Z_]/,j=/[^\x00-\x7F]|[-\w]/,H="function",O="ident",X="number",C="percentage",S=")",E="none",A="hue",N="alpha",_=0;function D(e){let a=e[_],t=e[_+1];return"-"===a||"+"===a?/\d/.test(t)||"."===t&&/\d/.test(e[_+2]):/\d/.test("."===a?t:a)}function J(e){if(_>=e.length)return!1;let a=e[_];if(L.test(a))return!0;if("-"===a){if(e.length-_<2)return!1;let a=e[_+1];return!("-"!==a&&!L.test(a))}return!1}var G={deg:1,rad:180/Math.PI,grad:.9,turn:360};function F(e){let a="";if("-"!==e[_]&&"+"!==e[_]||(a+=e[_++]),a+=W(e),"."===e[_]&&/\d/.test(e[_+1])&&(a+=e[_++]+W(e)),"e"!==e[_]&&"E"!==e[_]||("-"!==e[_+1]&&"+"!==e[_+1]||!/\d/.test(e[_+2])?/\d/.test(e[_+1])&&(a+=e[_++]+W(e)):a+=e[_++]+e[_++]+W(e)),J(e)){let t=B(e);return"deg"===t||"rad"===t||"turn"===t||"grad"===t?{type:A,value:a*G[t]}:void 0}return"%"===e[_]?(_++,{type:C,value:+a}):{type:X,value:+a}}function W(e){let a="";for(;/\d/.test(e[_]);)a+=e[_++];return a}function B(e){let a="";for(;_<e.length&&j.test(e[_]);)a+=e[_++];return a}function Y(e){let a=B(e);return"("===e[_]?(_++,{type:H,value:a}):"none"===a?{type:E,value:void 0}:{type:O,value:a}}function K(e,a){const t=[];let r;for(;e._i<e.length;)if(r=e[e._i++],r.type===E||r.type===X||r.type===N||r.type===C||a&&r.type===A)t.push(r);else{if(r.type!==S)return;if(e._i<e.length)return}if(!(t.length<3||t.length>4)){if(4===t.length){if(t[3].type!==N)return;t[3]=t[3].value}return 3===t.length&&t.push({type:E,value:void 0}),t.every(e=>e.type!==N)?t:void 0}}var V=e=>{if("string"!=typeof e)return;const a=function(e=""){let a,t=e.trim(),r=[];for(_=0;_<t.length;)if(a=t[_++],"\n"!==a&&"\t"!==a&&" "!==a){if(","===a)return;if(")"!==a){if("+"===a){if(_--,D(t)){r.push(F(t));continue}return}if("-"===a){if(_--,D(t)){r.push(F(t));continue}if(J(t)){r.push({type:O,value:B(t)});continue}return}if("."===a){if(_--,D(t)){r.push(F(t));continue}return}if("/"===a){for(;_<t.length&&("\n"===t[_]||"\t"===t[_]||" "===t[_]);)_++;let e;if(D(t)&&(e=F(t),e.type!==A)){r.push({type:N,value:e});continue}if(J(t)&&"none"===B(t)){r.push({type:N,value:{type:E,value:void 0}});continue}return}if(/\d/.test(a))_--,r.push(F(t));else{if(!L.test(a))return;_--,r.push(Y(t))}}else r.push({type:S})}else for(;_<t.length&&("\n"===t[_]||"\t"===t[_]||" "===t[_]);)_++;return r}(e),t=a?function(e,a){e._i=0;let t=e[e._i++];if(!t||t.type!==H)return;let r=K(e,a);return r?(r.unshift(t.value),r):void 0}(a,!0):void 0;let r,o=0,l=k.length;for(;o<l;)if(void 0!==(r=k[o++](e,t)))return r;return a?function(e){e._i=0;let a=e[e._i++];if(!a||a.type!==H||"color"!==a.value)return;if(a=e[e._i++],a.type!==O)return;const t=$[a.value];if(!t)return;const r={mode:t},o=K(e,!1);if(!o)return;const l=I(t).channels;for(let e,a,t=0;t<l.length;t++)e=o[t],a=l[t],e.type!==E&&(r[a]=e.type===X?e.value:e.value/100,"alpha"===a&&(r[a]=Math.max(0,Math.min(1,r[a]))));return r}(a):void 0};var Z=function(e,a){if(!a||"rgb"!==a[0]&&"rgba"!==a[0])return;const t={mode:"rgb"},[,r,o,l,n]=a;return r.type!==A&&o.type!==A&&l.type!==A?(r.type!==E&&(t.r=r.type===X?r.value/255:r.value/100),o.type!==E&&(t.g=o.type===X?o.value/255:o.value/100),l.type!==E&&(t.b=l.type===X?l.value/255:l.value/100),n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t):void 0},Q=e=>"transparent"===e?{mode:"rgb",r:0,g:0,b:0,alpha:0}:void 0,U=(e,a,t)=>e+t*(a-e),ee=(e,a,t)=>(t-e)/(a-e),ae=(e,a,t,r,o,l)=>U(U(e,a,o),U(t,r,o),l),te=(e,a,t,r,o,l,n,i,h,d,p)=>U(ae(e,a,t,r,h,d),ae(o,l,n,i,h,d),p),re=e=>a=>{let t=(e=>{let a=[];for(let t=0;t<e.length-1;t++){let r=e[t],o=e[t+1];void 0===r&&void 0===o?a.push(void 0):void 0!==r&&void 0!==o?a.push([r,o]):a.push(void 0!==r?[r,r]:[o,o])}return a})(a);return a=>{let r=a*t.length,o=a>=1?t.length-1:Math.max(Math.floor(r),0),l=t[o];return void 0===l?void 0:e(l[0],l[1],r-o)}},oe=re(U),le=e=>{let a=!1,t=e.map(e=>void 0!==e?(a=!0,e):1);return a?t:e},ne={mode:"rgb",channels:["r","g","b","alpha"],parse:[Z,s,m,d,Q,"srgb"],serialize:"srgb",interpolate:{r:oe,g:oe,b:oe,alpha:{use:oe,fixup:le}},gamut:!0,white:{r:1,g:1,b:1},black:{r:0,g:0,b:0}},ie=(e=0)=>Math.pow(Math.abs(e),563/256)*Math.sign(e),he=e=>{let a=ie(e.r),t=ie(e.g),r=ie(e.b),o={mode:"xyz65",x:.5766690429101305*a+.1855582379065463*t+.1882286462349947*r,y:.297344975250536*a+.6273635662554661*t+.0752914584939979*r,z:.0270313613864123*a+.0706888525358272*t+.9913375368376386*r};return void 0!==e.alpha&&(o.alpha=e.alpha),o},de=e=>Math.pow(Math.abs(e),256/563)*Math.sign(e),pe=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o={mode:"a98",r:de(2.0415879038107465*e-.5650069742788597*a-.3447313507783297*t),g:de(-.9692436362808798*e+1.8759675015077206*a+.0415550574071756*t),b:de(.0134442806320312*e-.1183623922310184*a+1.0151749943912058*t)};return void 0!==r&&(o.alpha=r),o},se=(e=0)=>{const a=Math.abs(e);return a<=.04045?e/12.92:(Math.sign(e)||1)*Math.pow((a+.055)/1.055,2.4)},ue=({r:e,g:a,b:t,alpha:r})=>{let o={mode:"lrgb",r:se(e),g:se(a),b:se(t)};return void 0!==r&&(o.alpha=r),o},be=e=>{let{r:a,g:t,b:r,alpha:o}=ue(e),l={mode:"xyz65",x:.4123907992659593*a+.357584339383878*t+.1804807884018343*r,y:.2126390058715102*a+.715168678767756*t+.0721923153607337*r,z:.0193308187155918*a+.119194779794626*t+.9505321522496607*r};return void 0!==o&&(l.alpha=o),l},ve=(e=0)=>{const a=Math.abs(e);return a>.0031308?(Math.sign(e)||1)*(1.055*Math.pow(a,1/2.4)-.055):12.92*e},ce=({r:e,g:a,b:t,alpha:r},o="rgb")=>{let l={mode:o,r:ve(e),g:ve(a),b:ve(t)};return void 0!==r&&(l.alpha=r),l},ge=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=ce({r:3.2409699419045226*e-1.537383177570094*a-.4986107602930034*t,g:-.9692436362808796*e+1.8759675015077204*a+.0415550574071756*t,b:.0556300796969936*e-.2039769588889765*a+1.0569715142428784*t});return void 0!==r&&(o.alpha=r),o},Me={...ne,mode:"a98",parse:["a98-rgb"],serialize:"a98-rgb",fromMode:{rgb:e=>pe(be(e)),xyz65:pe},toMode:{rgb:e=>ge(he(e)),xyz65:he}},fe=e=>(e%=360)<0?e+360:e,me=(e,a)=>e.map((t,r,o)=>{if(void 0===t)return t;let l=fe(t);return 0===r||void 0===e[r-1]?l:a(l-fe(o[r-1]))}).reduce((e,a)=>e.length&&void 0!==a&&void 0!==e[e.length-1]?(e.push(a+e[e.length-1]),e):(e.push(a),e),[]),ye=e=>me(e,e=>Math.abs(e)<=180?e:e-360*Math.sign(e)),xe=e=>me(e,e=>Math.abs(e)>=180||0===e?e:e-360*Math.sign(e)),ze=e=>me(e,e=>e>=0?e:e+360),we=e=>me(e,e=>e<=0?e:e-360),ke=[-.14861,1.78277,-.29227,-.90649,1.97294,0],$e=Math.PI/180,Te=180/Math.PI,Pe=ke[3]*ke[4],Ie=ke[1]*ke[4],qe=ke[1]*ke[2]-ke[0]*ke[3],Re=({r:e,g:a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=(qe*t+e*Pe-a*Ie)/(qe+Pe-Ie),l=t-o,n=(ke[4]*(a-o)-ke[2]*l)/ke[3],i={mode:"cubehelix",l:o,s:0===o||1===o?void 0:Math.sqrt(l*l+n*n)/(ke[4]*o*(1-o))};return i.s&&(i.h=Math.atan2(n,l)*Te-120),void 0!==r&&(i.alpha=r),i},Le=({h:e,s:a,l:t,alpha:r})=>{let o={mode:"rgb"};e=(void 0===e?0:e+120)*$e,void 0===t&&(t=0);let l=void 0===a?0:a*t*(1-t),n=Math.cos(e),i=Math.sin(e);return o.r=t+l*(ke[0]*n+ke[1]*i),o.g=t+l*(ke[2]*n+ke[3]*i),o.b=t+l*(ke[4]*n+ke[5]*i),void 0!==r&&(o.alpha=r),o},je=(e,a)=>{if(void 0===e.h||void 0===a.h||!e.s||!a.s)return 0;let t=fe(e.h),r=fe(a.h),o=Math.sin((r-t+360)/2*Math.PI/180);return 2*Math.sqrt(e.s*a.s)*o},He=(e,a)=>{if(void 0===e.h||void 0===a.h)return 0;let t=fe(e.h),r=fe(a.h);return Math.abs(r-t)>180?t-(r-360*Math.sign(r-t)):r-t},Oe=(e,a)=>{if(void 0===e.h||void 0===a.h||!e.c||!a.c)return 0;let t=fe(e.h),r=fe(a.h),o=Math.sin((r-t+360)/2*Math.PI/180);return 2*Math.sqrt(e.c*a.c)*o},Xe=(e="rgb",a=[1,1,1,0])=>{let t=I(e),r=t.channels,o=t.difference,l=x(e);return(e,t)=>{let n=l(e),i=l(t);return Math.sqrt(r.reduce((e,t,r)=>{let l=o[t]?o[t](n,i):n[t]-i[t];return e+(a[r]||0)*Math.pow(isNaN(l)?0:l,2)},0))}},Ce=()=>Xe("lab65"),Se=(e=1,a=.045,t=.015)=>{let r=x("lab65");return(o,l)=>{let n=r(o),i=r(l),h=n.l,d=n.a,p=n.b,s=Math.sqrt(d*d+p*p),u=i.l,b=i.a,v=i.b,c=Math.sqrt(b*b+v*v),g=Math.pow(h-u,2),M=Math.pow(s-c,2),f=Math.pow(d-b,2)+Math.pow(p-v,2)-M;return Math.sqrt(g/Math.pow(e,2)+M/Math.pow(1+a*s,2)+f/Math.pow(1+t*s,2))}},Ee=(e=1,a=1,t=1)=>{let r=x("lab65");return(o,l)=>{let n=r(o),i=r(l),h=n.l,d=n.a,p=n.b,s=Math.sqrt(d*d+p*p),u=i.l,b=i.a,v=i.b,c=(s+Math.sqrt(b*b+v*v))/2,g=.5*(1-Math.sqrt(Math.pow(c,7)/(Math.pow(c,7)+Math.pow(25,7)))),M=d*(1+g),f=b*(1+g),m=Math.sqrt(M*M+p*p),y=Math.sqrt(f*f+v*v),x=Math.abs(M)+Math.abs(p)===0?0:Math.atan2(p,M);x+=2*(x<0)*Math.PI;let z=Math.abs(f)+Math.abs(v)===0?0:Math.atan2(v,f);z+=2*(z<0)*Math.PI;let w=u-h,k=y-m,$=m*y===0?0:z-x;$-=2*($>Math.PI)*Math.PI,$+=2*($<-Math.PI)*Math.PI;let T,P=2*Math.sqrt(m*y)*Math.sin($/2),I=(h+u)/2,q=(m+y)/2;m*y===0?T=x+z:(T=(x+z)/2,T-=(Math.abs(x-z)>Math.PI)*Math.PI,T+=2*(T<0)*Math.PI);let R=Math.pow(I-50,2),L=1-.17*Math.cos(T-Math.PI/6)+.24*Math.cos(2*T)+.32*Math.cos(3*T+Math.PI/30)-.2*Math.cos(4*T-63*Math.PI/180),j=1+.015*R/Math.sqrt(20+R),H=1+.045*q,O=1+.015*q*L,X=30*Math.PI/180*Math.exp(-1*Math.pow((180/Math.PI*T-275)/25,2)),C=2*Math.sqrt(Math.pow(q,7)/(Math.pow(q,7)+Math.pow(25,7))),S=-1*Math.sin(2*X)*C;return Math.sqrt(Math.pow(w/(e*j),2)+Math.pow(k/(a*H),2)+Math.pow(P/(t*O),2)+S*k/(a*H)*P/(t*O))}},Ae=(e=1,a=1)=>{let t=x("lab65");return(r,o)=>{let l=t(r),n=l.l,i=l.a,h=l.b,d=Math.sqrt(i*i+h*h),p=Math.atan2(h,i);p+=2*Math.PI*(p<0);let s=t(o),u=s.l,b=s.a,v=s.b,c=Math.sqrt(b*b+v*v),g=Math.pow(n-u,2),M=Math.pow(d-c,2),f=Math.pow(i-b,2)+Math.pow(h-v,2)-M,m=Math.sqrt(Math.pow(d,4)/(Math.pow(d,4)+1900)),y=n<16?.511:.040975*n/(1+.01765*n),x=.0638*d/(1+.0131*d)+.638,z=x*(m*(p>=164/180*Math.PI&&p<=345/180*Math.PI?.56+Math.abs(.2*Math.cos(p+168/180*Math.PI)):.36+Math.abs(.4*Math.cos(p+35/180*Math.PI)))+1-m);return Math.sqrt(g/Math.pow(e*y,2)+M/Math.pow(a*x,2)+f/Math.pow(z,2))}},Ne=()=>{let e=x("lab65");return(a,t)=>{let r=e(a),o=e(t),l=r.l-o.l,n=r.a-o.a,i=r.b-o.b;return Math.abs(l)+Math.sqrt(n*n+i*i)}},_e=()=>Xe("yiq",[.5053,.299,.1957]),De=()=>Xe("itp",[518400,129600,518400]),Je=e=>{let a=e.reduce((e,a)=>{if(void 0!==a){let t=a*Math.PI/180;e.sin+=Math.sin(t),e.cos+=Math.cos(t)}return e},{sin:0,cos:0}),t=180*Math.atan2(a.sin,a.cos)/Math.PI;return t<0?360+t:t},Ge=e=>{let a=e.filter(e=>void 0!==e);return a.length?a.reduce((e,a)=>e+a,0)/a.length:void 0},Fe=e=>"function"==typeof e;function We(e,a="rgb",t){let r=I(a),o=e.map(x(a));return r.channels.reduce((e,a)=>{let l=o.map(e=>e[a]).filter(e=>void 0!==e);if(l.length){let o;o=Fe(t)?t:t&&Fe(t[a])?t[a]:r.average&&Fe(r.average[a])?r.average[a]:Ge,e[a]=o(l,a)}return e},{mode:a})}var Be={mode:"cubehelix",channels:["h","s","l","alpha"],parse:["--cubehelix"],serialize:"--cubehelix",ranges:{h:[0,360],s:[0,4.614],l:[0,1]},fromMode:{rgb:Re},toMode:{rgb:Le},interpolate:{h:{use:oe,fixup:ye},s:oe,l:oe,alpha:{use:oe,fixup:le}},difference:{h:je},average:{h:Je}},Ye=({l:e,a,b:t,alpha:r},o="lch")=>{void 0===a&&(a=0),void 0===t&&(t=0);let l=Math.sqrt(a*a+t*t),n={mode:o,l:e,c:l};return l&&(n.h=fe(180*Math.atan2(t,a)/Math.PI)),void 0!==r&&(n.alpha=r),n},Ke=({l:e,c:a,h:t,alpha:r},o="lab")=>{void 0===t&&(t=0);let l={mode:o,l:e,a:a?a*Math.cos(t/180*Math.PI):0,b:a?a*Math.sin(t/180*Math.PI):0};return void 0!==r&&(l.alpha=r),l},Ve=Math.pow(29,3)/Math.pow(3,3),Ze=Math.pow(6,3)/Math.pow(29,3),Qe=.3457/.3585,Ue=1,ea=.2958/.3585,aa=.3127/.329,ta=1,ra=.3583/.329,oa=(Math.pow(29,3),Math.pow(3,3),Math.pow(6,3),Math.pow(29,3),e=>Math.pow(e,3)>Ze?Math.pow(e,3):(116*e-16)/Ve),la=({l:e,a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=(e+16)/116,l=o-t/200,n={mode:"xyz65",x:oa(a/500+o)*aa,y:oa(o)*ta,z:oa(l)*ra};return void 0!==r&&(n.alpha=r),n},na=e=>ge(la(e)),ia=e=>e>Ze?Math.cbrt(e):(Ve*e+16)/116,ha=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=ia(e/aa),l=ia(a/ta),n={mode:"lab65",l:116*l-16,a:500*(o-l),b:200*(l-ia(t/ra))};return void 0!==r&&(n.alpha=r),n},da=e=>{let a=ha(be(e));return e.r===e.b&&e.b===e.g&&(a.a=a.b=0),a},pa=26/180*Math.PI,sa=Math.cos(pa),ua=Math.sin(pa),ba=100/Math.log(1.39),va=({l:e,c:a,h:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o={mode:"lab65",l:(Math.exp(1*e/ba)-1)/.0039},l=(Math.exp(.0435*a*1*1)-1)/.075,n=l*Math.cos(t/180*Math.PI-pa),i=l*Math.sin(t/180*Math.PI-pa);return o.a=n*sa-i/.83*ua,o.b=n*ua+i/.83*sa,void 0!==r&&(o.alpha=r),o},ca=({l:e,a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=a*sa+t*ua,l=.83*(t*sa-a*ua),n=Math.sqrt(o*o+l*l),i={mode:"dlch",l:ba/1*Math.log(1+.0039*e),c:Math.log(1+.075*n)/.0435};return i.c&&(i.h=fe((Math.atan2(l,o)+pa)/Math.PI*180)),void 0!==r&&(i.alpha=r),i},ga=e=>va(Ye(e,"dlch")),Ma=e=>Ke(ca(e),"dlab"),fa={mode:"dlab",parse:["--din99o-lab"],serialize:"--din99o-lab",toMode:{lab65:ga,rgb:e=>na(ga(e))},fromMode:{lab65:Ma,rgb:e=>Ma(da(e))},channels:["l","a","b","alpha"],ranges:{l:[0,100],a:[-40.09,45.501],b:[-40.469,44.344]},interpolate:{l:oe,a:oe,b:oe,alpha:{use:oe,fixup:le}}},ma={mode:"dlch",parse:["--din99o-lch"],serialize:"--din99o-lch",toMode:{lab65:va,dlab:e=>Ke(e,"dlab"),rgb:e=>na(va(e))},fromMode:{lab65:ca,dlab:e=>Ye(e,"dlch"),rgb:e=>ca(da(e))},channels:["l","c","h","alpha"],ranges:{l:[0,100],c:[0,51.484],h:[0,360]},interpolate:{l:oe,c:oe,h:{use:oe,fixup:ye},alpha:{use:oe,fixup:le}},difference:{h:Oe},average:{h:Je}};function ya({h:e,s:a,i:t,alpha:r}){e=fe(void 0!==e?e:0),void 0===a&&(a=0),void 0===t&&(t=0);let o,l=Math.abs(e/60%2-1);switch(Math.floor(e/60)){case 0:o={r:t*(1+a*(3/(2-l)-1)),g:t*(1+a*(3*(1-l)/(2-l)-1)),b:t*(1-a)};break;case 1:o={r:t*(1+a*(3*(1-l)/(2-l)-1)),g:t*(1+a*(3/(2-l)-1)),b:t*(1-a)};break;case 2:o={r:t*(1-a),g:t*(1+a*(3/(2-l)-1)),b:t*(1+a*(3*(1-l)/(2-l)-1))};break;case 3:o={r:t*(1-a),g:t*(1+a*(3*(1-l)/(2-l)-1)),b:t*(1+a*(3/(2-l)-1))};break;case 4:o={r:t*(1+a*(3*(1-l)/(2-l)-1)),g:t*(1-a),b:t*(1+a*(3/(2-l)-1))};break;case 5:o={r:t*(1+a*(3/(2-l)-1)),g:t*(1-a),b:t*(1+a*(3*(1-l)/(2-l)-1))};break;default:o={r:t*(1-a),g:t*(1-a),b:t*(1-a)}}return o.mode="rgb",void 0!==r&&(o.alpha=r),o}function xa({r:e,g:a,b:t,alpha:r}){void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.max(e,a,t),l=Math.min(e,a,t),n={mode:"hsi",s:e+a+t===0?0:1-3*l/(e+a+t),i:(e+a+t)/3};return o-l!==0&&(n.h=60*(o===e?(a-t)/(o-l)+6*(a<t):o===a?(t-e)/(o-l)+2:(e-a)/(o-l)+4)),void 0!==r&&(n.alpha=r),n}var za={mode:"hsi",toMode:{rgb:ya},parse:["--hsi"],serialize:"--hsi",fromMode:{rgb:xa},channels:["h","s","i","alpha"],ranges:{h:[0,360]},gamut:"rgb",interpolate:{h:{use:oe,fixup:ye},s:oe,i:oe,alpha:{use:oe,fixup:le}},difference:{h:je},average:{h:Je}};function wa({h:e,s:a,l:t,alpha:r}){e=fe(void 0!==e?e:0),void 0===a&&(a=0),void 0===t&&(t=0);let o,l=t+a*(t<.5?t:1-t),n=l-2*(l-t)*Math.abs(e/60%2-1);switch(Math.floor(e/60)){case 0:o={r:l,g:n,b:2*t-l};break;case 1:o={r:n,g:l,b:2*t-l};break;case 2:o={r:2*t-l,g:l,b:n};break;case 3:o={r:2*t-l,g:n,b:l};break;case 4:o={r:n,g:2*t-l,b:l};break;case 5:o={r:l,g:2*t-l,b:n};break;default:o={r:2*t-l,g:2*t-l,b:2*t-l}}return o.mode="rgb",void 0!==r&&(o.alpha=r),o}function ka({r:e,g:a,b:t,alpha:r}){void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.max(e,a,t),l=Math.min(e,a,t),n={mode:"hsl",s:o===l?0:(o-l)/(1-Math.abs(o+l-1)),l:.5*(o+l)};return o-l!==0&&(n.h=60*(o===e?(a-t)/(o-l)+6*(a<t):o===a?(t-e)/(o-l)+2:(e-a)/(o-l)+4)),void 0!==r&&(n.alpha=r),n}var $a=(e,a)=>{switch(a){case"deg":return+e;case"rad":return e/Math.PI*180;case"grad":return e/10*9;case"turn":return 360*e}},Ta=new RegExp(`^hsla?\\(\\s*${c}${g}${b}${g}${b}\\s*(?:,\\s*${v}\\s*)?\\)$`),Pa=e=>{let a=e.match(Ta);if(!a)return;let t={mode:"hsl"};return void 0!==a[3]?t.h=+a[3]:void 0!==a[1]&&void 0!==a[2]&&(t.h=$a(a[1],a[2])),void 0!==a[4]&&(t.s=Math.min(Math.max(0,a[4]/100),1)),void 0!==a[5]&&(t.l=Math.min(Math.max(0,a[5]/100),1)),void 0!==a[6]?t.alpha=Math.max(0,Math.min(1,a[6]/100)):void 0!==a[7]&&(t.alpha=Math.max(0,Math.min(1,+a[7]))),t};var Ia=function(e,a){if(!a||"hsl"!==a[0]&&"hsla"!==a[0])return;const t={mode:"hsl"},[,r,o,l,n]=a;if(r.type!==E){if(r.type===C)return;t.h=r.value}if(o.type!==E){if(o.type===A)return;t.s=o.value/100}if(l.type!==E){if(l.type===A)return;t.l=l.value/100}return n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t},qa={mode:"hsl",toMode:{rgb:wa},fromMode:{rgb:ka},channels:["h","s","l","alpha"],ranges:{h:[0,360]},gamut:"rgb",parse:[Ia,Pa],serialize:e=>`hsl(${void 0!==e.h?e.h:"none"} ${void 0!==e.s?100*e.s+"%":"none"} ${void 0!==e.l?100*e.l+"%":"none"}${e.alpha<1?` / ${e.alpha}`:""})`,interpolate:{h:{use:oe,fixup:ye},s:oe,l:oe,alpha:{use:oe,fixup:le}},difference:{h:je},average:{h:Je}};function Ra({h:e,s:a,v:t,alpha:r}){e=fe(void 0!==e?e:0),void 0===a&&(a=0),void 0===t&&(t=0);let o,l=Math.abs(e/60%2-1);switch(Math.floor(e/60)){case 0:o={r:t,g:t*(1-a*l),b:t*(1-a)};break;case 1:o={r:t*(1-a*l),g:t,b:t*(1-a)};break;case 2:o={r:t*(1-a),g:t,b:t*(1-a*l)};break;case 3:o={r:t*(1-a),g:t*(1-a*l),b:t};break;case 4:o={r:t*(1-a*l),g:t*(1-a),b:t};break;case 5:o={r:t,g:t*(1-a),b:t*(1-a*l)};break;default:o={r:t*(1-a),g:t*(1-a),b:t*(1-a)}}return o.mode="rgb",void 0!==r&&(o.alpha=r),o}function La({r:e,g:a,b:t,alpha:r}){void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.max(e,a,t),l=Math.min(e,a,t),n={mode:"hsv",s:0===o?0:1-l/o,v:o};return o-l!==0&&(n.h=60*(o===e?(a-t)/(o-l)+6*(a<t):o===a?(t-e)/(o-l)+2:(e-a)/(o-l)+4)),void 0!==r&&(n.alpha=r),n}var ja={mode:"hsv",toMode:{rgb:Ra},parse:["--hsv"],serialize:"--hsv",fromMode:{rgb:La},channels:["h","s","v","alpha"],ranges:{h:[0,360]},gamut:"rgb",interpolate:{h:{use:oe,fixup:ye},s:oe,v:oe,alpha:{use:oe,fixup:le}},difference:{h:je},average:{h:Je}};function Ha({h:e,w:a,b:t,alpha:r}){if(void 0===a&&(a=0),void 0===t&&(t=0),a+t>1){let e=a+t;a/=e,t/=e}return Ra({h:e,s:1===t?1:1-a/(1-t),v:1-t,alpha:r})}function Oa(e){let a=La(e);if(void 0===a)return;let t=void 0!==a.s?a.s:0,r=void 0!==a.v?a.v:0,o={mode:"hwb",w:(1-t)*r,b:1-r};return void 0!==a.h&&(o.h=a.h),void 0!==a.alpha&&(o.alpha=a.alpha),o}var Xa=function(e,a){if(!a||"hwb"!==a[0])return;const t={mode:"hwb"},[,r,o,l,n]=a;if(r.type!==E){if(r.type===C)return;t.h=r.value}if(o.type!==E){if(o.type===A)return;t.w=o.value/100}if(l.type!==E){if(l.type===A)return;t.b=l.value/100}return n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t},Ca={mode:"hwb",toMode:{rgb:Ha},fromMode:{rgb:Oa},channels:["h","w","b","alpha"],ranges:{h:[0,360]},gamut:"rgb",parse:[Xa],serialize:e=>`hwb(${void 0!==e.h?e.h:"none"} ${void 0!==e.w?100*e.w+"%":"none"} ${void 0!==e.b?100*e.b+"%":"none"}${e.alpha<1?` / ${e.alpha}`:""})`,interpolate:{h:{use:oe,fixup:ye},w:oe,b:oe,alpha:{use:oe,fixup:le}},difference:{h:He},average:{h:Je}},Sa=.1593017578125,Ea=78.84375,Aa=.8359375,Na=18.8515625,_a=18.6875;function Da(e){if(e<0)return 0;const a=Math.pow(e,1/Ea);return 1e4*Math.pow(Math.max(0,a-Aa)/(Na-_a*a),1/Sa)}function Ja(e){if(e<0)return 0;const a=Math.pow(e/1e4,Sa);return Math.pow((Aa+Na*a)/(1+_a*a),Ea)}var Ga=e=>Math.max(e/203,0),Fa=({i:e,t:a,p:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);const o=Da(e+.008609037037932761*a+.11102962500302593*t),l=Da(e-.00860903703793275*a-.11102962500302599*t),n=Da(e+.5600313357106791*a-.32062717498731885*t),i={mode:"xyz65",x:Ga(2.070152218389422*o-1.3263473389671556*l+.2066510476294051*n),y:Ga(.3647385209748074*o+.680566024947227*l-.0453045459220346*n),z:Ga(-.049747207535812*o-.0492609666966138*l+1.1880659249923042*n)};return void 0!==r&&(i.alpha=r),i},Wa=(e=0)=>Math.max(203*e,0),Ba=({x:e,y:a,z:t,alpha:r})=>{const o=Wa(e),l=Wa(a),n=Wa(t),i=Ja(.3592832590121217*o+.6976051147779502*l-.0358915932320289*n),h=Ja(-.1920808463704995*o+1.1004767970374323*l+.0753748658519118*n),d=Ja(.0070797844607477*o+.0748396662186366*l+.8433265453898765*n),p={mode:"itp",i:.5*i+.5*h,t:1.61376953125*i-3.323486328125*h+1.709716796875*d,p:4.378173828125*i-4.24560546875*h-.132568359375*d};return void 0!==r&&(p.alpha=r),p},Ya={mode:"itp",channels:["i","t","p","alpha"],parse:["--ictcp"],serialize:"--ictcp",toMode:{xyz65:Fa,rgb:e=>ge(Fa(e))},fromMode:{xyz65:Ba,rgb:e=>Ba(be(e))},ranges:{i:[0,.581],t:[-.369,.272],p:[-.164,.331]},interpolate:{i:oe,t:oe,p:oe,alpha:{use:oe,fixup:le}}},Ka=e=>{if(e<0)return 0;let a=Math.pow(e/1e4,Sa);return Math.pow((Aa+Na*a)/(1+_a*a),134.03437499999998)},Va=(e=0)=>Math.max(203*e,0),Za=({x:e,y:a,z:t,alpha:r})=>{e=Va(e),a=Va(a);let o=1.15*e-.15*(t=Va(t)),l=.66*a+.34*e,n=Ka(.41478972*o+.579999*l+.014648*t),i=Ka(-.20151*o+1.120649*l+.0531008*t),h=Ka(-.0166008*o+.2648*l+.6684799*t),d=(n+i)/2,p={mode:"jab",j:.44*d/(1-.56*d)-16295499532821565e-27,a:3.524*n-4.066708*i+.542708*h,b:.199076*n+1.096799*i-1.295875*h};return void 0!==r&&(p.alpha=r),p},Qa=16295499532821565e-27,Ua=e=>{if(e<0)return 0;let a=Math.pow(e,.007460772656268216);return 1e4*Math.pow((Aa-a)/(_a*a-Na),1/Sa)},et=e=>e/203,at=({j:e,a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=(e+Qa)/(.44+.56*(e+Qa)),l=Ua(o+.13860504*a+.058047316*t),n=Ua(o-.13860504*a-.058047316*t),i=Ua(o-.096019242*a-.8118919*t),h={mode:"xyz65",x:et(1.661373024652174*l-.914523081304348*n+.23136208173913045*i),y:et(-.3250758611844533*l+1.571847026732543*n-.21825383453227928*i),z:et(-.090982811*l-.31272829*n+1.5227666*i)};return void 0!==r&&(h.alpha=r),h},tt=e=>{let a=Za(be(e));return e.r===e.b&&e.b===e.g&&(a.a=a.b=0),a},rt=e=>ge(at(e)),ot={mode:"jab",channels:["j","a","b","alpha"],parse:["--jzazbz"],serialize:"--jzazbz",fromMode:{rgb:tt,xyz65:Za},toMode:{rgb:rt,xyz65:at},ranges:{j:[0,.222],a:[-.109,.129],b:[-.185,.134]},interpolate:{j:oe,a:oe,b:oe,alpha:{use:oe,fixup:le}}},lt=({j:e,a,b:t,alpha:r})=>{void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.sqrt(a*a+t*t),l={mode:"jch",j:e,c:o};return o&&(l.h=fe(180*Math.atan2(t,a)/Math.PI)),void 0!==r&&(l.alpha=r),l},nt=({j:e,c:a,h:t,alpha:r})=>{void 0===t&&(t=0);let o={mode:"jab",j:e,a:a?a*Math.cos(t/180*Math.PI):0,b:a?a*Math.sin(t/180*Math.PI):0};return void 0!==r&&(o.alpha=r),o},it={mode:"jch",parse:["--jzczhz"],serialize:"--jzczhz",toMode:{jab:nt,rgb:e=>rt(nt(e))},fromMode:{rgb:e=>lt(tt(e)),jab:lt},channels:["j","c","h","alpha"],ranges:{j:[0,.221],c:[0,.19],h:[0,360]},interpolate:{h:{use:oe,fixup:ye},c:oe,j:oe,alpha:{use:oe,fixup:le}},difference:{h:Oe},average:{h:Je}},ht=Math.pow(29,3)/Math.pow(3,3),dt=Math.pow(6,3)/Math.pow(29,3),pt=e=>Math.pow(e,3)>dt?Math.pow(e,3):(116*e-16)/ht,st=({l:e,a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=(e+16)/116,l=o-t/200,n={mode:"xyz50",x:pt(a/500+o)*Qe,y:pt(o)*Ue,z:pt(l)*ea};return void 0!==r&&(n.alpha=r),n},ut=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=ce({r:3.1341359569958707*e-1.6173863321612538*a-.4906619460083532*t,g:-.978795502912089*e+1.916254567259524*a+.03344273116131949*t,b:.07195537988411677*e-.2289768264158322*a+1.405386058324125*t});return void 0!==r&&(o.alpha=r),o},bt=e=>ut(st(e)),vt=e=>{let{r:a,g:t,b:r,alpha:o}=ue(e),l={mode:"xyz50",x:.436065742824811*a+.3851514688337912*t+.14307845442264197*r,y:.22249319175623702*a+.7168870538238823*t+.06061979053616537*r,z:.013923904500943465*a+.09708128566574634*t+.7140993584005155*r};return void 0!==o&&(l.alpha=o),l},ct=e=>e>dt?Math.cbrt(e):(ht*e+16)/116,gt=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=ct(e/Qe),l=ct(a/Ue),n={mode:"lab",l:116*l-16,a:500*(o-l),b:200*(l-ct(t/ea))};return void 0!==r&&(n.alpha=r),n},Mt=e=>{let a=gt(vt(e));return e.r===e.b&&e.b===e.g&&(a.a=a.b=0),a};var ft=function(e,a){if(!a||"lab"!==a[0])return;const t={mode:"lab"},[,r,o,l,n]=a;return r.type!==A&&o.type!==A&&l.type!==A?(r.type!==E&&(t.l=Math.min(Math.max(0,r.value),100)),o.type!==E&&(t.a=o.type===X?o.value:125*o.value/100),l.type!==E&&(t.b=l.type===X?l.value:125*l.value/100),n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t):void 0},mt={mode:"lab",toMode:{xyz50:st,rgb:bt},fromMode:{xyz50:gt,rgb:Mt},channels:["l","a","b","alpha"],ranges:{l:[0,100],a:[-125,125],b:[-125,125]},parse:[ft],serialize:e=>`lab(${void 0!==e.l?e.l:"none"} ${void 0!==e.a?e.a:"none"} ${void 0!==e.b?e.b:"none"}${e.alpha<1?` / ${e.alpha}`:""})`,interpolate:{l:oe,a:oe,b:oe,alpha:{use:oe,fixup:le}}},yt={...mt,mode:"lab65",parse:["--lab-d65"],serialize:"--lab-d65",toMode:{xyz65:la,rgb:na},fromMode:{xyz65:ha,rgb:da},ranges:{l:[0,100],a:[-125,125],b:[-125,125]}};var xt,zt=function(e,a){if(!a||"lch"!==a[0])return;const t={mode:"lch"},[,r,o,l,n]=a;if(r.type!==E){if(r.type===A)return;t.l=Math.min(Math.max(0,r.value),100)}if(o.type!==E&&(t.c=Math.max(0,o.type===X?o.value:150*o.value/100)),l.type!==E){if(l.type===C)return;t.h=l.value}return n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t},wt={mode:"lch",toMode:{lab:Ke,rgb:e=>bt(Ke(e))},fromMode:{rgb:e=>Ye(Mt(e)),lab:Ye},channels:["l","c","h","alpha"],ranges:{l:[0,100],c:[0,150],h:[0,360]},parse:[zt],serialize:e=>`lch(${void 0!==e.l?e.l:"none"} ${void 0!==e.c?e.c:"none"} ${void 0!==e.h?e.h:"none"}${e.alpha<1?` / ${e.alpha}`:""})`,interpolate:{h:{use:oe,fixup:ye},c:oe,l:oe,alpha:{use:oe,fixup:le}},difference:{h:Oe},average:{h:Je}},kt={...wt,mode:"lch65",parse:["--lch-d65"],serialize:"--lch-d65",toMode:{lab65:e=>Ke(e,"lab65"),rgb:e=>na(Ke(e,"lab65"))},fromMode:{rgb:e=>Ye(da(e),"lch65"),lab65:e=>Ye(e,"lch65")},ranges:{l:[0,100],c:[0,150],h:[0,360]}},$t=({l:e,u:a,v:t,alpha:r})=>{void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.sqrt(a*a+t*t),l={mode:"lchuv",l:e,c:o};return o&&(l.h=fe(180*Math.atan2(t,a)/Math.PI)),void 0!==r&&(l.alpha=r),l},Tt=({l:e,c:a,h:t,alpha:r})=>{void 0===t&&(t=0);let o={mode:"luv",l:e,u:a?a*Math.cos(t/180*Math.PI):0,v:a?a*Math.sin(t/180*Math.PI):0};return void 0!==r&&(o.alpha=r),o},Pt=(e,a,t)=>4*e/(e+15*a+3*t),It=(e,a,t)=>9*a/(e+15*a+3*t),qt=Pt(Qe,Ue,ea),Rt=It(Qe,Ue,ea),Lt=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=(l=a/Ue)<=dt?ht*l:116*Math.cbrt(l)-16;var l;let n=Pt(e,a,t),i=It(e,a,t);isFinite(n)&&isFinite(i)?(n=13*o*(n-qt),i=13*o*(i-Rt)):o=n=i=0;let h={mode:"luv",l:o,u:n,v:i};return void 0!==r&&(h.alpha=r),h},jt=4*(xt=Qe)/(xt+15*Ue+3*ea),Ht=((e,a,t)=>9*a/(e+15*a+3*t))(Qe,Ue,ea),Ot=({l:e,u:a,v:t,alpha:r})=>{if(void 0===e&&(e=0),0===e)return{mode:"xyz50",x:0,y:0,z:0};void 0===a&&(a=0),void 0===t&&(t=0);let o=a/(13*e)+jt,l=t/(13*e)+Ht,n=Ue*(e<=8?e/ht:Math.pow((e+16)/116,3)),i={mode:"xyz50",x:n*(9*o)/(4*l),y:n,z:n*(12-3*o-20*l)/(4*l)};return void 0!==r&&(i.alpha=r),i},Xt={mode:"lchuv",toMode:{luv:Tt,rgb:e=>ut(Ot(Tt(e)))},fromMode:{rgb:e=>$t(Lt(vt(e))),luv:$t},channels:["l","c","h","alpha"],parse:["--lchuv"],serialize:"--lchuv",ranges:{l:[0,100],c:[0,176.956],h:[0,360]},interpolate:{h:{use:oe,fixup:ye},c:oe,l:oe,alpha:{use:oe,fixup:le}},difference:{h:Oe},average:{h:Je}},Ct={...ne,mode:"lrgb",toMode:{rgb:ce},fromMode:{rgb:ue},parse:["srgb-linear"],serialize:"srgb-linear"},St={mode:"luv",toMode:{xyz50:Ot,rgb:e=>ut(Ot(e))},fromMode:{xyz50:Lt,rgb:e=>Lt(vt(e))},channels:["l","u","v","alpha"],parse:["--luv"],serialize:"--luv",ranges:{l:[0,100],u:[-84.936,175.042],v:[-125.882,87.243]},interpolate:{l:oe,u:oe,v:oe,alpha:{use:oe,fixup:le}}},Et=({r:e,g:a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.cbrt(.412221469470763*e+.5363325372617348*a+.0514459932675022*t),l=Math.cbrt(.2119034958178252*e+.6806995506452344*a+.1073969535369406*t),n=Math.cbrt(.0883024591900564*e+.2817188391361215*a+.6299787016738222*t),i={mode:"oklab",l:.210454268309314*o+.7936177747023054*l-.0040720430116193*n,a:1.9779985324311684*o-2.42859224204858*l+.450593709617411*n,b:.0259040424655478*o+.7827717124575296*l-.8086757549230774*n};return void 0!==r&&(i.alpha=r),i},At=e=>{let a=Et(ue(e));return e.r===e.b&&e.b===e.g&&(a.a=a.b=0),a},Nt=({l:e,a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=Math.pow(e+.3963377773761749*a+.2158037573099136*t,3),l=Math.pow(e-.1055613458156586*a-.0638541728258133*t,3),n=Math.pow(e-.0894841775298119*a-1.2914855480194092*t,3),i={mode:"lrgb",r:4.076741636075957*o-3.3077115392580616*l+.2309699031821044*n,g:-1.2684379732850317*o+2.6097573492876887*l-.3413193760026573*n,b:-.0041960761386756*o-.7034186179359362*l+1.7076146940746117*n};return void 0!==r&&(i.alpha=r),i},_t=e=>ce(Nt(e));function Dt(e){const a=.206,t=1.206/1.03;return.5*(t*e-a+Math.sqrt((t*e-a)*(t*e-a)+.12*t*e))}function Jt(e){return(e*e+.206*e)/(1.206/1.03*(e+.03))}function Gt(e,a){let t=function(e,a){let t,r,o,l,n,i,h,d;-1.88170328*e-.80936493*a>1?(t=1.19086277,r=1.76576728,o=.59662641,l=.75515197,n=.56771245,i=4.0767416621,h=-3.3077115913,d=.2309699292):1.81444104*e-1.19445276*a>1?(t=.73956515,r=-.45954404,o=.08285427,l=.1254107,n=.14503204,i=-1.2684380046,h=2.6097574011,d=-.3413193965):(t=1.35733652,r=-.00915799,o=-1.1513021,l=-.50559606,n=.00692167,i=-.0041960863,h=-.7034186147,d=1.707614701);let p=t+r*e+o*a+l*e*e+n*e*a,s=.3963377774*e+.2158037573*a,u=-.1055613458*e-.0638541728*a,b=-.0894841775*e-1.291485548*a;{let e=1+p*s,a=1+p*u,t=1+p*b,r=i*(e*e*e)+h*(a*a*a)+d*(t*t*t),o=i*(3*s*e*e)+h*(3*u*a*a)+d*(3*b*t*t);p-=r*o/(o*o-.5*r*(i*(6*s*s*e)+h*(6*u*u*a)+d*(6*b*b*t)))}return p}(e,a),r=Nt({l:1,a:t*e,b:t*a}),o=Math.cbrt(1/Math.max(r.r,r.g,r.b));return[o,o*t]}function Ft(e,a,t=null){t||(t=Gt(e,a));let r=t[0],o=t[1];return[o/r,o/(1-r)]}function Wt(e,a,t){let r=Gt(a,t),o=function(e,a,t,r,o,l=null){let n;if(l||(l=Gt(e,a)),(t-o)*l[1]-(l[0]-o)*r<=0)n=l[1]*o/(r*l[0]+l[1]*(o-t));else{n=l[1]*(o-1)/(r*(l[0]-1)+l[1]*(o-t));{let l=t-o,i=.3963377774*e+.2158037573*a,h=-.1055613458*e-.0638541728*a,d=-.0894841775*e-1.291485548*a,p=l+r*i,s=l+r*h,u=l+r*d;{let e=o*(1-n)+n*t,a=n*r,l=e+a*i,b=e+a*h,v=e+a*d,c=l*l*l,g=b*b*b,M=v*v*v,f=3*p*l*l,m=3*s*b*b,y=3*u*v*v,x=6*p*p*l,z=6*s*s*b,w=6*u*u*v,k=4.0767416621*c-3.3077115913*g+.2309699292*M-1,$=4.0767416621*f-3.3077115913*m+.2309699292*y,T=$/($*$-.5*k*(4.0767416621*x-3.3077115913*z+.2309699292*w)),P=-k*T,I=-1.2684380046*c+2.6097574011*g-.3413193965*M-1,q=-1.2684380046*f+2.6097574011*m-.3413193965*y,R=q/(q*q-.5*I*(-1.2684380046*x+2.6097574011*z-.3413193965*w)),L=-I*R,j=-.0041960863*c-.7034186147*g+1.707614701*M-1,H=-.0041960863*f-.7034186147*m+1.707614701*y,O=H/(H*H-.5*j*(-.0041960863*x-.7034186147*z+1.707614701*w)),X=-j*O;P=T>=0?P:1e6,L=R>=0?L:1e6,X=O>=0?X:1e6,n+=Math.min(P,Math.min(L,X))}}}return n}(a,t,e,1,e,r),l=Ft(a,t,r),n=e*(.11516993+1/(7.4477897+4.1590124*t+a*(1.75198401*t-2.19557347+a*(-2.13704948-10.02301043*t+a*(5.38770819*t-4.24894561+4.69891013*a))))),i=(1-e)*(.11239642+1/(1.6132032-.68124379*t+a*(.40370612+.90148123*t+a*(.6122399*t-.27087943+a*(.00299215-.45399568*t-.14661872*a))))),h=.9*(o/Math.min(e*l[0],(1-e)*l[1]))*Math.sqrt(Math.sqrt(1/(1/(n*n*n*n)+1/(i*i*i*i))));return n=.4*e,i=.8*(1-e),[Math.sqrt(1/(1/(n*n)+1/(i*i))),h,o]}function Bt(e){const a=void 0!==e.l?e.l:0,t=void 0!==e.a?e.a:0,r=void 0!==e.b?e.b:0,o={mode:"okhsl",l:Dt(a)};void 0!==e.alpha&&(o.alpha=e.alpha);let l=Math.sqrt(t*t+r*r);if(!l)return o.s=0,o;let n,[i,h,d]=Wt(a,t/l,r/l);if(l<h){let e=0,a=.8*i;n=.8*((l-e)/(a+(1-a/h)*(l-e)))}else{let e=.2*h*h*1.25*1.25/i;n=.8+.2*((l-h)/(e+(1-e/(d-h))*(l-h)))}return n&&(o.s=n,o.h=fe(180*Math.atan2(r,t)/Math.PI)),o}function Yt(e){let a=void 0!==e.h?e.h:0,t=void 0!==e.s?e.s:0,r=void 0!==e.l?e.l:0;const o={mode:"oklab",l:Jt(r)};if(void 0!==e.alpha&&(o.alpha=e.alpha),!t||1===r)return o.a=o.b=0,o;let l,n,i,h,d=Math.cos(a/180*Math.PI),p=Math.sin(a/180*Math.PI),[s,u,b]=Wt(o.l,d,p);t<.8?(l=1.25*t,n=0,i=.8*s,h=1-i/u):(l=5*(t-.8),n=u,i=.2*u*u*1.25*1.25/s,h=1-i/(b-u));let v=n+l*i/(1-h*l);return o.a=v*d,o.b=v*p,o}var Kt={...qa,mode:"okhsl",channels:["h","s","l","alpha"],parse:["--okhsl"],serialize:"--okhsl",fromMode:{oklab:Bt,rgb:e=>Bt(At(e))},toMode:{oklab:Yt,rgb:e=>_t(Yt(e))}};function Vt(e){let a=void 0!==e.l?e.l:0,t=void 0!==e.a?e.a:0,r=void 0!==e.b?e.b:0,o=Math.sqrt(t*t+r*r),l=o?t/o:1,n=o?r/o:1,[i,h]=Ft(l,n),d=1-.5/i,p=h/(o+a*h),s=p*a,u=p*o,b=Jt(s),v=u*b/s,c=Nt({l:b,a:l*v,b:n*v}),g=Math.cbrt(1/Math.max(c.r,c.g,c.b,0));a/=g,o=o/g*Dt(a)/a,a=Dt(a);const M={mode:"okhsv",s:o?(.5+h)*u/(.5*h+h*d*u):0,v:a?a/s:0};return M.s&&(M.h=fe(180*Math.atan2(r,t)/Math.PI)),void 0!==e.alpha&&(M.alpha=e.alpha),M}function Zt(e){const a={mode:"oklab"};void 0!==e.alpha&&(a.alpha=e.alpha);const t=void 0!==e.h?e.h:0,r=void 0!==e.s?e.s:0,o=void 0!==e.v?e.v:0,l=Math.cos(t/180*Math.PI),n=Math.sin(t/180*Math.PI),[i,h]=Ft(l,n),d=.5,p=1-d/i,s=1-r*d/(d+h-h*p*r),u=r*h*d/(d+h-h*p*r),b=Jt(s),v=u*b/s,c=Nt({l:b,a:l*v,b:n*v}),g=Math.cbrt(1/Math.max(c.r,c.g,c.b,0)),M=Jt(o*s),f=u*M/s;return a.l=M*g,a.a=f*l*g,a.b=f*n*g,a}var Qt={...ja,mode:"okhsv",channels:["h","s","v","alpha"],parse:["--okhsv"],serialize:"--okhsv",fromMode:{oklab:Vt,rgb:e=>Vt(At(e))},toMode:{oklab:Zt,rgb:e=>_t(Zt(e))}};var Ut=function(e,a){if(!a||"oklab"!==a[0])return;const t={mode:"oklab"},[,r,o,l,n]=a;return r.type!==A&&o.type!==A&&l.type!==A?(r.type!==E&&(t.l=Math.min(Math.max(0,r.type===X?r.value:r.value/100),1)),o.type!==E&&(t.a=o.type===X?o.value:.4*o.value/100),l.type!==E&&(t.b=l.type===X?l.value:.4*l.value/100),n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t):void 0},er={...mt,mode:"oklab",toMode:{lrgb:Nt,rgb:_t},fromMode:{lrgb:Et,rgb:At},ranges:{l:[0,1],a:[-.4,.4],b:[-.4,.4]},parse:[Ut],serialize:e=>`oklab(${void 0!==e.l?e.l:"none"} ${void 0!==e.a?e.a:"none"} ${void 0!==e.b?e.b:"none"}${e.alpha<1?` / ${e.alpha}`:""})`};var ar=function(e,a){if(!a||"oklch"!==a[0])return;const t={mode:"oklch"},[,r,o,l,n]=a;if(r.type!==E){if(r.type===A)return;t.l=Math.min(Math.max(0,r.type===X?r.value:r.value/100),1)}if(o.type!==E&&(t.c=Math.max(0,o.type===X?o.value:.4*o.value/100)),l.type!==E){if(l.type===C)return;t.h=l.value}return n.type!==E&&(t.alpha=Math.min(1,Math.max(0,n.type===X?n.value:n.value/100))),t},tr={...wt,mode:"oklch",toMode:{oklab:e=>Ke(e,"oklab"),rgb:e=>_t(Ke(e,"oklab"))},fromMode:{rgb:e=>Ye(At(e),"oklch"),oklab:e=>Ye(e,"oklch")},parse:[ar],serialize:e=>`oklch(${void 0!==e.l?e.l:"none"} ${void 0!==e.c?e.c:"none"} ${void 0!==e.h?e.h:"none"}${e.alpha<1?` / ${e.alpha}`:""})`,ranges:{l:[0,1],c:[0,.4],h:[0,360]}},rr=e=>{let{r:a,g:t,b:r,alpha:o}=ue(e),l={mode:"xyz65",x:.486570948648216*a+.265667693169093*t+.1982172852343625*r,y:.2289745640697487*a+.6917385218365062*t+.079286914093745*r,z:0*a+.0451133818589026*t+1.043944368900976*r};return void 0!==o&&(l.alpha=o),l},or=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o=ce({r:2.4934969119414263*e-.9313836179191242*a-.402710784450717*t,g:-.8294889695615749*e+1.7626640603183465*a+.0236246858419436*t,b:.0358458302437845*e-.0761723892680418*a+.9568845240076871*t},"p3");return void 0!==r&&(o.alpha=r),o},lr={...ne,mode:"p3",parse:["display-p3"],serialize:"display-p3",fromMode:{rgb:e=>or(be(e)),xyz65:or},toMode:{rgb:e=>ge(rr(e)),xyz65:rr}},nr=e=>{let a=Math.abs(e);return a>=1/512?Math.sign(e)*Math.pow(a,1/1.8):16*e},ir=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o={mode:"prophoto",r:nr(1.3457868816471585*e-.2555720873797946*a-.0511018649755453*t),g:nr(-.5446307051249019*e+1.5082477428451466*a+.0205274474364214*t),b:nr(0*e+0*a+1.2119675456389452*t)};return void 0!==r&&(o.alpha=r),o},hr=(e=0)=>{let a=Math.abs(e);return a>=16/512?Math.sign(e)*Math.pow(a,1.8):e/16},dr=e=>{let a=hr(e.r),t=hr(e.g),r=hr(e.b),o={mode:"xyz50",x:.7977666449006423*a+.1351812974005331*t+.0313477341283922*r,y:.2880748288194013*a+.7118352342418731*t+899369387256e-16*r,z:0*a+0*t+.8251046025104602*r};return void 0!==e.alpha&&(o.alpha=e.alpha),o},pr={...ne,mode:"prophoto",parse:["prophoto-rgb"],serialize:"prophoto-rgb",fromMode:{xyz50:ir,rgb:e=>ir(vt(e))},toMode:{xyz50:dr,rgb:e=>ut(dr(e))}},sr=1.09929682680944,ur=e=>{const a=Math.abs(e);return a>.018053968510807?(Math.sign(e)||1)*(sr*Math.pow(a,.45)-(sr-1)):4.5*e},br=({x:e,y:a,z:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);let o={mode:"rec2020",r:ur(1.7166511879712683*e-.3556707837763925*a-.2533662813736599*t),g:ur(-.6666843518324893*e+1.6164812366349395*a+.0157685458139111*t),b:ur(.0176398574453108*e-.0427706132578085*a+.9421031212354739*t)};return void 0!==r&&(o.alpha=r),o},vr=1.09929682680944,cr=(e=0)=>{let a=Math.abs(e);return a<.08124285829863151?e/4.5:(Math.sign(e)||1)*Math.pow((a+vr-1)/vr,1/.45)},gr=e=>{let a=cr(e.r),t=cr(e.g),r=cr(e.b),o={mode:"xyz65",x:.6369580483012911*a+.1446169035862083*t+.1688809751641721*r,y:.262700212011267*a+.6779980715188708*t+.059301716469862*r,z:0*a+.0280726930490874*t+1.0609850577107909*r};return void 0!==e.alpha&&(o.alpha=e.alpha),o},Mr={...ne,mode:"rec2020",fromMode:{xyz65:br,rgb:e=>br(be(e))},toMode:{xyz65:gr,rgb:e=>ge(gr(e))},parse:["rec2020"],serialize:"rec2020"},fr=.0037930732552754493,mr=Math.cbrt(fr),yr=e=>Math.cbrt(e)-mr,xr=e=>{const{r:a,g:t,b:r,alpha:o}=ue(e),l=yr(.3*a+.622*t+.078*r+fr),n=yr(.23*a+.692*t+.078*r+fr),i={mode:"xyb",x:(l-n)/2,y:(l+n)/2,b:yr(.2434226892454782*a+.2047674442449682*t+.5518098665095535*r+fr)-(l+n)/2};return void 0!==o&&(i.alpha=o),i},zr=e=>Math.pow(e+mr,3),wr=({x:e,y:a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);const o=zr(e+a)-fr,l=zr(a-e)-fr,n=zr(t+a)-fr,i=ce({r:11.031566904639861*o-9.866943908131562*l-.16462299650829934*n,g:-3.2541473810744237*o+4.418770377582723*l-.16462299650829934*n,b:-3.6588512867136815*o+2.7129230459360922*l+1.9459282407775895*n});return void 0!==r&&(i.alpha=r),i},kr={mode:"xyb",channels:["x","y","b","alpha"],parse:["--xyb"],serialize:"--xyb",toMode:{rgb:wr},fromMode:{rgb:xr},ranges:{x:[-.0154,.0281],y:[0,.8453],b:[-.2778,.388]},interpolate:{x:oe,y:oe,b:oe,alpha:{use:oe,fixup:le}}},$r={mode:"xyz50",parse:["xyz-d50"],serialize:"xyz-d50",toMode:{rgb:ut,lab:gt},fromMode:{rgb:vt,lab:st},channels:["x","y","z","alpha"],ranges:{x:[0,.964],y:[0,.999],z:[0,.825]},interpolate:{x:oe,y:oe,z:oe,alpha:{use:oe,fixup:le}}},Tr=e=>{let{x:a,y:t,z:r,alpha:o}=e;void 0===a&&(a=0),void 0===t&&(t=0),void 0===r&&(r=0);let l={mode:"xyz50",x:1.0479298208405488*a+.0229467933410191*t-.0501922295431356*r,y:.0296278156881593*a+.990434484573249*t-.0170738250293851*r,z:-.0092430581525912*a+.0150551448965779*t+.7518742899580008*r};return void 0!==o&&(l.alpha=o),l},Pr=e=>{let{x:a,y:t,z:r,alpha:o}=e;void 0===a&&(a=0),void 0===t&&(t=0),void 0===r&&(r=0);let l={mode:"xyz65",x:.9554734527042182*a-.0230985368742614*t+.0632593086610217*r,y:-.0283697069632081*a+1.0099954580058226*t+.021041398966943*r,z:.0123140016883199*a-.0205076964334779*t+1.3303659366080753*r};return void 0!==o&&(l.alpha=o),l},Ir={mode:"xyz65",toMode:{rgb:ge,xyz50:Tr},fromMode:{rgb:be,xyz50:Pr},ranges:{x:[0,.95],y:[0,1],z:[0,1.088]},channels:["x","y","z","alpha"],parse:["xyz","xyz-d65"],serialize:"xyz-d65",interpolate:{x:oe,y:oe,z:oe,alpha:{use:oe,fixup:le}}},qr=({r:e,g:a,b:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);const o={mode:"yiq",y:.29889531*e+.58662247*a+.11448223*t,i:.59597799*e-.2741761*a-.32180189*t,q:.21147017*e-.52261711*a+.31114694*t};return void 0!==r&&(o.alpha=r),o},Rr=({y:e,i:a,q:t,alpha:r})=>{void 0===e&&(e=0),void 0===a&&(a=0),void 0===t&&(t=0);const o={mode:"rgb",r:e+.95608445*a+.6208885*t,g:e-.27137664*a-.6486059*t,b:e-1.10561724*a+1.70250126*t};return void 0!==r&&(o.alpha=r),o},Lr={mode:"yiq",toMode:{rgb:Rr},fromMode:{rgb:qr},channels:["y","i","q","alpha"],parse:["--yiq"],serialize:"--yiq",ranges:{i:[-.595,.595],q:[-.522,.522]},interpolate:{y:oe,i:oe,q:oe,alpha:{use:oe,fixup:le}}},jr=(e=4)=>a=>"number"==typeof a?((e,a)=>Math.round(e*(a=Math.pow(10,a)))/a)(a,e):a,Hr=jr(2),Or=e=>Math.max(0,Math.min(1,e||0)),Xr=e=>Math.round(255*Or(e)),Cr=x("rgb"),Sr=x("hsl"),Er=e=>{if(void 0===e)return;return"#"+(1<<24|Xr(e.r)<<16|Xr(e.g)<<8|Xr(e.b)).toString(16).slice(1)},Ar=e=>{if(void 0===e)return;let a=Xr(void 0!==e.alpha?e.alpha:1);return Er(e)+(256|a).toString(16).slice(1)},Nr=e=>{if(void 0===e)return;let a=Xr(e.r),t=Xr(e.g),r=Xr(e.b);return void 0===e.alpha||1===e.alpha?`rgb(${a}, ${t}, ${r})`:`rgba(${a}, ${t}, ${r}, ${Hr(Or(e.alpha))})`},_r=e=>{if(void 0===e)return;const a=Hr(e.h||0),t=Hr(100*Or(e.s))+"%",r=Hr(100*Or(e.l))+"%";return void 0===e.alpha||1===e.alpha?`hsl(${a}, ${t}, ${r})`:`hsla(${a}, ${t}, ${r}, ${Hr(Or(e.alpha))})`},Dr=e=>{const a=y(e);if(!a)return;const t=I(a.mode);if(!t.serialize||"string"==typeof t.serialize){let e=`color(${t.serialize||`--${a.mode}`} `;return t.channels.forEach((t,r)=>{"alpha"!==t&&(e+=(r?" ":"")+(void 0!==a[t]?a[t]:"none"))}),void 0!==a.alpha&&a.alpha<1&&(e+=` / ${a.alpha}`),e+")"}return"function"==typeof t.serialize?t.serialize(a):void 0},Jr=e=>Er(Cr(e)),Gr=e=>Ar(Cr(e)),Fr=e=>Nr(Cr(e)),Wr=e=>_r(Sr(e)),Br={normal:(e,a)=>a,multiply:(e,a)=>e*a,screen:(e,a)=>e+a-e*a,"hard-light":(e,a)=>a<.5?2*e*a:2*a*(1-e)-1,overlay:(e,a)=>e<.5?2*a*e:2*e*(1-a)-1,darken:(e,a)=>Math.min(e,a),lighten:(e,a)=>Math.max(e,a),"color-dodge":(e,a)=>0===e?0:1===a?1:Math.min(1,e/(1-a)),"color-burn":(e,a)=>1===e?1:0===a?0:1-Math.min(1,(1-e)/a),"soft-light":(e,a)=>a<.5?e-(1-2*a)*e*(1-e):e+(2*a-1)*((e<.25?((16*e-12)*e+4)*e:Math.sqrt(e))-e),difference:(e,a)=>Math.abs(e-a),exclusion:(e,a)=>e+a-2*e*a},Yr=(e,a="normal",t="rgb")=>{let r="function"==typeof a?a:Br[a],o=x(t),l=I(t).channels;return e.map(e=>{let a=o(e);return void 0===a.alpha&&(a.alpha=1),a}).reduce((e,a)=>{if(void 0===e)return a;let o=a.alpha+e.alpha*(1-a.alpha);return l.reduce((t,l)=>("alpha"!==l&&(0===o?t[l]=0:(t[l]=a.alpha*(1-e.alpha)*a[l]+a.alpha*e.alpha*r(e[l],a[l])+(1-a.alpha)*e.alpha*e[l],t[l]=Math.max(0,Math.min(1,t[l]/o)))),t),{mode:t,alpha:o})})},Kr=(e="rgb",a={})=>{let t=I(e),r=(e=>Object.keys(e).reduce((a,t)=>{let r=e[t];return a[t]=Array.isArray(r)?r:[r,r],a},{}))(a);return t.channels.reduce((e,a)=>((r.alpha||"alpha"!==a)&&(e[a]=(([e,a])=>e+Math.random()*(a-e))(r[a]||t.ranges[a])),e),{mode:e})},Vr=(e,a="rgb",t=!1)=>{let r=a?I(a).channels:null,o=a?x(a):y;return l=>{let n=o(l);if(!n)return;let i=(r||I(n.mode).channels).reduce((t,r)=>{let o=e(n[r],r,n,a);return void 0===o||isNaN(o)||(t[r]=o),t},{mode:n.mode});if(!t)return i;let h=y(l);return h&&h.mode!==i.mode?x(h.mode)(i):i}},Zr=(e,a,t)=>"alpha"!==a?(e||0)*(void 0!==t.alpha?t.alpha:1):e,Qr=(e,a,t)=>"alpha"!==a&&0!==t.alpha?(e||0)/(void 0!==t.alpha?t.alpha:1):e,Ur=(e=1,a=0)=>(t,r)=>"alpha"!==r?t*e+a:t,eo=(e=1,a=1,t=0)=>(r,o)=>"alpha"!==o?e*Math.pow(r,a)+t:r,ao=e=>{void 0===e[0]&&(e[0]=0),void 0===e[e.length-1]&&(e[e.length-1]=1);let a,t,r,o,l=1;for(;l<e.length;){if(void 0===e[l]){for(t=l,r=e[l-1],a=l;void 0===e[a];)a++;for(o=(e[a]-r)/(a-l+1);l<a;)e[l]=r+(l+1-t)*o,l++}else e[l]<e[l-1]&&(e[l]=e[l-1]);l++}return e},to=(e=.5)=>a=>e<=0?1:e>=1?0:Math.pow(a,Math.log(.5)/Math.log(e)),ro=e=>"function"==typeof e,oo=e=>e&&"object"==typeof e,lo=e=>"number"==typeof e,no=(e,a="rgb",t,r)=>{let o=I(a),l=x(a),n=[],i=[],h={};e.forEach(e=>{Array.isArray(e)?(n.push(l(e[0])),i.push(e[1])):lo(e)||ro(e)?h[i.length]=e:(n.push(l(e)),i.push(void 0))}),ao(i);let d=o.channels.reduce((e,a)=>{let r;return r=oo(t)&&oo(t[a])&&t[a].fixup?t[a].fixup:oo(o.interpolate[a])&&o.interpolate[a].fixup?o.interpolate[a].fixup:e=>e,e[a]=r(n.map(e=>e[a])),e},{});if(r){let e=n.map((e,t)=>o.channels.reduce((e,a)=>(e[a]=d[a][t],e),{mode:a}));d=o.channels.reduce((t,o)=>(t[o]=e.map(e=>{let t=r(e[o],o,e,a);return isNaN(t)?void 0:t}),t),{})}let p=o.channels.reduce((e,a)=>{let r;return ro(t)?r=t:oo(t)&&ro(t[a])?r=t[a]:oo(t)&&oo(t[a])&&t[a].use?r=t[a].use:ro(o.interpolate[a])?r=o.interpolate[a]:oo(o.interpolate[a])&&(r=o.interpolate[a].use),e[a]=r(d[a]),e},{}),s=n.length-1;return e=>{if((e=Math.min(Math.max(0,e),1))<=i[0])return n[0];if(e>i[s])return n[s];let t=0;for(;i[t]<e;)t++;let r=i[t-1],l=i[t]-r,d=(e-r)/l,u=h[t]||h[0];void 0!==u&&(lo(u)&&(u=to((u-r)/l)),d=u(d));let b=(t-1+d)/s;return o.channels.reduce((e,a)=>{let t=p[a](b);return void 0!==t&&(e[a]=t),e},{mode:a})}},io=(e,a="rgb",t)=>no(e,a,t),ho=(e,a)=>(t,r="rgb",o)=>{let l=a?Vr(a,r):void 0,n=no(t,r,o,e);return l?e=>l(n(e)):n},po=ho(Zr,Qr),so=(e,a)=>(e+a)%a,uo=(e,a,t,r,o)=>{let l=o*o,n=l*o;return((1-3*o+3*l-n)*e+(4-6*l+3*n)*a+(1+3*o+3*l-3*n)*t+n*r)/6},bo=e=>a=>{let t=e.length-1,r=a>=1?t-1:Math.max(0,Math.floor(a*t));return uo(r>0?e[r-1]:2*e[r]-e[r+1],e[r],e[r+1],r<t-1?e[r+2]:2*e[r+1]-e[r],(a-r/t)*t)},vo=e=>a=>{const t=e.length-1,r=Math.floor(a*t);return uo(e[so(r-1,e.length)],e[so(r,e.length)],e[so(r+1,e.length)],e[so(r+2,e.length)],(a-r/t)*t)},co=e=>{let a,t=e.length-1,r=new Array(t),o=new Array(t),l=new Array(t);for(r[1]=1/4,o[1]=(6*e[1]-e[0])/4,a=2;a<t;++a)r[a]=1/(4-r[a-1]),o[a]=(6*e[a]-(a==t-1?e[t]:0)-o[a-1])*r[a];for(l[0]=e[0],l[t]=e[t],t-1>0&&(l[t-1]=o[t-1]),a=t-2;a>0;--a)l[a]=o[a]-r[a]*l[a+1];return l},go=e=>bo(co(e)),Mo=e=>vo(co(e)),fo=Math.sign,mo=Math.min,yo=Math.abs,xo=e=>{let a=e.length-1,t=[],r=[],o=[];for(let l=0;l<a;l++)t.push((e[l+1]-e[l])*a),r.push(l>0?.5*(e[l+1]-e[l-1])*a:void 0),o.push(l>0?(fo(t[l-1])+fo(t[l]))*mo(yo(t[l-1]),yo(t[l]),.5*yo(r[l])):void 0);return[t,r,o]},zo=(e,a,t)=>{let r=e.length-1,o=r*r;return l=>{let n;n=l>=1?r-1:Math.max(0,Math.floor(l*r));let i=l-n/r,h=i*i,d=h*i;return(a[n]+a[n+1]-2*t[n])*o*d+(3*t[n]-2*a[n]-a[n+1])*r*h+a[n]*i+e[n]}},wo=e=>{if(e.length<3)return oe(e);let a=e.length-1,[t,,r]=xo(e);return r[0]=t[0],r[a]=t[a-1],zo(e,r,t)},ko=e=>{if(e.length<3)return oe(e);let a=e.length-1,[t,r,o]=xo(e);return r[0]=(2*e[1]-1.5*e[0]-.5*e[2])*a,r[a]=(1.5*e[a]-2*e[a-1]+.5*e[a-2])*a,o[0]=r[0]*t[0]<=0?0:yo(r[0])>2*yo(t[0])?2*t[0]:r[0],o[a]=r[a]*t[a-1]<=0?0:yo(r[a])>2*yo(t[a-1])?2*t[a-1]:r[a],zo(e,o,t)},$o=e=>{let a=e.length-1,[t,r,o]=xo(e);r[0]=.5*(e[1]-e[a])*a,r[a]=.5*(e[0]-e[a-1])*a;let l=(e[0]-e[a])*a,n=l;return o[0]=(fo(l)+fo(t[0]))*mo(yo(l),yo(t[0]),.5*yo(r[0])),o[a]=(fo(t[a-1])+fo(n))*mo(yo(t[a-1]),yo(n),.5*yo(r[a])),zo(e,o,t)},To=(e=1)=>1===e?e=>e:a=>Math.pow(a,e),Po=(e=2,a=1)=>{let t=To(a);if(e<2)return e<1?[]:[t(.5)];let r=[];for(let a=0;a<e;a++)r.push(t(a/(e-1)));return r},Io=x("rgb"),qo=e=>{const a={mode:e.mode,r:Math.max(0,Math.min(void 0!==e.r?e.r:0,1)),g:Math.max(0,Math.min(void 0!==e.g?e.g:0,1)),b:Math.max(0,Math.min(void 0!==e.b?e.b:0,1))};return void 0!==e.alpha&&(a.alpha=e.alpha),a},Ro=e=>qo(Io(e)),Lo=e=>void 0!==e&&(void 0===e.r||e.r>=0&&e.r<=1)&&(void 0===e.g||e.g>=0&&e.g<=1)&&(void 0===e.b||e.b>=0&&e.b<=1);function jo(e){return Lo(Io(e))}function Ho(e="rgb"){const{gamut:a}=I(e);if(!a)return e=>!0;const t=x("string"==typeof a?a:e);return e=>Lo(t(e))}function Oo(e){if(void 0===(e=y(e))||jo(e))return e;return x(e.mode)(Ro(e))}function Xo(e="rgb"){const{gamut:a}=I(e);if(!a)return e=>y(e);const t="string"==typeof a?a:e,r=x(t),o=Ho(t);return e=>{const a=y(e);if(!a)return;const t=r(a);if(o(t))return a;const l=qo(t);return a.mode===l.mode?l:x(a.mode)(l)}}function Co(e,a="lch",t="rgb"){e=y(e);let r="rgb"===t?jo:Ho(t),o="rgb"===t?Ro:Xo(t);if(void 0===e||r(e))return e;let l=x(e.mode);e=x(a)(e);let n={...e,c:0};if(!r(n))return l(o(n));let i=0,h=void 0!==e.c?e.c:0,d=I(a).ranges.c,p=(d[1]-d[0])/Math.pow(2,13),s=n.c;for(;h-i>p;)n.c=i+.5*(h-i),r(n)?(s=n.c,i=n.c):h=n.c;return l(r(n)?n:{...n,c:s})}function So(e="rgb",a="oklch",t=Xe("oklch"),r=.02){const o=x(e),l=I(e);if(!l.gamut)return e=>o(e);const n=Ho(e),i=Xo(e),h=x(a),{ranges:d}=I(a);if(!d.l||!d.c)throw new Error("LCH-like space expected");return a=>{if(void 0===(a=y(a)))return;const p={...h(a)};if(void 0===p.l&&(p.l=0),void 0===p.c&&(p.c=0),p.l>=d.l[1]){const t={...l.white,mode:e};return void 0!==a.alpha&&(t.alpha=a.alpha),t}if(p.l<=d.l[0]){const t={...l.black,mode:e};return void 0!==a.alpha&&(t.alpha=a.alpha),t}if(n(p))return o(p);let s=0,u=p.c,b=(d.c[1]-d.c[0])/4e3,v=i(p);for(;u-s>b;)p.c=.5*(s+u),v=i(p),n(p)||t&&r>0&&t(p,v)<=r?s=p.c:u=p.c;return o(n(p)?p:v)}}var Eo=(e,a=Xe(),t=e=>e)=>{let r=e.map((e,a)=>({color:t(e),i:a}));return(t,o=1,l=1/0)=>(isFinite(o)&&(o=Math.max(1,Math.min(o,r.length-1))),r.forEach(e=>{e.d=a(t,e.color)}),r.sort((e,a)=>e.d-a.d).slice(0,o).filter(e=>e.d<l).map(a=>e[a.i]))},Ao=e=>Math.max(e,0),No=e=>Math.max(Math.min(e,1),0),_o=(e,a,t=!1)=>{let r=x(a),o=I(a).channels;return l=>{let n=r(l);if(!n)return;let i,h={mode:a},d=o.length;for(let a=0;a<e.length;a++)i=o[Math.floor(a/d)],void 0!==n[i]&&(h[i]=(h[i]||0)+e[a]*(n[o[a%d]]||0));if(!t)return h;let p=y(l);return p&&h.mode!==p.mode?x(p.mode)(h):h}},Do=(e=1,a="rgb")=>{let t=Ao(e);return Vr(Ur(t),a,!0)},Jo=(e=1,a="rgb")=>{let t=Ao(e);return Vr(Ur(t,(1-t)/2),a,!0)},Go=(e=1,a="rgb")=>_o((e=>{let a=1-No(e);return[.393+.607*a,.769-.769*a,.189-.189*a,0,.349-.349*a,.686+.314*a,.168-.168*a,0,.272-.272*a,.534-.534*a,.131+.869*a,0,0,0,0,1]})(e),a,!0),Fo=(e=1,a="rgb")=>_o((e=>{let a=Ao(e);return[.213+.787*a,.715-.715*a,.072-.072*a,0,.213-.213*a,.715+.285*a,.072-.072*a,0,.213-.213*a,.715-.715*a,.072+.928*a,0,0,0,0,1]})(e),a,!0),Wo=(e=1,a="rgb")=>_o((e=>{let a=1-No(e);return[.2126+.7874*a,.7152-.7152*a,.0722-.0722*a,0,.2126-.2126*a,.7152+.2848*a,.0722-.0722*a,0,.2126-.2126*a,.7152-.7152*a,.0722+.9278*a,0,0,0,0,1]})(e),a,!0),Bo=(e=1,a="rgb")=>{let t=No(e);return Vr((e,a)=>"alpha"===a?e:((e,a,t)=>void 0===e||void 0===a?void 0:e+t*(a-e))(t,1-t,e),a,!0)},Yo=(e=0,a="rgb")=>_o((e=>{let a=Math.PI*e/180,t=Math.cos(a),r=Math.sin(a);return[.213+.787*t-.213*r,.715-.715*t-.715*r,.072-.072*t+.928*r,0,.213-.213*t+.143*r,.715+.285*t+.14*r,.072-.072*t-.283*r,0,.213-.213*t-.787*r,.715-.715*t+.715*r,.072+.928*t+.072*r,0,0,0,0,1]})(e),a,!0),Ko=x("rgb"),Vo=[[1,0,-0,0,1,0,-0,-0,1],[.856167,.182038,-.038205,.029342,.955115,.015544,-.00288,-.001563,1.004443],[.734766,.334872,-.069637,.05184,.919198,.028963,-.004928,-.004209,1.009137],[.630323,.465641,-.095964,.069181,.890046,.040773,-.006308,-.007724,1.014032],[.539009,.579343,-.118352,.082546,.866121,.051332,-.007136,-.011959,1.019095],[.458064,.679578,-.137642,.092785,.846313,.060902,-.007494,-.016807,1.024301],[.38545,.769005,-.154455,.100526,.829802,.069673,-.007442,-.02219,1.029632],[.319627,.849633,-.169261,.106241,.815969,.07779,-.007025,-.028051,1.035076],[.259411,.923008,-.18242,.110296,.80434,.085364,-.006276,-.034346,1.040622],[.203876,.990338,-.194214,.112975,.794542,.092483,-.005222,-.041043,1.046265],[.152286,1.052583,-.204868,.114503,.786281,.099216,-.003882,-.048116,1.051998]],Zo=[[1,0,-0,0,1,0,-0,-0,1],[.866435,.177704,-.044139,.049567,.939063,.01137,-.003453,.007233,.99622],[.760729,.319078,-.079807,.090568,.889315,.020117,-.006027,.013325,.992702],[.675425,.43385,-.109275,.125303,.847755,.026942,-.00795,.018572,.989378],[.605511,.52856,-.134071,.155318,.812366,.032316,-.009376,.023176,.9862],[.547494,.607765,-.155259,.181692,.781742,.036566,-.01041,.027275,.983136],[.498864,.674741,-.173604,.205199,.754872,.039929,-.011131,.030969,.980162],[.457771,.731899,-.18967,.226409,.731012,.042579,-.011595,.034333,.977261],[.422823,.781057,-.203881,.245752,.709602,.044646,-.011843,.037423,.974421],[.392952,.82361,-.216562,.263559,.69021,.046232,-.01191,.040281,.97163],[.367322,.860646,-.227968,.280085,.672501,.047413,-.01182,.04294,.968881]],Qo=[[1,0,-0,0,1,0,-0,-0,1],[.92667,.092514,-.019184,.021191,.964503,.014306,.008437,.054813,.93675],[.89572,.13333,-.02905,.029997,.9454,.024603,.013027,.104707,.882266],[.905871,.127791,-.033662,.026856,.941251,.031893,.01341,.148296,.838294],[.948035,.08949,-.037526,.014364,.946792,.038844,.010853,.193991,.795156],[1.017277,.027029,-.044306,-.006113,.958479,.047634,.006379,.248708,.744913],[1.104996,-.046633,-.058363,-.032137,.971635,.060503,.001336,.317922,.680742],[1.193214,-.109812,-.083402,-.058496,.97941,.079086,-.002346,.403492,.598854],[1.257728,-.139648,-.118081,-.078003,.975409,.102594,-.003316,.501214,.502102],[1.278864,-.125333,-.153531,-.084748,.957674,.127074,-989e-6,.601151,.399838],[1.255528,-.076749,-.178779,-.078411,.930809,.147602,.004733,.691367,.3039]],Uo=(e,a)=>{let t=Math.max(0,Math.min(1,a)),r=Math.round(t/.1),o=Math.round(t%.1),l=e[r];if(o>0&&r<e.length-1){let a=e[r+1];l=l.map((e,t)=>U(l[t],a[t],o))}return e=>{let a=y(e);if(void 0===a)return;let{r:t,g:r,b:o}=Ko(a),n={mode:"rgb",r:l[0]*t+l[1]*r+l[2]*o,g:l[3]*t+l[4]*r+l[5]*o,b:l[6]*t+l[7]*r+l[8]*o};return void 0!==a.alpha&&(n.alpha=a.alpha),x(a.mode)(n)}},el=(e=1)=>Uo(Vo,e),al=(e=1)=>Uo(Zo,e),tl=(e=1)=>Uo(Qo,e),rl=e=>e*e*(3-2*e),ol=e=>.5-Math.sin(Math.asin(1-2*e)/3),ll=e=>e*e*e*(e*(6*e-15)+10),nl=e=>(1-Math.cos(e*Math.PI))/2;function il(e){let a=x("lrgb")(e);return.2126*a.r+.7152*a.g+.0722*a.b}function hl(e,a){let t=il(e),r=il(a);return(Math.max(t,r)+.05)/(Math.min(t,r)+.05)}var dl=P(Me),pl=P(Be),sl=P(fa),ul=P(ma),bl=P(za),vl=P(qa),cl=P(ja),gl=P(Ca),Ml=P(Ya),fl=P(ot),ml=P(it),yl=P(mt),xl=P(yt),zl=P(wt),wl=P(kt),kl=P(Xt),$l=P(Ct),Tl=P(St),Pl=P(Kt),Il=P(Qt),ql=P(er),Rl=P(tr),Ll=P(lr),jl=P(pr),Hl=P(Mr),Ol=P(ne),Xl=P(kr),Cl=P($r),Sl=P(Ir),El=P(Lr)}},a={};function t(r){var o=a[r];if(void 0!==o)return o.exports;var l=a[r]={exports:{}};return e[r](l,l.exports,t),l.exports}var r={};return(()=>{"use strict";var e=r;
+      /*
+      * * @version: 4.2.0
+      * @author: Preline Labs Ltd.
+      * @license: Licensed under MIT and Preline UI Fair Use License (https://preline.co/docs/license.html)
+      * Copyright 2026 Preline Labs Ltd.
+      */Object.defineProperty(e,"__esModule",{value:!0}),e.varToColor=function(e,t){if(e.startsWith("#")||e.startsWith("rgba"))return e;const r=t||document.documentElement;return function(e){const t=(0,a.parse)(e),r=(0,a.clampChroma)(t,"oklch");return(0,a.formatHex)(r)}(getComputedStyle(r).getPropertyValue(e).trim())};const a=t(8710)})(),r})());
+    </script>
+  <script>
+    	!function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t(require("ApexCharts"));else if("function"==typeof define&&define.amd)define(["ApexCharts"],t);else{var s="object"==typeof exports?t(require("ApexCharts")):t(e.ApexCharts);for(var a in s)("object"==typeof exports?exports:e)[a]=s[a]}}(self,e=>(()=>{"use strict";var t={4024(e,t,s){
+    	/*
+    	* @version: 4.2.0
+    	* @author: Preline Labs Ltd.
+    	* @license: Licensed under MIT and Preline UI Fair Use License (https://preline.co/docs/license.html)
+    	* Copyright 2024 Preline Labs Ltd.
+    	*/
+    	var a=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0}),t.buildChart=function(e,t,s,a){const l=document.querySelector(e);let n=null;if(!l)return!1;const o=l.closest('[role="tabpanel"]');let i=null;Array.from(document.querySelector("html").classList).forEach(e=>{["dark","light","default"].includes(e)&&(i=e)});const d=(e=i||localStorage.getItem("hs_theme"))=>"dark"===e||"auto"===e&&window.matchMedia("(prefers-color-scheme: dark)").matches?window._.merge(t("dark"),"function"==typeof a?a():a):window._.merge(t("light"),"function"==typeof s?s():s);if(l){let e=!0;n=new r.default(l,d()),n.render(),setTimeout(()=>{e=!1},100);let t=!1;const s=t=>{e||(n.updateOptions(d(t.detail)),window.dispatchEvent(new Event("resize")))},a=e=>{var t;let a;const r=null!==(t=null==e?void 0:e.target)&&void 0!==t?t:document.querySelector("html");Array.from(r.classList).forEach(e=>{["dark","light","default"].includes(e)&&(a=e)}),s({detail:a||localStorage.getItem("hs_theme")})},i=e=>{const t=e.detail;t&&t.isClipboardInit||a(t)},p=s=>{if(t)return;const r=s.detail,n=null==r?void 0:r.target;n&&l&&n.contains(l)&&(t=!0,e?setTimeout(()=>a(r),120):a(r))};window.addEventListener("on-hs-appearance-change",s),window.addEventListener("on-hs-color-theme-change",e=>{setTimeout(()=>i(e),50)}),window.addEventListener("on-hs-font-change",e=>{setTimeout(()=>i(e),50)}),window.addEventListener("on-hs-brand-change",e=>{setTimeout(()=>i(e),50)}),window.addEventListener("on-hs-clipboard-init-progress",p),o&&o.addEventListener("on-hs-appearance-change",s)}return n},t.buildHeatmapTooltip=function(e,t){const{mode:s,valuePrefix:a="$",valuePostfix:r="",divider:l="",wrapperClasses:n="ms-0.5 mb-2 bg-white border border-gray-200 text-gray-800 rounded-lg shadow-md dark:bg-neutral-800 dark:border-neutral-700",wrapperExtClasses:o="",markerClasses:i="w-2.5! h-2.5! me-1.5!",markerStyles:d="",markerExtClasses:p="rounded-xs!",valueClasses:c="font-medium! text-gray-500 ms-auto! dark:text-neutral-400",valueExtClasses:u=""}=t,{dataPointIndex:x,seriesIndex:h,series:g}=e,{name:v}=e.ctx.opts.series[h],$=`${a}${g[h][x]}${r}`;return`<div class="${"dark"===s?"dark ":""}${n} ${o}">\n    <div class="apexcharts-tooltip-series-group flex!">\n\t\t\t<span class="apexcharts-tooltip-marker ${i} ${p}" style="${d}"></span>\n      <span class="flex items-center">\n        <div class="apexcharts-tooltip-text">\n          <div class="apexcharts-tooltip-y-group py-0.5!">\n            <span class="apexcharts-tooltip-text-y-value ${c} ${u}">${v}${l}</span>\n          </div>\n        </div>\n      </span>\n\t\t\t<span class="apexcharts-tooltip-text-y-value ${c} ${u}">${$}</span>\n    </div>\n  </div>`},t.buildTooltip=function(e,t){const{title:s,mode:a,valuePrefix:r="$",isValueDivided:l=!0,valuePostfix:n="",hasTextLabel:o=!1,invertGroup:i=!1,labelDivider:d="",wrapperClasses:p="ms-0.5 mb-2 bg-white border border-gray-200 text-gray-800 rounded-lg shadow-md dark:bg-neutral-800 dark:border-neutral-700",wrapperExtClasses:c="",seriesClasses:u="text-xs",seriesExtClasses:x="",titleClasses:h="font-semibold text-sm! bg-white! border-gray-200! text-gray-800 rounded-t-lg dark:bg-neutral-800! dark:border-neutral-700! dark:text-neutral-200",titleExtClasses:g="",markerClasses:v="w-2.5! h-2.5! me-1.5!",markerExtClasses:$="rounded-xs!",valueClasses:m="font-medium! text-gray-500 ms-auto! dark:text-neutral-400",valueExtClasses:f="",labelClasses:b="text-gray-500 dark:text-neutral-400",labelExtClasses:y="",thousandsShortName:w="k"}=t,{dataPointIndex:k}=e,{colors:C}=e.w.globals,E=e.ctx.opts.series;let S="";return E.forEach((t,s)=>{const a=e.series[s][k]||("object"!=typeof E[s].data[k]?E[s].data[k]:e.series[s][k]),p=E[s].name,c=i?{left:`${o?p:""}${d}`,right:`${r}${a>=1e3&&l?`${a/1e3}${w}`:a}${n}`}:{left:`${r}${a>=1e3&&l?`${a/1e3}${w}`:a}${n}`,right:`${o?p:""}${d}`},h=`<span class="apexcharts-tooltip-text-y-label ${b} ${y}">${c.left}</span>`;S+=`<div class="apexcharts-tooltip-series-group !flex ${o?"justify-between!":""} order-${s+1} ${u} ${x}">\n      <span class="flex items-center">\n        <span class="apexcharts-tooltip-marker ${v} ${$}" style="background: ${C[s]}"></span>\n        <div class="apexcharts-tooltip-text">\n          <div class="apexcharts-tooltip-y-group py-0.5!">\n            <span class="apexcharts-tooltip-text-y-value ${m} ${f}">${c.right}</span>\n          </div>\n        </div>\n      </span>\n      ${h}\n    </div>`}),`<div class="${"dark"===a?"dark ":""}${p} ${c}">\n    <div class="apexcharts-tooltip-title ${h} ${g}">${s}</div>\n    ${S}\n  </div>`},t.buildTooltipCompareTwo=function(e,t){const{title:s,mode:a,valuePrefix:r="$",isValueDivided:l=!0,valuePostfix:n="",hasCategory:o=!0,hasTextLabel:i=!1,labelDivider:d="",wrapperClasses:p="ms-0.5 mb-2 bg-white border border-gray-200 text-gray-800 rounded-lg shadow-md dark:bg-neutral-800 dark:border-neutral-700",wrapperExtClasses:c="",seriesClasses:u="justify-between! w-full text-xs",seriesExtClasses:x="",titleClasses:h="flex justify-between font-semibold text-sm! bg-white! border-gray-200! text-gray-800 rounded-t-lg dark:bg-neutral-800! dark:border-neutral-700! dark:text-neutral-200",titleExtClasses:g="",markerClasses:v="w-2.5! h-2.5! me-1.5!",markerExtClasses:$="rounded-xs!",valueClasses:m="font-medium! text-gray-500 ms-auto! dark:text-neutral-400",valueExtClasses:f="",labelClasses:b="text-gray-500 dark:text-neutral-400 ms-2",labelExtClasses:y="",thousandsShortName:w="k"}=t,{dataPointIndex:k}=e,{categories:C}=e.ctx.opts.xaxis,{colors:E}=e.w.globals,S=e.ctx.opts.series;let j="";const T=S[0].data[k],A=S[1].data[k],L=C[k].split(" "),P=o?`${L[0]}${L[1]?" ":""}${L[1]?L[1].slice(0,3):""}`:"",q=0===A?0:(T-A)/Math.abs(A)*100,_=0===q,B=q>0,I=B?'<svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>':'<svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline points="16 17 22 17 22 11" /></svg>';return S.forEach((t,s)=>{const a=e.series[s][k]||("object"!=typeof S[s].data[k]?S[s].data[k]:e.series[s][k]),o=S[s].name,p=S[s].altValue||null,c=`<span class="apexcharts-tooltip-text-y-label ${b} ${y}">${P} ${o||""}</span>`,h=p||`<span class="apexcharts-tooltip-text-y-value ${m} ${f}">${r}${a>=1e3&&l?`${a/1e3}${w}`:a}${n}${d}</span>`;j+=`<div class="apexcharts-tooltip-series-group ${u} !flex order-${s+1} ${x}">\n      <span class="flex items-center">\n        <span class="apexcharts-tooltip-marker ${v} ${$}" style="background: ${E[s]}"></span>\n        <div class="apexcharts-tooltip-text">\n          <div class="apexcharts-tooltip-y-group py-0.5!">\n            ${h}\n          </div>\n        </div>\n      </span>\n      ${i?c:""}\n    </div>`}),`<div class="${"dark"===a?"dark ":""}${p} ${c}">\n    <div class="apexcharts-tooltip-title ${h} ${g}">\n      <span>${s}</span>\n      <span class="flex items-center gap-x-1 ${_?"":B?"text-green-600":"text-red-600"} ms-2">\n        ${_?"":I}\n        <span class="inline-block text-sm">\n          ${q.toFixed(1)}%\n        </span>\n      </span>\n    </div>\n    ${j}\n  </div>`},t.buildTooltipCompareTwoAlt=function(e,t){const{title:s,mode:a,valuePrefix:r="$",isValueDivided:l=!0,valuePostfix:n="",hasCategory:o=!0,hasTextLabel:i=!1,labelDivider:d="",wrapperClasses:p="ms-0.5 mb-2 bg-white border border-gray-200 text-gray-800 rounded-lg shadow-md dark:bg-neutral-800 dark:border-neutral-700",wrapperExtClasses:c="",seriesClasses:u="justify-between! w-full text-xs",seriesExtClasses:x="",titleClasses:h="flex justify-between font-semibold text-sm! bg-white! border-gray-200! text-gray-800 rounded-t-lg dark:bg-neutral-800! dark:border-neutral-700! dark:text-neutral-200",titleExtClasses:g="",markerClasses:v="w-2.5! h-2.5! me-1.5!",markerExtClasses:$="rounded-xs!",valueClasses:m="font-medium! text-gray-500 ms-auto! dark:text-neutral-400",valueExtClasses:f="",labelClasses:b="text-gray-500 dark:text-neutral-400 ms-2",labelExtClasses:y="",thousandsShortName:w="k"}=t,{dataPointIndex:k}=e,{categories:C}=e.ctx.opts.xaxis,{colors:E}=e.w.globals,S=e.ctx.opts.series;let j="";const T=S[0].data[k],A=S[1].data[k],L=C[k].split(" "),P=o?`${L[0]}${L[1]?" ":""}${L[1]?L[1].slice(0,3):""}`:"",q=0===A?0:(T-A)/Math.abs(A)*100,_=0===q,B=q>0,I=B?'<svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>':'<svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline points="16 17 22 17 22 11" /></svg>';return S.forEach((t,s)=>{const a=e.series[s][k]||("object"!=typeof S[s].data[k]?S[s].data[k]:e.series[s][k]),o=S[s].name,p=`<span class="apexcharts-tooltip-text-y-label ${b} ${y}">${r}${a>=1e3&&l?`${a/1e3}${w}`:a}${n}</span>`;j+=`<div class="apexcharts-tooltip-series-group !flex ${u} order-${s+1} ${x}">\n      <span class="flex items-center">\n        <span class="apexcharts-tooltip-marker ${v} ${$}" style="background: ${E[s]}"></span>\n        <div class="apexcharts-tooltip-text text-xs">\n          <div class="apexcharts-tooltip-y-group py-0.5!">\n            <span class="apexcharts-tooltip-text-y-value ${m} ${f}">${P} ${o||""}${d}</span>\n          </div>\n        </div>\n      </span>\n      ${i?p:""}\n    </div>`}),`<div class="${"dark"===a?"dark ":""}${p} ${c}">\n    <div class="apexcharts-tooltip-title ${h} ${g}">\n      <span>${s}</span>\n      <span class="flex items-center gap-x-1 ${_?"":B?"text-green-600":"text-red-600"} ms-2">\n        ${_?"":I}\n        <span class="inline-block text-sm">\n          ${q.toFixed(1)}%\n        </span>\n      </span>\n    </div>\n    ${j}\n  </div>`},t.buildTooltipForDonut=function({series:e,seriesIndex:t,w:s},a){const{globals:r}=s,{colors:l}=r;return`<div class="apexcharts-tooltip-series-group" style="background-color: ${l[t]}; display: block;">\n    <div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">\n      <div class="apexcharts-tooltip-y-group" style="color: ${a[t]}">\n        <span class="apexcharts-tooltip-text-y-label">${r.labels[t]}: </span>\n        <span class="apexcharts-tooltip-text-y-value">${e[t]}</span>\n      <div class="apexcharts-tooltip-y-group" style="color: ${a[t]}">\n        <span class="apexcharts-tooltip-text-y-label">${r.labels[t]}: </span>\n        <span class="apexcharts-tooltip-text-y-value">${e[t]}</span>\n      </div>\n    </div>\n  </div>`},t.fullBarHoverEffect=function(e,{shadowClasses:t="fill-gray-200"}={}){var s;const a=e.el.querySelector(".apexcharts-grid"),r=e.el.querySelector("svg");if(!a||!r)return;const l=(null===(s=e.w.config.xaxis)||void 0===s?void 0:s.categories)||[];if(0===l.length)return;let n=null,o=!1,i=!1;function d(){n&&o&&!i&&(i=!0,n.classList.remove("opacity-100"),null==n||n.remove(),n=null,o=!1,i=!1)}r.addEventListener("mousemove",s=>{const r=a.getBoundingClientRect();if(s.clientX<r.left||s.clientX>r.right||s.clientY<r.top||s.clientY>r.bottom)return void d();const p=(s.clientX-r.left)/r.width,c=Math.floor(p*l.length);c<0||c>=l.length?d():function(s){var a;const r=e.el.querySelector(".apexcharts-bar-series");if(!r)return;const l=r.querySelectorAll("path")[s];if(!l)return;const d=l.getBBox(),p=d.x,c=d.y,u=d.width;c<=0||(n||(n=document.createElementNS("http://www.w3.org/2000/svg","rect"),n.setAttribute("y","0"),n.setAttribute("class",t),null===(a=l.parentNode)||void 0===a||a.insertBefore(n,l)),n.setAttribute("x",p.toString()),n.setAttribute("width",u.toString()),n.setAttribute("height",c.toString()),requestAnimationFrame(()=>{null==n||n.classList.add("opacity-100")}),o=!0,i=!1)}(c)}),r.addEventListener("mouseleave",d)},t.cssVarToValue=function(e,t=document.documentElement){const s=getComputedStyle(t).getPropertyValue(e);return s?s.trim():null};const r=a(s(3157))},3157(t){t.exports=e}},s={};var a=function e(a){var r=s[a];if(void 0!==r)return r.exports;var l=s[a]={exports:{}};return t[a].call(l.exports,l,l.exports,e),l.exports}(4024);return a})());
+    </script>
+
+  <script>
+      window.addEventListener("message", (event) => {
+        const data = event.data || {};
+
+        if (!data.type) return false;
+        if (data.type === "hs:color-theme-change") {
+          window.dispatchEvent(new CustomEvent("on-hs-color-theme-change", {
+            detail: {
+              target: document.documentElement,
+              value: data.value
+            }
+          }));
+        }
+      });
+    </script>
+
+  <script>
+      window.addEventListener("load", () => {
+        (function () {
+          buildChart(
+            "#hs-multiple-bar-charts",
+            (mode) => ({
+              chart: {
+                type: "bar",
+                height: 300,
+                toolbar: {
+                  show: false,
+                },
+                zoom: {
+                  enabled: false,
+                },
+              },
+              series: [
+                {
+                  name: "Chosen Period",
+                  data: [
+                    23000, 44000, 55000, 57000, 56000, 61000, 58000, 63000, 60000,
+                    66000, 34000, 78000,
+                  ],
+                },
+                {
+                  name: "Last Period",
+                  data: [
+                    17000, 76000, 85000, 101000, 98000, 87000, 105000, 91000, 114000,
+                    94000, 67000, 66000,
+                  ],
+                },
+              ],
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  columnWidth: "16px",
+                  borderRadius: 0,
+                },
+              },
+              legend: {
+                show: false,
+              },
+              dataLabels: {
+                enabled: false,
+              },
+              stroke: {
+                show: true,
+                width: 8,
+                colors: ["transparent"],
+              },
+              xaxis: {
+                categories: [
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December",
+                ],
+                axisBorder: {
+                  show: false,
+                },
+                axisTicks: {
+                  show: false,
+                },
+                crosshairs: {
+                  show: false,
+                },
+                labels: {
+                  style: {
+                    colors: varToColor('--chart-colors-xaxis-labels'),
+                    fontSize: "13px",
+                    fontFamily: "Inter, ui-sans-serif",
+                    fontWeight: 400,
+                  },
+                  offsetX: -2,
+                  formatter: (title) => title.slice(0, 3),
+                },
+              },
+              yaxis: {
+                labels: {
+                  align: "left",
+                  minWidth: 0,
+                  maxWidth: 140,
+                  style: {
+                    colors: varToColor('--chart-colors-yaxis-labels'),
+                    fontSize: "13px",
+                    fontFamily: "Inter, ui-sans-serif",
+                    fontWeight: 400,
+                  },
+                  formatter: (value) => (value >= 1000 ? `${value / 1000}k` : value),
+                },
+              },
+              states: {
+                hover: {
+                  filter: {
+                    type: "darken",
+                    value: 0.9,
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: (value) =>
+                    `$${value >= 1000 ? `${value / 1000}k` : value}`,
+                },
+                custom: function (props) {
+                  const { categories } = props.ctx.opts.xaxis;
+                  const { dataPointIndex } = props;
+                  const title = categories[dataPointIndex];
+                  const newTitle = `${title}`;
+
+                  return buildTooltip(props, {
+                    title: newTitle,
+                    mode,
+                    hasTextLabel: true,
+                    wrapperExtClasses: "min-w-28",
+                    labelDivider: ":",
+                    labelExtClasses: "ms-2",
+                  });
+                },
+              },
+              responsive: [
+                {
+                  breakpoint: 568,
+                  options: {
+                    chart: {
+                      height: 300,
+                    },
+                    plotOptions: {
+                      bar: {
+                        columnWidth: "14px",
+                      },
+                    },
+                    stroke: {
+                      width: 8,
+                    },
+                    labels: {
+                      style: {
+                        colors: varToColor('--chart-colors-labels'),
+                        fontSize: "11px",
+                        fontFamily: "Inter, ui-sans-serif",
+                        fontWeight: 400,
+                      },
+                      offsetX: -2,
+                      formatter: (title) => title.slice(0, 3),
+                    },
+                    yaxis: {
+                      labels: {
+                        align: "left",
+                        minWidth: 0,
+                        maxWidth: 140,
+                        style: {
+                          colors: varToColor('--chart-colors-yaxis-labels'),
+                          fontSize: "11px",
+                          fontFamily: "Inter, ui-sans-serif",
+                          fontWeight: 400,
+                        },
+                        formatter: (value) =>
+                          value >= 1000 ? `${value / 1000}k` : value,
+                      },
+                    },
+                  },
+                },
+              ],
+            }),
+            () => ({
+              colors: [varToColor('--chart-colors-primary'), varToColor('--chart-colors-chart-10')],
+              grid: {
+                borderColor: varToColor('--chart-colors-grid-border'),
+              },
+            }),
+            () => ({
+              colors: [varToColor('--chart-colors-primary-inverse'), varToColor('--chart-colors-chart-10-inverse')],
+              grid: {
+                borderColor: varToColor('--chart-colors-grid-border-inverse'),
+              },
+            })
+          );
+        })();
+      });
+    </script>
+  <script>
+      window.addEventListener("load", () => {
+        const tabpanel = document.querySelector('#hs-single-area-chart').closest('[role="tabpanel"]');
+
+        (function () {
+          buildChart(
+            "#hs-single-area-chart",
+            (mode) => ({
+              chart: {
+                height: 300,
+                type: "area",
+                toolbar: {
+                  show: false,
+                },
+                zoom: {
+                  enabled: false,
+                },
+              },
+              series: [
+                {
+                  name: "Visitors",
+                  data: [180, 51, 60, 38, 88, 50, 40, 52, 88, 80, 60, 70],
+                },
+              ],
+              legend: {
+                show: false,
+              },
+              dataLabels: {
+                enabled: false,
+              },
+              stroke: {
+                curve: "straight",
+                width: 2,
+              },
+              grid: {
+                strokeDashArray: 2,
+              },
+              fill: {
+                type: "gradient",
+                gradient: {
+                  type: "vertical",
+                  shadeIntensity: 1,
+                  opacityFrom: 0.1,
+                  opacityTo: 0.8,
+                },
+              },
+              xaxis: {
+                type: "category",
+                tickPlacement: "on",
+                categories: [
+                  "25 January 2023",
+                  "26 January 2023",
+                  "27 January 2023",
+                  "28 January 2023",
+                  "29 January 2023",
+                  "30 January 2023",
+                  "31 January 2023",
+                  "1 February 2023",
+                  "2 February 2023",
+                  "3 February 2023",
+                  "4 February 2023",
+                  "5 February 2023",
+                ],
+                axisBorder: {
+                  show: false,
+                },
+                axisTicks: {
+                  show: false,
+                },
+                crosshairs: {
+                  stroke: {
+                    dashArray: 0,
+                  },
+                  dropShadow: {
+                    show: false,
+                  },
+                },
+                tooltip: {
+                  enabled: false,
+                },
+                labels: {
+                  style: {
+                    colors: varToColor('--chart-colors-xaxis-labels', tabpanel),
+                    fontSize: "13px",
+                    fontFamily: "Inter, ui-sans-serif",
+                    fontWeight: 400,
+                  },
+                  formatter: (title) => {
+                    let t = title;
+
+                    if (t) {
+                      const newT = t.split(" ");
+                      t = `${newT[0]} ${newT[1].slice(0, 3)}`;
+                    }
+
+                    return t;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  align: "left",
+                  minWidth: 0,
+                  maxWidth: 140,
+                  style: {
+                    colors: varToColor('--chart-colors-yaxis-labels', tabpanel),
+                    fontSize: "13px",
+                    fontFamily: "Inter, ui-sans-serif",
+                    fontWeight: 400,
+                  },
+                  formatter: (value) => (value >= 1000 ? `${value / 1000}k` : value),
+                },
+              },
+              tooltip: {
+                x: {
+                  format: "MMMM yyyy",
+                },
+                y: {
+                  formatter: (value) =>
+                    `${value >= 1000 ? `${value / 1000}k` : value}`,
+                },
+                custom: function (props) {
+                  const { categories } = props.ctx.opts.xaxis;
+                  const { dataPointIndex } = props;
+                  const title = categories[dataPointIndex].split(" ");
+                  const newTitle = `${title[0]} ${title[1]}`;
+
+                  return buildTooltip(props, {
+                    title: newTitle,
+                    mode,
+                    valuePrefix: "",
+                    hasTextLabel: true,
+                    wrapperExtClasses: "min-w-28",
+                  });
+                },
+              },
+              responsive: [
+                {
+                  breakpoint: 568,
+                  options: {
+                    chart: {
+                      height: 300,
+                    },
+                    labels: {
+                      style: {
+                        colors: varToColor('--chart-colors-labels', tabpanel),
+                        fontSize: "11px",
+                        fontFamily: "Inter, ui-sans-serif",
+                        fontWeight: 400,
+                      },
+                      offsetX: -2,
+                      formatter: (title) => title.slice(0, 3),
+                    },
+                    yaxis: {
+                      labels: {
+                        align: "left",
+                        minWidth: 0,
+                        maxWidth: 140,
+                        style: {
+                          colors: varToColor('--chart-colors-yaxis-labels', tabpanel),
+                          fontSize: "11px",
+                          fontFamily: "Inter, ui-sans-serif",
+                          fontWeight: 400,
+                        },
+                        formatter: (value) =>
+                          value >= 1000 ? `${value / 1000}k` : value,
+                      },
+                    },
+                  },
+                },
+              ],
+            }),
+            () => ({
+              colors: [varToColor('--chart-colors-primary-hex', tabpanel)],
+              fill: {
+                gradient: {
+                  stops: [0, 90, 100],
+                },
+              },
+              grid: {
+                borderColor: varToColor('--chart-colors-grid-border', tabpanel),
+              },
+            }),
+            () => ({
+              colors: [varToColor('--chart-colors-primary-hex-inverse', tabpanel)],
+              fill: {
+                gradient: {
+                  stops: [100, 90, 0],
+                },
+              },
+              grid: {
+                borderColor: varToColor('--chart-colors-grid-border-inverse', tabpanel),
+              },
+            })
+          );
+        })();
+      });
+    </script>
+
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>

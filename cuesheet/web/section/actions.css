@@ -1,0 +1,4 @@
+.s-actions {
+  display: grid;
+  gap: var(--gap-tight);
+}

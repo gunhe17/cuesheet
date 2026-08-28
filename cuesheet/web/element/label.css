@@ -1,0 +1,8 @@
+.e-label {
+  display: block;
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-track);
+  line-height: var(--type-label-leading);
+  color: var(--text-muted);
+}

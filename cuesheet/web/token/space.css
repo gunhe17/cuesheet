@@ -1,0 +1,22 @@
+:root {
+  --gap-hair: var(--x-space-1);
+  --gap-tight: var(--x-space-2);
+  --gap: var(--x-space-4);
+  --gap-loose: var(--x-space-7);
+  --gap-section: var(--x-space-9);
+
+  --pad-field: var(--x-space-3) var(--x-space-4);
+  --pad-action: var(--x-space-3) var(--x-space-6);
+  --pad-badge: var(--x-space-1) var(--x-space-3);
+  --pad-card: var(--x-space-6);
+  --pad-row: var(--x-space-3) var(--x-space-4);
+  --pad-view: var(--x-space-6) var(--x-space-5);
+  --pad-rail: var(--x-space-5);
+
+  --size-tap: var(--x-size-tap);
+  --size-swatch: var(--x-space-7);
+  --size-rail: var(--x-size-rail);
+  --size-rail-hit: var(--x-size-rail-hit);
+  --size-gutter: var(--x-size-gutter);
+  --size-content: var(--x-size-content);
+}

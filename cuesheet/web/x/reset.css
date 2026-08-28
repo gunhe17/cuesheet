@@ -1,0 +1,8 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+/* 브라우저 기본 마진이 간격 토큰을 덮어쓴다 — 간격은 담는 쪽의 gap 이 전담 */
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: none; }

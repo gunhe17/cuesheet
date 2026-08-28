@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="relative min-h-full h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Preline UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/main.min.css">
+</head>
+<body class="py-10 xl:py-0 px-4 xl:px-0 w-full max-w-xs mx-auto xl:mt-6"><!-- Language Dropdown -->
+  <div class="hs-dropdown [--strategy:absolute]  relative inline-flex">
+    <button id="hs-pro-aimtlg" type="button" class="flex justify-center items-center gap-x-3 size-9 text-sm text-foreground hover:bg-muted-hover rounded-lg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus">
+      <svg class="shrink-0 size-4.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </svg>
+      <span class="sr-only">Language</span>
+    </button>
+
+    <!-- Language Dropdown -->
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-40 transition-[opacity,margin] duration opacity-0 hidden z-11 bg-dropdown border border-dropdown-line rounded-xl shadow-lg before:absolute before:-top-4 before:inset-s-0 before:w-full before:h-5" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-aimtlg">
+      <div class="p-1 space-y-0.5">
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          English (US)
+        </button>
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          English (UK)
+        </button>
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          Deutsch
+        </button>
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          Dansk
+        </button>
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          Italiano
+        </button>
+        <button type="button" class="w-full flex items-center gap-x-3 py-1.5 px-2 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-dropdown-item-focus">
+          中文 (繁體)
+        </button>
+      </div>
+    </div>
+    <!-- End Language Dropdown -->
+  </div>
+  <!-- End Language Dropdown -->
+  <script src="../../../assets/preline.js"></script>
+
+                <script>
+                    window.defaultVariables = {"baseUrl":"https:\/\/preline.co"};
+                </script></body>
+</html>
+
+<script>
+  window.addEventListener("load", () => {
+    document.querySelectorAll(".hs-dropdown").forEach((el) => {
+      HSDropdown.open(el);
+    });
+  });
+</script>

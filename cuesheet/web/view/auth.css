@@ -1,0 +1,10 @@
+.v-auth {
+  display: grid;
+  align-content: center;
+  gap: var(--gap-section);
+  max-width: 24rem;
+  margin-inline: auto;
+  padding: var(--pad-view);
+  min-height: 100dvh;
+}
+.v-auth[hidden] { display: none; }

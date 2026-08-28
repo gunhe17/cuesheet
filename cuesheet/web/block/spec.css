@@ -1,0 +1,8 @@
+.b-spec {
+  display: grid;
+  grid-template-columns: 4rem minmax(8rem, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--gap-tight);
+}
+.b-spec > .e-swatch { inline-size: auto; justify-self: stretch; }
+.b-spec > :last-child { justify-self: end; text-align: end; }

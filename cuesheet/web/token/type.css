@@ -1,0 +1,40 @@
+:root {
+  --font-sans: var(--x-font-sans);
+  --font-mono: var(--x-font-mono);
+
+  --type-title-size: var(--x-text-large);
+  --type-title-weight: var(--x-weight-semibold);
+  --type-title-track: var(--x-track-display);
+  --type-title-leading: var(--x-leading-display);
+
+  --type-heading-size: var(--x-text-title3);
+  --type-heading-weight: var(--x-weight-semibold);
+  --type-heading-track: var(--x-track-title);
+  --type-heading-leading: var(--x-leading-title);
+
+  --type-body-size: var(--x-text-body);
+  --type-body-weight: var(--x-weight-regular);
+  --type-body-track: var(--x-track-body);
+  --type-body-leading: var(--x-leading-body);
+
+  --type-callout-size: var(--x-text-callout);
+
+  --type-label-size: var(--x-text-subhead);
+  --type-label-weight: var(--x-weight-semibold);
+  --type-label-track: var(--x-track-body);
+  --type-label-leading: var(--x-leading-caption);
+
+  --type-caption-size: var(--x-text-footnote);
+  --type-caption-track: var(--x-track-caption);
+  --type-caption-leading: var(--x-leading-caption);
+
+  --type-action-size: var(--x-text-body);
+  --type-action-weight: var(--x-weight-semibold);
+
+  --type-count-size: var(--x-text-display);
+  --type-count-weight: var(--x-weight-semibold);
+  --type-count-track: var(--x-track-display);
+
+  --type-time-size: var(--x-text-footnote);
+  --type-time-track: var(--x-track-caption);
+}
