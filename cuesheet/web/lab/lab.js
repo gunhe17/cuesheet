@@ -19,6 +19,14 @@ const CASES = [
     note: "코너 헤더에 누계. 코너는 도메인에 없는 필드다" },
 ];
 
+// 애플의 에셋은 가져올 수 없다 — 묶음 목록의 얼개와 치수만 옮겼다
+const BORROWED = [
+  { key: "S1", label: "설정", body: settings,
+    note: "그룹이 카드, 구분선은 라벨에 맞춰 들어간다. 값은 오른쪽, 꺾쇠는 그 뒤" },
+  { key: "S2", label: "큐 편집", body: editor,
+    note: "같은 패턴을 큐 상세에 얹은 것. D 안이 펼치던 내용이 한 화면이 된다" },
+];
+
 let state = "running";
 let data = null;
 let ticker = null;
@@ -30,8 +38,8 @@ let ticker = null;
 function render() {
   data = fixture.snapshot(state);
 
-  const deck = document.getElementById("deck");
-  deck.replaceChildren(...CASES.map(build));
+  document.getElementById("deck").replaceChildren(...CASES.map(build));
+  document.getElementById("borrowed").replaceChildren(...BORROWED.map(build));
 
   restartTicker();
   requestAnimationFrame(sync);
@@ -394,6 +402,137 @@ function header(cues, segment) {
 
 
 // #
+// settings — 차용한 묶음 목록. 화면에 쓰는 값은 여기서도 fixture 에서만 나온다
+
+function settings() {
+  const { cuesheet, participants, me } = data;
+
+  return screen(
+    group("큐시트", null, [
+      setting({ label: "제목", value: cuesheet.title, symbol: "tag", tint: "blue" }),
+      setting({ label: "시작 시각", value: hhmm(new Date(cuesheet.scheduled_at)), symbol: "clock", tint: "amber" }),
+      setting({ label: "참가자", value: `${participants.length}명`, symbol: "person", tint: "teal" }),
+    ]),
+    group("내 역할", "색은 큐 종류라 역할과 무관합니다. 담당 여부는 진하기로만 드러납니다", [
+      setting({ label: "맡은 역할", value: me.role_ids.map((id) => fixture.ROLE_NAME[id]).join(" · ") }),
+      setting({ label: "담당 큐만 보기", accessory: toggle(false), tap: false }),
+      setting({ label: "진행 권한", value: me.can_advance ? "총괄" : "없음", accessory: null, tap: false }),
+    ]),
+    group("화면", null, [
+      setting({ label: "테마", value: "시스템", symbol: "moon", tint: "violet" }),
+      setting({ label: "내 순서 알림", symbol: "bell", tint: "rose", accessory: toggle(true), tap: false }),
+    ]),
+    group(null, null, [
+      setting({ label: "로그아웃", tone: "danger", accessory: null }),
+    ]),
+  );
+}
+
+function editor() {
+  const cue = data.cues.find((item) => item.id === data.cuesheet.current_cue_id) || data.cues[0];
+
+  return screen(
+    group("큐", null, [
+      setting({ label: "제목", value: cue.title, symbol: "tag", tint: "blue" }),
+      setting({ label: "길이", value: clock(cue.planned_sec), symbol: "clock", tint: "amber" }),
+      setting({ label: "색", value: cue.color, symbol: "swatch", tint: cue.color }),
+    ]),
+    group("역할별 지시", "task 하나가 행 하나다 — 카메라·자막 열을 새로 만들지 않았다",
+      cue.tasks.map((task) => setting({
+        label: fixture.ROLE_NAME[task.role_id],
+        value: task.instruction,
+      })),
+    ),
+    group("진행", null, [
+      setting({ label: "시작 시각 고정", accessory: toggle(false), tap: false }),
+      setting({ label: "담당에게 알림", accessory: toggle(true), tap: false }),
+    ]),
+    group(null, null, [
+      setting({ label: "큐 삭제", tone: "danger", accessory: null }),
+    ]),
+  );
+}
+
+function group(head, foot, rows) {
+  const node = document.createElement("section");
+  node.className = "s-settings";
+
+  const card = document.createElement("div");
+  card.className = "group";
+  card.append(...rows);
+
+  if (head) node.append(text("p", "e-label", head));
+  node.append(card);
+  if (foot) node.append(text("p", "e-caption", foot));
+  return node;
+}
+
+// 액세서리를 넘기지 않으면 꺾쇠가 붙는다 — 설정 목록의 행은 대개 들어가는 행이다
+function setting({ label, value, symbol, tint, tone, accessory, tap = true }) {
+  const id = tap ? "tpl-lab-setting" : "tpl-lab-setting-static";
+  const node = document.getElementById(id).content.cloneNode(true);
+  const row = node.querySelector(".b-setting");
+
+  if (tone) row.dataset.tone = tone;
+  if (symbol) row.prepend(tile(symbol, tint));
+  node.querySelector("[data-label]").textContent = label;
+  node.querySelector("[data-value]").textContent = value || "";
+
+  if (accessory !== null) row.append(accessory || chevron());
+  return node;
+}
+
+function chevron() {
+  const node = document.createElement("i");
+  node.className = "e-chevron";
+  return node;
+}
+
+function toggle(on) {
+  const node = document.createElement("button");
+  node.className = "e-toggle";
+  node.type = "button";
+  node.setAttribute("role", "switch");
+  node.setAttribute("aria-checked", String(on));
+  node.append(document.createElement("i"));
+  return node;
+}
+
+
+// #
+// symbol — SF Symbols 를 쓸 수 없으므로 필요한 다섯 개만 직접 그린다
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+const SYMBOLS = {
+  tag: ["M4 12V5.5A1.5 1.5 0 015.5 4H12l8 8-6.5 6.5z", "M8.2 8.2h.01"],
+  clock: ["M12 21a9 9 0 100-18 9 9 0 000 18z", "M12 7.5V12l3 2"],
+  person: ["M12 12a4 4 0 100-8 4 4 0 000 8z", "M5 20c1.4-3.3 3.9-5 7-5s5.6 1.7 7 5"],
+  moon: ["M20 14.4A8.5 8.5 0 019.6 4 8.5 8.5 0 1020 14.4z"],
+  bell: ["M12 4a5.5 5.5 0 00-5.5 5.5v3.2L5 16h14l-1.5-3.3V9.5A5.5 5.5 0 0012 4z", "M10.2 19a2 2 0 003.6 0"],
+};
+
+function tile(name, tint) {
+  const node = document.createElement("span");
+  node.className = "e-symbol";
+  if (tint) node.dataset.tint = tint;
+
+  const paths = SYMBOLS[name];
+  if (!paths) return node;
+
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  for (const shape of paths) {
+    const path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d", shape);
+    svg.append(path);
+  }
+  node.append(svg);
+  return node;
+}
+
+
+// #
 // countdown — 폴링 응답이 아니라 로컬 시계로 센다
 
 function restartTicker() {
@@ -498,6 +637,13 @@ window.addEventListener("load", () => {
 
   applyState(state);
   findings();
+});
+
+// 스위치는 랩에서도 눌린다 — 켜고 끈 모습을 둘 다 봐야 대비가 판단된다
+document.addEventListener("click", (event) => {
+  const switched = event.target.closest(".e-toggle");
+  if (!switched) return;
+  switched.setAttribute("aria-checked", String(switched.getAttribute("aria-checked") !== "true"));
 });
 
 window.addEventListener("resize", sync);

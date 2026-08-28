@@ -1,0 +1,10 @@
+/* 눌러서 들어가는 행 끝의 꺾쇠. SF Symbols 를 쓸 수 없으므로 테두리 두 변으로 그린다 */
+.e-chevron {
+  inline-size: 8px;
+  block-size: 8px;
+  border-block-start: 2px solid var(--text-dim);
+  border-inline-end: 2px solid var(--text-dim);
+  border-start-end-radius: 1px;
+  transform: rotate(45deg);
+  opacity: 0.6;
+}

@@ -17,6 +17,7 @@
 /* 헤더·조작은 고정되고 가운데만 스크롤한다 — 폰에서 헤더가 밀려나면 지금 어느 큐시트인지 잃는다 */
 .s-phone > .screen {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
   gap: var(--gap-tight);
   overflow-y: auto;
@@ -24,6 +25,9 @@
   scrollbar-width: none;
 }
 .s-phone > .screen::-webkit-scrollbar { width: 0; height: 0; }
+
+/* 묶음 목록은 그룹 사이를 넓게 띄운다 — 붙으면 카드 경계가 한 덩어리로 읽힌다 */
+.s-phone > .screen:has(> .s-settings) { gap: var(--gap-loose); }
 
 .s-phone > .stage {
   position: relative;

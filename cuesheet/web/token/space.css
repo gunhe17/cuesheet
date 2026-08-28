@@ -14,6 +14,7 @@
   --pad-rail: var(--x-space-5);
 
   --size-tap: var(--x-size-tap);
+  --size-symbol: var(--x-size-symbol);
   --size-swatch: var(--x-space-7);
   --size-rail: var(--x-size-rail);
   --size-rail-hit: var(--x-size-rail-hit);

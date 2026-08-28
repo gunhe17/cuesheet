@@ -27,6 +27,17 @@
 
   <div class="v-lab-deck" id="deck"></div>
 
+  <header class="s-brand">
+    <h2 class="e-heading">차용 — iOS 설정 패턴</h2>
+    <p>
+      Apple 의 코드·SF Symbols·SF Pro 는 가져올 수 없습니다. 가져온 것은 묶음 목록의 얼개와 치수입니다 —
+      그룹이 카드가 되고, 구분선이 라벨에 맞춰 들어가고, 행 높이가 44 인 규칙. 색·글꼴·간격은 이 제품의 토큰 그대로라
+      설정 화면만 애플처럼 보이는 일이 생기지 않습니다.
+    </p>
+  </header>
+
+  <div class="v-lab-deck" id="borrowed"></div>
+
   <section class="s-group">
     <header>
       <h2 class="e-heading">맞춰본 결과</h2>
@@ -64,6 +75,20 @@
     <span class="e-time" data-eta></span>
     <span data-title></span>
     <span class="e-time" data-length></span>
+  </div>
+</template>
+
+<template id="tpl-lab-setting">
+  <button class="b-setting" type="button">
+    <span data-label></span>
+    <span data-value></span>
+  </button>
+</template>
+
+<template id="tpl-lab-setting-static">
+  <div class="b-setting">
+    <span data-label></span>
+    <span data-value></span>
   </div>
 </template>
 

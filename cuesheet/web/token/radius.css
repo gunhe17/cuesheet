@@ -4,4 +4,5 @@
   --radius-card: var(--x-radius-3);
   --radius-badge: var(--x-radius-pill);
   --radius-block: var(--x-radius-1);
+  --radius-inset: var(--x-radius-inset);
 }

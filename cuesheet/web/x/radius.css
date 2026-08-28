@@ -2,5 +2,6 @@
   --x-radius-1: 8px;    /* 기본 */
   --x-radius-2: 12px;   /* 입력·중간 */
   --x-radius-3: 18px;   /* 카드 */
+  --x-radius-inset: 10px;   /* 묶음 목록 */
   --x-radius-pill: 980px;
 }

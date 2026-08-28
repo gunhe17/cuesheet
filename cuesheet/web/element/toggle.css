@@ -1,0 +1,22 @@
+/* 51×31 · 손잡이 27 — iOS 스위치 치수. 켠 색은 iOS 의 초록이 아니라 이 제품의 accent 다 */
+.e-toggle {
+  display: flex;
+  inline-size: 51px;
+  block-size: 31px;
+  padding: 2px;
+  border-radius: var(--radius-badge);
+  background: var(--layer-hover);
+  cursor: pointer;
+  transition: background var(--dur-fade);
+}
+.e-toggle > i {
+  inline-size: 27px;
+  block-size: 27px;
+  border-radius: var(--radius-badge);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-raised);
+  transition: transform var(--dur-fade);
+}
+.e-toggle[aria-checked="true"] { background: var(--accent); }
+.e-toggle[aria-checked="true"] > i { transform: translateX(20px); }
+.e-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }

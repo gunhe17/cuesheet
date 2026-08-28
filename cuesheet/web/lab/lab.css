@@ -5,6 +5,9 @@
 
 /* element */
 @import "../element/code.css"      layer(element);
+@import "../element/chevron.css"   layer(element);
+@import "../element/toggle.css"    layer(element);
+@import "../element/symbol.css"    layer(element);
 
 /* block */
 @import "../block/demo.css"        layer(block);
@@ -12,6 +15,7 @@
 @import "../block/detail.css"      layer(block);
 @import "../block/segment.css"     layer(block);
 @import "../block/progress.css"    layer(block);
+@import "../block/setting.css"     layer(block);
 
 /* section */
 @import "../section/group.css"     layer(section);
@@ -19,6 +23,7 @@
 @import "../section/expand.css"    layer(section);
 @import "../section/segments.css"  layer(section);
 @import "../section/table.css"     layer(section);
+@import "../section/settings.css"  layer(section);
 
 /* view */
 @import "../view/lab.css"          layer(view);

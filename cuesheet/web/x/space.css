@@ -13,6 +13,7 @@
 
   /* 최소 탭 타깃 44×44 */
   --x-size-tap: 44px;
+  --x-size-symbol: 29px;
   --x-size-rail: 10px;
   --x-size-rail-hit: 20px;
   --x-size-gutter: 52px;

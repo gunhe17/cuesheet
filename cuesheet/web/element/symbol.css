@@ -1,0 +1,25 @@
+/* 행 머리의 아이콘 타일. 색은 큐 팔레트를 그대로 쓴다 — 색 체계를 하나 더 만들지 않는다 */
+.e-symbol {
+  display: grid;
+  place-items: center;
+  inline-size: var(--size-symbol);
+  block-size: var(--size-symbol);
+  border-radius: var(--radius-block);
+  background: var(--hue, var(--accent));
+  color: var(--cue-ink);
+}
+.e-symbol[data-tint="slate"]  { --hue: var(--cue-slate); }
+.e-symbol[data-tint="blue"]   { --hue: var(--cue-blue); }
+.e-symbol[data-tint="teal"]   { --hue: var(--cue-teal); }
+.e-symbol[data-tint="amber"]  { --hue: var(--cue-amber); }
+.e-symbol[data-tint="rose"]   { --hue: var(--cue-rose); }
+.e-symbol[data-tint="violet"] { --hue: var(--cue-violet); }
+.e-symbol > svg {
+  inline-size: 62%;
+  block-size: 62%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

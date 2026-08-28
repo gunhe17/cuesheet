@@ -1,0 +1,34 @@
+/* iOS 설정의 묶음 목록 — 그룹이 카드가 되고, 구분선은 그룹 안에서만 그어진다.
+   헤더·푸터는 카드 밖에 놓여 그룹이 무엇인지와 왜인지를 나눠 말한다 */
+.s-settings {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap-hair);
+}
+.s-settings > .e-label,
+.s-settings > .e-caption {
+  padding-inline: var(--gap);
+}
+.s-settings > .e-caption { padding-block-end: var(--gap-tight); }
+
+/* 다크에서 카드를 그리는 것은 배경이 아니라 테두리다 — raised 와 surface 의 차이가 1.13 뿐이다 */
+.s-settings > .group {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-inset);
+  overflow: hidden;
+}
+.s-settings .b-setting { position: relative; }
+.s-settings button.b-setting { cursor: pointer; }
+.s-settings button.b-setting:active { background: var(--layer); }
+.s-settings button.b-setting:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+/* 첫 행 위와 마지막 행 아래에는 선이 없다. 선의 시작점은 행이 알려준 --lead */
+.s-settings .b-setting + .b-setting::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--lead);
+  inset-inline-end: 0;
+  border-block-start: 1px solid var(--line);
+}

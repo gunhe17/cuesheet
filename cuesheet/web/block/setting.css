@@ -1,0 +1,39 @@
+/* 설정 목록의 한 행 — 아이콘 · 라벨 · 값 · 액세서리. 최소 높이는 탭 타깃 44 */
+.b-setting {
+  --lead: var(--gap);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-tight);
+  inline-size: 100%;
+  min-block-size: var(--size-tap);
+  padding: var(--gap-tight) var(--gap);
+  background: var(--surface-raised);
+  color: var(--text);
+  font-size: var(--type-body-size);
+  letter-spacing: var(--type-body-track);
+  text-align: start;
+}
+
+/* 아이콘이 붙으면 라벨이 그만큼 밀린다 — 구분선도 같은 값을 봐야 해서 토큰으로 둔다 */
+.b-setting:has(.e-symbol) { --lead: calc(var(--gap) * 2 + var(--size-symbol)); }
+
+.b-setting > [data-label] {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.b-setting > [data-value] {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-dim);
+}
+.b-setting[data-tone="accent"] > [data-label] { color: var(--accent); }
+/* 되돌릴 수 없는 행은 가운데로 — 값도 꺾쇠도 없으니 라벨이 행 전체다 */
+.b-setting[data-tone="danger"] > [data-label] {
+  color: var(--danger);
+  text-align: center;
+}
