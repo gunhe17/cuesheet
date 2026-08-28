@@ -1,0 +1,22 @@
+.v-lab {
+  display: grid;
+  gap: var(--gap-section);
+  padding: var(--pad-view);
+}
+
+/* 폰은 나란히 늘리되 읽는 글은 한 단 폭으로 묶는다 */
+.v-lab > .s-brand,
+.v-lab > .s-group {
+  max-inline-size: var(--size-content);
+}
+.v-lab-deck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: var(--gap-loose);
+}
+.v-lab-case {
+  display: grid;
+  gap: var(--gap);
+  inline-size: 390px;
+}

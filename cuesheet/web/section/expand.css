@@ -1,0 +1,14 @@
+/* 탭하면 그 자리에서 펼쳐진다 — 화면 이동이 없어 스크롤 위치를 잃지 않는다 */
+.s-expand {
+  display: grid;
+  align-content: start;
+  gap: var(--gap-tight);
+}
+.s-expand > details { display: grid; gap: var(--gap-hair); }
+.s-expand summary {
+  display: block;
+  cursor: pointer;
+  list-style: none;
+}
+.s-expand summary::-webkit-details-marker { display: none; }
+.s-expand summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }

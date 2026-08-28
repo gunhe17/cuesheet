@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>큐시트 모바일 레이아웃 랩</title>
+<link rel="stylesheet" href="./lab.css">
+</head>
+<body class="s-app">
+
+<main class="v-lab">
+
+  <header class="s-brand">
+    <h1 class="e-title">모바일 레이아웃 랩</h1>
+    <p class="e-caption">
+      목업 여섯 안을 <code class="e-code">cuesheet/web</code> 의 토큰·컴포넌트로 다시 그린 것입니다.
+      데이터는 손으로 적은 마크업이 아니라 <code class="e-code">cuesheet_get</code> 응답 모양의 고정 데이터 하나를
+      여섯 화면이 나눠 씁니다. 컴포넌트를 고치면 여기가 같이 바뀝니다.
+    </p>
+    <div class="s-actions">
+      <button class="e-action-ghost" type="button" id="theme">테마 — <span id="theme-label">시스템</span></button>
+      <button class="e-action-ghost" type="button" id="state">상태 — <span id="state-label">진행중</span></button>
+    </div>
+  </header>
+
+  <div class="v-lab-deck" id="deck"></div>
+
+  <section class="s-group">
+    <header>
+      <h2 class="e-heading">맞춰본 결과</h2>
+      <p class="e-caption">목업을 스택 위에 올리면서 드러난 것 — 화면이 아니라 도메인·응답을 고쳐야 하는 항목입니다.</p>
+    </header>
+    <ul id="findings"></ul>
+  </section>
+
+</main>
+
+
+<template id="tpl-lab-case">
+  <article class="v-lab-case">
+    <div class="b-demo">
+      <p class="e-code" data-key></p>
+      <p class="e-heading" data-label></p>
+      <p class="e-caption" data-note></p>
+    </div>
+    <section class="s-phone">
+      <header class="s-bar">
+        <span class="e-heading" data-title></span>
+        <span class="s-actions-inline">
+          <span class="e-badge" data-run-state></span>
+          <span class="e-badge" data-state="warn" data-delay hidden></span>
+        </span>
+      </header>
+    </section>
+  </article>
+</template>
+
+<template id="tpl-lab-row">
+  <div class="b-row">
+    <i></i>
+    <span class="e-code" data-seq></span>
+    <span class="e-time" data-eta></span>
+    <span data-title></span>
+    <span class="e-time" data-length></span>
+  </div>
+</template>
+
+<template id="tpl-lab-axis-cue">
+  <div class="b-axis-cue"><b></b><span></span></div>
+</template>
+
+<script type="module" src="./lab.js"></script>
+</body>
+</html>

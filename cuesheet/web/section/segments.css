@@ -1,0 +1,12 @@
+.s-segments {
+  display: grid;
+  align-content: start;
+  gap: var(--gap-hair);
+}
+
+/* 코너 헤더는 스크롤해도 위에 붙는다 — 지금 어느 코너인지 잃지 않는다 */
+.s-segments > .b-segment {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+}

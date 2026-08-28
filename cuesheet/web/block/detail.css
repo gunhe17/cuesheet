@@ -1,0 +1,19 @@
+.b-detail {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--gap-hair) var(--gap-tight);
+  padding: var(--pad-row);
+  background: var(--layer);
+  border-radius: var(--radius-block);
+}
+.b-detail > dt {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-leading);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.b-detail > dd {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-leading);
+  color: var(--text);
+}

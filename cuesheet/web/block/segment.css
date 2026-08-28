@@ -1,0 +1,20 @@
+.b-segment {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--gap-tight);
+  padding: var(--pad-badge);
+  background: var(--surface);
+  border-block-end: 1px solid var(--line);
+}
+.b-segment > b {
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  color: var(--text);
+}
+.b-segment > span {
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+}

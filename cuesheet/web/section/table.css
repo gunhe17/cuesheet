@@ -1,0 +1,28 @@
+.s-table {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.s-table table {
+  inline-size: max-content;
+  border-collapse: collapse;
+}
+.s-table th,
+.s-table td {
+  padding: var(--pad-row);
+  border-block-end: 1px solid var(--line);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-leading);
+  text-align: start;
+  white-space: nowrap;
+}
+.s-table th {
+  font-weight: var(--type-label-weight);
+  color: var(--text-dim);
+}
+
+/* 시각 열만 고정 — 배경이 투명하면 밀려온 열이 밑으로 비친다 */
+.s-table [data-frozen] {
+  position: sticky;
+  inset-inline-start: 0;
+  background: var(--surface);
+}

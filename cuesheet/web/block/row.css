@@ -1,0 +1,40 @@
+/* 목록형 후보가 공유하는 한 줄 — 색 띠 + 순번 + 시각 + 제목 + 길이 */
+.b-row {
+  display: grid;
+  grid-template-columns: 3px auto auto 1fr auto;
+  align-items: center;
+  gap: var(--gap-tight);
+  inline-size: 100%;
+  padding: var(--pad-row);
+  background: var(--surface-raised);
+  border-radius: var(--radius-block);
+  text-align: start;
+}
+.b-row[data-color="slate"]  { --hue: var(--cue-slate); }
+.b-row[data-color="blue"]   { --hue: var(--cue-blue); }
+.b-row[data-color="teal"]   { --hue: var(--cue-teal); }
+.b-row[data-color="amber"]  { --hue: var(--cue-amber); }
+.b-row[data-color="rose"]   { --hue: var(--cue-rose); }
+.b-row[data-color="violet"] { --hue: var(--cue-violet); }
+
+.b-row > i {
+  align-self: stretch;
+  border-radius: var(--radius-badge);
+  background: var(--hue, var(--cue-slate));
+}
+.b-row > [data-title] {
+  font-size: var(--type-label-size);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.b-row > [data-length] { color: var(--text-dim); }
+
+/* 색은 큐 종류, 진하기는 담당 여부 — token/cue.css 와 같은 축을 쓴다 */
+.b-row[data-mine="false"] > [data-title] { color: var(--text-muted); }
+.b-row[data-state="done"] { opacity: 0.45; }
+.b-row[data-state="current"] {
+  background: var(--mine-soft);
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}

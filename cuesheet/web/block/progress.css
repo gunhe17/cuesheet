@@ -1,0 +1,12 @@
+.b-progress {
+  block-size: 4px;
+  border-radius: var(--radius-badge);
+  background: var(--layer);
+  overflow: hidden;
+}
+.b-progress > i {
+  display: block;
+  block-size: 100%;
+  background: var(--accent);
+  transition: inline-size var(--dur-fade);
+}

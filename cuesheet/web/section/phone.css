@@ -1,0 +1,32 @@
+/* 랩의 기기 프레임 — 390×844 논리 픽셀. 폰 안에서만 성립하는 배치를 실제 폭으로 가둔다 */
+.s-phone {
+  inline-size: 390px;
+  block-size: 844px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--gap-tight);
+  padding: var(--gap);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* 헤더·조작은 고정되고 가운데만 스크롤한다 — 폰에서 헤더가 밀려나면 지금 어느 큐시트인지 잃는다 */
+.s-phone > .screen {
+  display: grid;
+  align-content: start;
+  gap: var(--gap-tight);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.s-phone > .screen::-webkit-scrollbar { width: 0; height: 0; }
+
+.s-phone > .stage {
+  position: relative;
+  min-block-size: 0;
+}
+.s-phone > .stage > .s-axis { block-size: 100%; }
